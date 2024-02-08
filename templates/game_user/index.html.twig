@@ -1,0 +1,91 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello MyGameListController!
+{% endblock %}
+{% block stylesheets %}{% endblock %}
+{% block body %}
+	<div class="flex flex-col p-2 w-full">
+		<div class="flex justify-between">
+            <div class="w-42"><p>image</p></div>
+			<div class="w-42"><p>title</p></div>
+            <div class="w-42"><p>favoris</p></div>
+            <div class="w-42"><p>playtime</p></div>
+            <div class="w-42"><p>rate</p></div>
+            <div class="w-42"><p>status</p></div>
+            <div class="w-42"><p>comments</p></div>
+
+		</div>
+		{% for game in gameUser %}
+			<div class="flex justify-between ">
+				<div>
+					<img class="h-24" src="{{ game.game.backgroundImage }}" alt="{{ game.game.title }}">
+				</div>
+				<div class="w-42">
+					<a href="{{ path('app_game_details', {'id': game.game.gameId}) }}">{{ game.game.title }}</a>
+				</div>
+				{% if game.isFav == true %}
+					<div class="w-1/7">
+						<p>favoris</p>
+                        <a href="{{ path('app_fav', {'gameUserId': game.id}) }}">
+						<svg
+							fill="yellow" width="20px" height="20px" xmlns="http://www.w3.org/2000/svg" viewbox="0 0 576 512"><!--!Font Awesome Free 6.5.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.-->
+							<path d="M316.9 18C311.6 7 300.4 0 288.1 0s-23.4 7-28.8 18L195 150.3 51.4 171.5c-12 1.8-22 10.2-25.7 21.7s-.7 24.2 7.9 32.7L137.8 329 113.2 474.7c-2 12 3 24.2 12.9 31.3s23 8 33.8 2.3l128.3-68.5 128.3 68.5c10.8 5.7 23.9 4.9 33.8-2.3s14.9-19.3 12.9-31.3L438.5 329 542.7 225.9c8.6-8.5 11.7-21.2 7.9-32.7s-13.7-19.9-25.7-21.7L381.2 150.3 316.9 18z"/></svg>
+                        </a>
+                    </div>
+				{% else %}
+					<div class="w-1/7"> 
+						<p>favoris</p>
+                        <a href="{{ path('app_fav', {'gameUserId': game.id}) }}">
+						    <svg fill="white" width="20px" height="20px" xmlns="http://www.w3.org/2000/svg" viewbox="0 0 576 512"><!--!Font Awesome Free 6.5.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.--><path d="M316.9 18C311.6 7 300.4 0 288.1 0s-23.4 7-28.8 18L195 150.3 51.4 171.5c-12 1.8-22 10.2-25.7 21.7s-.7 24.2 7.9 32.7L137.8 329 113.2 474.7c-2 12 3 24.2 12.9 31.3s23 8 33.8 2.3l128.3-68.5 128.3 68.5c10.8 5.7 23.9 4.9 33.8-2.3s14.9-19.3 12.9-31.3L438.5 329 542.7 225.9c8.6-8.5 11.7-21.2 7.9-32.7s-13.7-19.9-25.7-21.7L381.2 150.3 316.9 18z"/></svg>
+                        </a>
+                    </div>
+				{% endif %}
+                {% if not game.playtime is empty %}
+                    <div class="w-1/7">
+                        <p>{{ game.playtime }} hours</p>
+                    </div>
+                    {% else %}
+                    <div class="w-1/7">
+                        <p>0</p>
+                    </div>
+                {% endif %}
+                {% if not game.rate is empty %}
+                    <div class="w-1/7">
+                        <p>{{ game.rate }}/20</p>
+                    </div class="w-1/7">
+                    {% else %}
+                    <div class="w-1/7">
+                        <p>-</p>
+                    </div>
+                {% endif %}
+                {% if not game.status is empty %}
+                    <div class="w-1/7">
+                        <p>{{ game.status }}</p>
+                    </div>
+                    {% else %}
+                    <div class="w-1/7">
+                        <p>-</p>
+                    </div>
+                {% endif %}
+                {% if not game.comments is empty %}
+                    <div class="w-1/7">
+                        <p>{{ game.comments }}</p>
+                    </div>
+                    {% else %}
+                    <div class="w-1/7">
+                        <p>-</p>
+                    </div>
+                {% endif %}
+                <a href="{{ path('app_remove', {'gameUserId': game.id}) }}">remove </a>
+                <a href="{{ path('app_game_user_edit', {'id': game.id}) }}">edit </a>
+			</div>
+       
+                
+		{% endfor %}
+	</div>
+
+{% endblock %}
+{% block javascripts %}
+           
+		<script src="{{ asset ('js/myGameList.js') }}"></script>  
+    {% endblock %}

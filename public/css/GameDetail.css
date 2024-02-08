@@ -1,0 +1,84 @@
+.screenContainer{
+    display: flex;
+    flex-wrap: wrap;
+
+}
+.screenContainer>div>img{
+    height: 100px;
+}
+.screenContainer{
+   
+    background: rgba(15, 14, 19, 0.7); 
+    padding:50px;
+    -webkit-backdrop-filter: blur(40px); /* Utilisation du préfixe -webkit- pour le support WebKit */
+    backdrop-filter: blur(40px);
+    padding-bottom:400px;
+}
+.bg-image>img{
+    height: 500px;
+}
+.title{
+    margin-bottom: 200px;
+}
+
+
+.content{
+    width:100%;
+}
+.img-size{
+    /* 	padding: 0;
+        margin: 0; */
+        height: 450px;
+        width: 700px;
+        background-size: cover;
+        overflow: hidden;
+    }
+    .modal-content {
+       width: 700px;
+      border:none;
+    }
+    .modal-body {
+       padding: 0;
+    }
+    
+    .carousel-control-prev-icon {
+        background-image: url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='%23009be1' viewBox='0 0 8 8'%3E%3Cpath d='M5.25 0l-4 4 4 4 1.5-1.5-2.5-2.5 2.5-2.5-1.5-1.5z'/%3E%3C/svg%3E");
+        width: 30px;
+        height: 48px;
+    }
+    .carousel-control-next-icon {
+        background-image: url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='%23009be1' viewBox='0 0 8 8'%3E%3Cpath d='M2.75 0l-1.5 1.5 2.5 2.5-2.5 2.5 1.5 1.5 4-4-4-4z'/%3E%3C/svg%3E");
+        width: 30px;
+        height: 48px;
+    
+    }    
+
+.hidden{
+    display:none;
+}
+.fixed{
+    display: flex;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1000;
+}
+
+#modal {
+    top: 0;
+    left: 0;
+    z-index: 1000; /* Assurez-vous que ce nombre est plus élevé que le z-index de tout autre élément sur votre page */
+    width: 100vw; /* Utilisez vw (viewport width) pour couvrir toute la largeur de la fenêtre du navigateur */
+    height: 100vh; /* Utilisez vh (viewport height) pour couvrir toute la hauteur de la fenêtre du navigateur */
+    background-color: rgba(0, 0, 0, 0.7); /* Utilisez rgba pour ajouter de la transparence à votre couleur de fond */
+    align-self: center; /* Centre le contenu verticalement */
+    justify-content: center; /* Centre le contenu horizontalement */
+    
+}
+#modal-img{
+    width: 1400px;
+    justify-content: center;
+    align-self: center;
+    margin: auto;
+}

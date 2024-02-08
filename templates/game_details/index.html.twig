@@ -1,0 +1,43 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello GameDetailsController!
+{% endblock %}
+
+{% block stylesheets %}
+	<link rel="stylesheet" href="{{ asset('css/GameDetail.css') }}">
+{% endblock %}
+{% block body %}
+	<div class="content">
+
+
+		
+
+        <div class="w-full mt-72 screenContainer">
+        <h2 class="title">{{ game.title }}</h2>
+            {% for screenshot in game.screenshots %}
+            <div>
+                <img src="{{ screenshot }}" alt="screen" onclick="showModal('{{ screenshot }}')"/>
+            </div>
+            {% endfor%}
+            <p>text test blablabla</p>
+                    <a href="{{ path('app_add_game', {'id': game.gameId}) }}"><p>ADD</p></a>
+        </div>
+		<div id="modal" class="hidden">
+        	<img id="modal-img" class="object-cover" />
+    	</div>
+    </div>
+    <style>
+        .content{
+            background-image: url({{ game.backgroundImage }});  
+            background-size: cover;
+            background-repeat: repeat-y;
+            
+        }
+    </style>
+		
+
+	{% endblock %}
+{% block javascripts %}
+           
+		<script src="{{ asset ('js/gameDetails.js') }}"></script>  
+    {% endblock %}

@@ -1,0 +1,38 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Project Masterpiece
+{% endblock %}
+{% block stylesheets %}
+
+{% endblock %}
+{% block body %}
+	<div class="w-full">
+		<div class="header"></div>
+		<div class="flex flex-wrap justify-center">
+			<div class="bg-gray-800 text-white m-2 flex flex-col w-96 h-96 rounded-lg">
+                <a href="{{ path('app_genre', {'genre': 'action'}) }}"><p>Action</p></a>
+                <a href="{{ path('app_genre', {'genre': 'adventure'}) }}"><p>Adventure</p></a>
+                <a href="{{ path('app_genre', {'genre': 'arcade'}) }}"><p>Arcade</p></a>
+                <a href="{{ path('app_genre', {'genre': 'board-games'}) }}"><p>Board Games</p></a>
+                <a href="{{ path('app_genre', {'genre': 'card'}) }}"><p>Card</p></a>
+                <a href="{{ path('app_genre', {'genre': 'casual'}) }}"><p>Casual</p></a>
+                <a href="{{ path('app_genre', {'genre': 'educational'}) }}"><p>Educational</p></a>
+                <a href="{{ path('app_genre', {'genre': 'family'}) }}"><p>Family</p></a>
+                <a href="{{ path('app_genre', {'genre': 'fighting'}) }}"><p>Fighting</p></a>
+                <a href="{{ path('app_genre', {'genre': 'Indie'}) }}"><p>Indie</p></a>
+                <a href="{{ path('app_genre', {'genre': 'massively-multiplayer'}) }}"><p>Massively Multiplayer</p></a>
+                <a href="{{ path('app_genre', {'genre': 'platformer'}) }}"><p>Platformer</p></a>
+                <a href="{{ path('app_genre', {'genre': 'puzzle'}) }}"><p>Puzzle</p></a>
+                <a href="{{ path('app_genre', {'genre': 'racing'}) }}"><p>Racing</p></a>
+                <a href="{{ path('app_genre', {'genre': 'role-playing-games-rpg'}) }}"><p>RPG</p></a>
+                <a href="{{ path('app_genre', {'genre': 'shooter'}) }}"><p>Shooter</p></a>
+                <a href="{{ path('app_genre', {'genre': 'simulation'}) }}"><p>Simulation</p></a>
+                <a href="{{ path('app_genre', {'genre': 'sports'}) }}"><p>Sports</p></a>
+                <a href="{{ path('app_genre', {'genre': 'strategy'}) }}"><p>Strategy</p></a>
+            </div>
+
+
+		</div>
+	</div>
+
+{% endblock %}

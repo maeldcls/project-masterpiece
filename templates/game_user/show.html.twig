@@ -1,0 +1,50 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}GameUser{% endblock %}
+
+{% block body %}
+    <h1>GameUser</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ game_user.id }}</td>
+            </tr>
+            <tr>
+                <th>IsFav</th>
+                <td>{{ game_user.isFav ? 'Yes' : 'No' }}</td>
+            </tr>
+            <tr>
+                <th>AddedAt</th>
+                <td>{{ game_user.addedAt ? game_user.addedAt|date('Y-m-d H:i:s') : '' }}</td>
+            </tr>
+            <tr>
+                <th>UpdatedAt</th>
+                <td>{{ game_user.updatedAt ? game_user.updatedAt|date('Y-m-d H:i:s') : '' }}</td>
+            </tr>
+            <tr>
+                <th>Playtime</th>
+                <td>{{ game_user.playtime }}</td>
+            </tr>
+            <tr>
+                <th>Status</th>
+                <td>{{ game_user.status }}</td>
+            </tr>
+            <tr>
+                <th>Rate</th>
+                <td>{{ game_user.rate }}</td>
+            </tr>
+            <tr>
+                <th>Comments</th>
+                <td>{{ game_user.comments }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_game_user_index') }}">back to list</a>
+
+    <a href="{{ path('app_game_user_edit', {'id': game_user.id}) }}">edit</a>
+
+    {{ include('game_user/_delete_form.html.twig') }}
+{% endblock %}

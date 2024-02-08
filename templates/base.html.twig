@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>{% block title %}Welcome!{% endblock %}</title>
+        <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text></svg>">
+        
+        
+        {% block stylesheets %}
+           
+        {% endblock %}
+         {{ encore_entry_link_tags('app') }}
+
+        
+    </head>
+
+    <body>
+    <div>
+		</div>
+    <div class="text-white bg-gray-900 m-0 flex flex-col w-52">
+        <a href="{{ path('app_game') }}" class="font-bold p-2"><h4>Accueil</h4></a>
+            {% if app.user %}
+            <a href="{{ path('app_logout') }} " class="font-bold p-2"><h4>Log Out</h4></a>
+            <a href="{{ path('app_game_user_index') }}"><h4>MyGameList</h4></a>
+        {% else %}
+            <a href="{{ path('app_login') }}" class="font-bold p-2"><h4>Log In</h4></a>
+        {% endif %}
+
+        <h3 class="font-bold p-2">TOP</h3>
+        <a href=""><h4>Best of the Year</h4></a>
+        <a href=""><h4>Popular in 2022</h4></a>
+        <h3 class="font-bold p-2">New releases</h3>
+        <a href=""><h4>Last 30 days</h4></a>
+        <a href=""><h4>This week</h4></a>
+        <a href=""><h4>Next Month</h4></a>
+        <a href="{{ path('app_genre_selector') }}"><h3 class="font-bold p-2">Genres</h3></a>
+        <a href="{{ path('app_genre', {'genre': 'action'}) }}"><h4>Action</h4></a>
+        <a href="{{ path('app_genre', {'genre': 'strategy'}) }}"><h4>Strategy</h4></a>
+        <a href="{{ path('app_genre', {'genre': 'shooter'}) }}"><h4>Shooter</h4></a>
+        <a href="{{ path('app_genre', {'genre': 'adventure'}) }}"><h4>Adventure</h4></a>
+        <a href="{{ path('app_genre', {'genre': 'puzzle'}) }}"><h4>Puzzle</h4></a>
+        <a href="{{ path('app_genre', {'genre': 'racing'}) }}"><h4>Racing</h4></a>
+        <a href="{{ path('app_genre', {'genre': 'sports'}) }}"><h4>Sports</h4></a>
+        <h3 class="font-bold p-2">Platforms</h3>
+        <a href=""><h4>Puzzle</h4></a>
+        <a href=""><h4>Racing</h4></a>
+        <a href=""><h4>Sports</h4></a>
+        <a href=""><h4>Puzzle</h4></a>
+    </div>
+    {% block body %}{% endblock %}
+    {% block javascripts %}
+            
+    {% endblock %}
+    {{ encore_entry_script_tags('app') }}
+        {% block importmap %}{{ importmap('app') }}{% endblock %}
+    <script src="{{ asset ('js/main.js') }}"></script>
+  
+</body>
+
+</html>

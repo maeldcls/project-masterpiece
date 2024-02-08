@@ -1,0 +1,55 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Project Masterpiece
+{% endblock %}
+
+{% block body %}
+	<div class="w-full">
+		{{ form_start(formSearch)}}
+			{{ form_widget(formSearch.searchText)}}
+			{{ form_end(formSearch)}} 
+		<div class="header"></div>
+		<div class="flex flex-wrap justify-center">
+			{% for game in games %}
+				<div class="bg-gray-800 text-white m-2 flex flex-col w-96 rounded-lg">
+
+					<div class="screenshots" data-game-screenshots="{{ game.screenshots|json_encode }}">
+						<img class="h-200 object-cover rounded-lg screenshot-image" src="{{ game.screenshots[0] }}" alt="Screenshot">
+					</div>
+
+					<div class="cardContent">
+						<div class="titleContainer">
+							<a href="{{ path('app_game_details', {'id': game.gameId}) }}">
+								<h2>{{game.title}}</h2>
+							</a>
+							{% if game.metacritics %}
+								<div class="w-8 h-8 border-2 border-green-500 flex justify-center items-center font-bold text-xl text-green-500 p-1">
+									<p class="text-green-500">{{game.metacritics}}</p>
+								</div>
+							{% endif %}
+						</div>
+						<div>
+							<p>Plateforms :</p>
+							{% for parentPlatform in game.parentPlatform %}
+								<div class="platform">
+									<img src="{{ asset('assets/image/' ~ parentPlatform ~ '.svg') }}" alt="{{ parentPlatform }}"/>
+								</div>
+							{% endfor %}
+						</div>
+						<div>
+							<p>Genres :</p>
+							{% for genre in game.genres %}
+								<a class="genreLink" href="{{ path('app_genre', {'genre': genre.name}) }}">{{genre.name}}</a>
+							{% endfor %}
+						</div>
+					</div>
+                    <a href="{{ path('app_add_game', {'id': game.gameId}) }}">ADD</a>
+				</div>
+
+			{% endfor %}
+
+
+		</div>
+	</div>
+
+{% endblock %}

@@ -1,0 +1,42 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Edit GameUser{% endblock %}
+
+{% block stylesheets %}{% endblock %}
+{% block body %}
+<div class="w-full content">
+    <h1>Edit the infos of my Game</h1>
+
+    <p>{{ game.title }}</p>
+    
+     {{ include('game_user/_form.html.twig', {'button_label': 'Update'}) }}
+    {{ include('game_user/_delete_form.html.twig') }}
+    <a href="{{ path('app_game_user_index') }}">back to list</a>
+    
+</div>
+    <style>
+        .content {
+    position: relative;
+    background-image: url({{ game.backgroundImage }});
+    background-size: cover;
+}
+
+.content::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background-color: rgba(0, 0, 0, 0.8); /* Change the last value to adjust the darkness */
+    z-index: 1;
+}
+
+/* Make sure the content is above the dark overlay */
+.content > * {
+    position: relative;
+    z-index: 2;
+}
+    </style>
+    
+{% endblock %}
