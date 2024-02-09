@@ -24,6 +24,9 @@ class Genre
     #[ORM\ManyToMany(targetEntity: Game::class, inversedBy: 'genres')]
     private Collection $gameGenre;
 
+    #[ORM\Column(length: 255)]
+    private ?string $nameAPI = null;
+
     public function __construct()
     {
         $this->gameGenre = new ArrayCollection();
@@ -78,6 +81,18 @@ class Genre
     public function removeGameGenre(Game $gameGenre): static
     {
         $this->gameGenre->removeElement($gameGenre);
+
+        return $this;
+    }
+
+    public function getNameAPI(): ?string
+    {
+        return $this->nameAPI;
+    }
+
+    public function setNameAPI(string $nameAPI): static
+    {
+        $this->nameAPI = $nameAPI;
 
         return $this;
     }

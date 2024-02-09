@@ -357,5 +357,14 @@ class Game
         return $this;
     }
 
-
+    public function userHasAdded(): bool
+    {
+        foreach ($this->gameUsers as $gameUser) {
+            if($gameUser->getGameId == $this->gameId){
+                return true;
+            }
+        }
+    
+        return false;
+    }
 }

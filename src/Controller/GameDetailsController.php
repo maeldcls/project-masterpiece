@@ -21,83 +21,84 @@ class GameDetailsController extends AbstractController
 
         $ch = curl_init($apiUrl);
         $response = curl_exec($ch);
-         // Configuration des options cURL
-         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-         // Ignorer la vérification SSL (À utiliser avec précaution !)
-         curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
-         // Exécution de la requête
-         $response = curl_exec($ch);
- 
-         // Vérification des erreurs cURL
-         if (curl_errno($ch)) {
-             die('Erreur cURL : ' . curl_error($ch));
-         }
- 
-         // Fermeture de la session cURL
-         curl_close($ch);
-        $data = json_decode($response, true);
+        // Configuration des options cURL
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        // Ignorer la vérification SSL (À utiliser avec précaution !)
+        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+        // Exécution de la requête
+        $response = curl_exec($ch);
 
+        // Vérification des erreurs cURL
+        if (curl_errno($ch)) {
+            die('Erreur cURL : ' . curl_error($ch));
+        }
+
+        // Fermeture de la session cURL
+        curl_close($ch);
+        $data = json_decode($response, true);
+        dump($data);
         $game = new Game();
         $game->setTitle($data['name']);
-       $game->setBackgroundImage($data['background_image']);
-         $game->setGameId($id);
-       if (isset($data['publishers'])) {
-        foreach ($data['publishers'] as $publisher) {
-            $publi = new Publisher();
-            $publi->setName($publisher['name']);
-            $game->addPublisher($publi);
-        }
-    }
-
-    // Developers
-    if (isset($data['developers'])) {
-        foreach ($data['developers'] as $developer) {
-            $dev = new Developer();
-            $dev->setName($developer['name']);
-            $game->addDeveloper($dev);
-        }
-    }
-
-    // Genres
-    if (isset($data['genres'])) {
-        foreach ($data['genres'] as $genreData) {
-            $genre = new Genre();
-            $genre->setName($genreData['name']);
-            $game->addGenre($genre);
-        }
-    }
-
-    // Platforms
-    if (isset($data['platforms'])) {
-        foreach ($data['platforms'] as $platformData) {
-            $platform = new Platform();
-            $platform->setName($platformData['platform']['name']);
-            if (isset($data['platforms']['image_background'])) {
-                $platform->setImage($platformData['platform']['image_background']);
+        $game->setBackgroundImage($data['background_image']);
+        $game->setGameId($id);
+        $game->setSummary($data['description_raw']);
+        if (isset($data['publishers'])) {
+            foreach ($data['publishers'] as $publisher) {
+                $publi = new Publisher();
+                $publi->setName($publisher['name']);
+                $game->addPublisher($publi);
             }
-            $game->addPlatform($platform);
         }
-    }
+
+        // Developers
+        if (isset($data['developers'])) {
+            foreach ($data['developers'] as $developer) {
+                $dev = new Developer();
+                $dev->setName($developer['name']);
+                $game->addDeveloper($dev);
+            }
+        }
+
+        // Genres
+        if (isset($data['genres'])) {
+            foreach ($data['genres'] as $genreData) {
+                $genre = new Genre();
+                $genre->setName($genreData['name']);
+                $game->addGenre($genre);
+            }
+        }
+
+        // Platforms
+        if (isset($data['platforms'])) {
+            foreach ($data['platforms'] as $platformData) {
+                $platform = new Platform();
+                $platform->setName($platformData['platform']['name']);
+                if (isset($data['platforms']['image_background'])) {
+                    $platform->setImage($platformData['platform']['image_background']);
+                }
+                $game->addPlatform($platform);
+            }
+        }
 
         $apiKey = "85c1e762dda2428786a58b352a42ade2";
         $apiUrl = "https://api.rawg.io/api/games/$id/screenshots?key=$apiKey";
 
         $ch = curl_init($apiUrl);
         $response = curl_exec($ch);
-         // Configuration des options cURL
-         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-         // Ignorer la vérification SSL (À utiliser avec précaution !)
-         curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
-         // Exécution de la requête
-         $response = curl_exec($ch);
- 
-         // Vérification des erreurs cURL
-         if (curl_errno($ch)) {
-             die('Erreur cURL : ' . curl_error($ch));
-         }
- 
-         // Fermeture de la session cURL
-         curl_close($ch);
+        // Configuration des options cURL
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        // Ignorer la vérification SSL (À utiliser avec précaution !)
+        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+        // Exécution de la requête
+        $response = curl_exec($ch);
+
+        // Vérification des erreurs cURL
+        if (curl_errno($ch)) {
+            die('Erreur cURL : ' . curl_error($ch));
+        }
+
+        // Fermeture de la session cURL
+        curl_close($ch);
         $data = json_decode($response, true);
 
         foreach ($data['results'] as $screenshot) {
@@ -107,9 +108,8 @@ class GameDetailsController extends AbstractController
         $game->setScreenshots($screenshots);
         return $this->render('game_details/index.html.twig', [
             'controller_name' => 'GameDetailsController',
-            'game'=>$game,
-            'data'=>$data
+            'game' => $game,
+            'data' => $data
         ]);
     }
 }
-?>

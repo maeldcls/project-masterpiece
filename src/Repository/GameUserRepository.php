@@ -2,7 +2,9 @@
 
 namespace App\Repository;
 
+use App\Entity\Game;
 use App\Entity\GameUser;
+use App\Entity\User;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
@@ -58,5 +60,22 @@ class GameUserRepository extends ServiceEntityRepository
         $result = $queryBuilder->getQuery()->getArrayResult();
 
         return $result;
+    }
+
+    public function hasUserAddedGame(User $user, Game $game): bool
+    {
+        // Implémentez la logique pour vérifier si l'utilisateur a ajouté le jeu
+        // Vous pouvez utiliser des requêtes DQL ou les méthodes du Repository pour effectuer la vérification
+
+        // Exemple avec une requête DQL :
+        $query = $this->createQueryBuilder('gu')
+            ->select('COUNT(gu.id)')
+            ->where('gu.user = :user')
+            ->andWhere('gu.game = :game')
+            ->setParameter('user', $user)
+            ->setParameter('game', $game)
+            ->getQuery();
+
+        return $query->getSingleScalarResult() > 0;
     }
 }
