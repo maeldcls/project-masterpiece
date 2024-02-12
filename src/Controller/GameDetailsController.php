@@ -7,6 +7,9 @@ use App\Entity\Game;
 use App\Entity\Genre;
 use App\Entity\Platform;
 use App\Entity\Publisher;
+use App\Entity\Tag;
+use DateTime;
+use DateTimeImmutable;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -41,6 +44,7 @@ class GameDetailsController extends AbstractController
         $game->setTitle($data['name']);
         $game->setBackgroundImage($data['background_image']);
         $game->setGameId($id);
+        $game->setReleaseDate(new DateTimeImmutable($data['released']));
         $game->setSummary($data['description_raw']);
         if (isset($data['publishers'])) {
             foreach ($data['publishers'] as $publisher) {
@@ -79,6 +83,17 @@ class GameDetailsController extends AbstractController
                 $game->addPlatform($platform);
             }
         }
+        if(isset($data['tags'])){
+
+            foreach($data['tags'] as $tag){
+                $newTag = new Tag();
+                $newTag->setName($tag['name']);
+                $game->addTag($newTag);
+            }
+        }
+        if(isset($data['website'])){
+            $game->setWebsite($data['website']);
+        }
 
         $apiKey = "85c1e762dda2428786a58b352a42ade2";
         $apiUrl = "https://api.rawg.io/api/games/$id/screenshots?key=$apiKey";
@@ -104,7 +119,7 @@ class GameDetailsController extends AbstractController
         foreach ($data['results'] as $screenshot) {
             $screenshots[] = $screenshot['image'];
         }
-
+        dump($game);
         $game->setScreenshots($screenshots);
         return $this->render('game_details/index.html.twig', [
             'controller_name' => 'GameDetailsController',

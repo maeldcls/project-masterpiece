@@ -30,10 +30,10 @@ class GameUserType extends AbstractType
             ])
             ->add('status', ChoiceType::class, [
                 'choices' => [
-                    'Want to play' => 'want_to_play',
-                    'Playing' => 'playing',
-                    'Finished' => 'finished',
-                    'Dropped' => 'dropped',
+                    'Want to play' => 'Want To Play',
+                    'Playing' => 'Playing',
+                    'Finished' => 'Finished',
+                    'Dropped' => 'Dropped',
                 ],
                 'required' => false,
             ])

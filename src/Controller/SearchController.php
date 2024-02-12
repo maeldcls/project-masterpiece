@@ -22,7 +22,7 @@ class SearchController extends AbstractController
         $searchWordUpdated = strtr($searchWord, '-', ' ');
 
         $apiKey = "85c1e762dda2428786a58b352a42ade2";
-
+        $user = $this->getUser();
         $apiUrl = "https://api.rawg.io/api/games?key=$apiKey&search=$searchWord&ordering=-metacritic&limit=100";
         $apiData = $apiDataService->fetchDataFromApi($apiUrl);
 

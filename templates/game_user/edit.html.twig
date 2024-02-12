@@ -2,9 +2,12 @@
 
 {% block title %}Edit GameUser{% endblock %}
 
-{% block stylesheets %}{% endblock %}
+{% block stylesheets %}
+<link rel="stylesheet" href="{{ asset('css/gameEdit.css') }}">
+{% endblock %}
+
 {% block body %}
-<div class="w-full content">
+<div class="w-full content flex flex-col justify-center items-center">
     <h1>Edit the infos of my Game</h1>
 
     <p>{{ game.title }}</p>
@@ -28,11 +31,11 @@
     right: 0;
     bottom: 0;
     left: 0;
-    background-color: rgba(0, 0, 0, 0.8); /* Change the last value to adjust the darkness */
+    background-color: rgba(0, 0, 0, 0.8); 
     z-index: 1;
 }
 
-/* Make sure the content is above the dark overlay */
+
 .content > * {
     position: relative;
     z-index: 2;

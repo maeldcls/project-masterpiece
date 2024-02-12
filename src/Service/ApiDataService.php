@@ -1,20 +1,45 @@
 <?php
+
 namespace App\Service;
 
 use App\Entity\Developer;
 use App\Entity\Game;
+use App\Entity\GameUser;
 use App\Entity\Genre;
 use App\Entity\Platform;
 use App\Entity\Publisher;
+use App\Entity\User;
+use App\Repository\GameRepository;
+use App\Repository\GameUserRepository;
+use App\Repository\UserRepository;
+use Doctrine\ORM\EntityManagerInterface;
+use Symfony\Bundle\SecurityBundle\Security;
 use Symfony\Contracts\HttpClient\HttpClientInterface;
 
 class ApiDataService
 {
     private $client;
+    private $entityManager;
+    private $userRepository;
+    private $gameRepository;
+    private $gameUserRepository;
+    private $security;
 
-    public function __construct(HttpClientInterface $client)
-    {
+
+    public function __construct(
+        HttpClientInterface $client,
+        EntityManagerInterface $entityManager,
+        UserRepository $userRepository,
+        GameRepository $gameRepository,
+        GameUserRepository $gameUserRepository,
+        Security $security
+    ) {
         $this->client = $client;
+        $this->entityManager = $entityManager;
+        $this->userRepository = $userRepository;
+        $this->gameRepository = $gameRepository;
+        $this->gameUserRepository = $gameUserRepository;
+        $this->security = $security;
     }
 
     public function fetchDataFromApi($url)
@@ -23,7 +48,7 @@ class ApiDataService
         // $response = $this->client->request('GET', $url);
         // $data = $response->toArray();
 
-        
+
         // Initialisation de cURL
         $ch = curl_init($url);
 
@@ -110,16 +135,15 @@ class ApiDataService
                             $platform->setImage($platformData['platform']['image_background']);
                         }
                         $game->addPlatform($platform);
-                        
                     }
                 }
                 if (isset($data['parent_platforms'])) {
                     $parentPlatforms = [];
                     $uniquePlatforms = [];
-                
+
                     foreach ($data['parent_platforms'] as $parentPlatformData) {
                         $platformSlug = $parentPlatformData['platform']['slug'];
-                
+
                         if (!in_array($platformSlug, $uniquePlatforms)) {
                             $parentPlatforms[] = $platformSlug;
                             $uniquePlatforms[] = $platformSlug; // Ajouter la plateforme au tableau des éléments uniques
@@ -130,12 +154,32 @@ class ApiDataService
                 if (isset($data['id'])) {
                     $game->setGameId($data['id']);
                 }
+
+                $user = $this->security->getUser();
+                if (!empty($user)) {
+                    $gameInDatabase = $this->gameRepository->findOneBy(['gameId' => $game->getGameId()]);
+
+                    if (!empty($gameInDatabase)) {
+                        $gameUserOfGameInDatabase = $this->gameUserRepository->findOneBy(['game' => $gameInDatabase, 'user' => $user]);
+                        if (!empty($gameUserOfGameInDatabase)) {
+                            $game->addGameUser($gameUserOfGameInDatabase);
+                        }
+
+                    }
+                }
+
+
+
+                // $findGame = $gameManager->findBy(['gameId' => $game->getGameId()]);
+
+                // $gameUserManager = $this->entityManager->getRepository(GameUser::class);
+                // $findGameUser = $gameUserManager->findBy(['game' => $game,'user'=>$user]);
+
+                // dump($findGameUser);
                 array_push($games, $game);
-                
-                
             }
         }
-        
+
         return $games;
     }
 }

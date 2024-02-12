@@ -43,7 +43,21 @@
 							{% endfor %}
 						</div>
 					</div>
-                    <a href="{{ path('app_add_game', {'id': game.gameId}) }}">ADD</a>
+	
+					{# verifier si l'utilisateur à ajouter le jeu ou non #}	
+					{% if app.user is empty %}	
+					<p> LOGIN </p>
+					{% elseif game.gameUsers is not empty %}
+						{% for gameUser in game.gameUsers %}
+							<a href="{{ path('app_remove', {'gameUserId': gameUser.id}) }}">REMOVE</a>
+						{% endfor %}
+					{% else %}
+						<a href="{{ path('app_add_game', {'id': game.gameId}) }}">ADD</a>
+					{% endif %}
+
+					{{ dump(game.gameUsers) }}
+					{# verifier si il y a un tableau game user ou non, si il y en a un c'est que l'utilisateur à ajouter le jeu #}
+                    {# <a href="{{ path('app_add_game', {'id': game.gameId}) }}">ADD</a> #}
 				</div>
 
 			{% endfor %}

@@ -9,6 +9,7 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use App\Form\SearchType;
+use App\Repository\GameRepository;
 use DateTimeImmutable;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -17,9 +18,9 @@ class GameController extends AbstractController
 {
     
     #[Route('/', name: 'app_game')]
-    public function index(Request $request, ApiDataService $apiDataService, EntityManagerInterface $entityManager): Response
+    public function index(Request $request, ApiDataService $apiDataService, EntityManagerInterface $entityManager, GameRepository $gameRepository): Response
     {
-       
+        // dd($gameRepository->find(7)->getGameUsers()->getValues());
         $form = $this->createForm(SearchType::class);
         $form->handleRequest($request);
 
@@ -32,17 +33,17 @@ class GameController extends AbstractController
         
         $apiKey = "85c1e762dda2428786a58b352a42ade2";
         $limit = 50;
-
+        $user = $this->getUser();
         $apiUrl = "https://api.rawg.io/api/games?key=$apiKey&ordering=-relevance&page_size=$limit";
         $games = $apiDataService->fetchDataFromApi($apiUrl);
    
-        $user = $this->getUser();
-
+       
+        
         // foreach ($games as $game) {
         //     $game['userHasAdded'] = $gameUserService->hasUserAddedGame($user, $game);
         // }
 
-        
+
 
         return $this->render('game/index.html.twig', [
             'controller_name' => 'GameController',

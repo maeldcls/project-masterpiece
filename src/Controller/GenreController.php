@@ -28,6 +28,7 @@ class GenreController extends AbstractController
     public function index($genre,ApiDataService $apiDataService): Response
     {
         $game = new Game();
+        $user = $this->getUser();
 
         $genre = strtolower($genre);
 
@@ -35,7 +36,7 @@ class GenreController extends AbstractController
         $limit = 24; // Nombre de jeux à récupérer
 
         $apiUrl = "https://api.rawg.io/api/games?key=$apiKey&genres=$genre&ordering=-metacritics&page_size=$limit";
-        $apiData = $apiDataService->fetchDataFromApi($apiUrl);
+        $apiData = $apiDataService->fetchDataFromApi($apiUrl,$user);
        
 
         return $this->render('genre/index.html.twig', [

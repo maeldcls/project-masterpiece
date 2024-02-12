@@ -72,8 +72,8 @@ class GameUserController extends AbstractController
         $game = new Game();
         $game = $gameRepository->find($gameUser->getGame()->getId());
         
-        dump($game);
-        if ($form->isSubmitted()) {
+
+        if ($form->isSubmitted() &&$form->isValid()) {
             $gameUser->setComments($form->get('comments')->getData());
             $entityManager->persist($gameUser);
             $entityManager->flush();

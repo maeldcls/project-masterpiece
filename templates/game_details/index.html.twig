@@ -1,17 +1,17 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello GameDetailsController!
+{% block title %}{{game.title}}
 {% endblock %}
 
 {% block stylesheets %}
 	<link rel="stylesheet" href="{{ asset('css/GameDetail.css') }}">
 {% endblock %}
 {% block body %}
-	<div class="w-full content">
+	<div class="content">
 
 
-		<div class="w-full flex flex-col mt-72 screenContainer">
-			<h2 class="title">{{ game.title }}</h2>
+		<div class="w-full flex flex-col screenContainer">
+			<h2 class="text-4xl font-bold p-4 title">{{ game.title }}</h2>
             <div class=" w-full flex flex-wrap">
 			    {% for screenshot in game.screenshots %}
                     <div class="p-2">
@@ -21,23 +21,35 @@
             </div>
 			<p id="summaryPreview">{{ game.summary|slice(0, 200) }}{{ game.summary|length > 100 ? '...' : '' }}</p>
             <p id="summaryFull" class="hidden">{{ game.summary}}</p>
-            <p id="readMore">Read More</p>
-            <p id="hide" class="hidden">Hide</p>
-			<a href="{{ path('app_add_game', {'id': game.gameId}) }}">
-				<p>ADD</p>
-			</a>
+            <p id="readMore" class="cursor-pointer">Read More</p>
+            <p id="hide" class="cursor-pointer hidden">Hide</p>
+
+			<a href="{{ game.website }}">{{ game.website }}</a>
+			<p>Release Date :{{ game.releaseDate|date('d/m/Y') }}
+
+			<p>Genres :</p>
+			{% for genre in game.genres %}
+				<a href="{{ path('app_genre', {'genre': genre.name }) }}">{{ genre.name }}</a>
+			{% endfor %}
+			<p>Tags :</p>
+			<p>
+			{% for tag in game.tags %}
+				{{ tag.name }}
+			{% endfor %}, 
+			</p>
 		</div>
 
 		<div id="modal" class="hidden">
 			<img id="modal-img" class="object-cover"/>
 		</div>
+
+		<a href="{{ path('app_add_game', {'id': game.gameId}) }}">ADD</a>
 	</div>
 	<style>
 		.content {
-			background-image: url({{ game.backgroundImage }});
-			background-size: contain;
-			background-repeat: no-repeat;
-            width: 100%;
+			background: url({{ game.backgroundImage }})center no-repeat;
+			background-size:cover;
+			width:100%;
 		}
 	</style>
 
