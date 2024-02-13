@@ -45,7 +45,7 @@ class GameDetailsController extends AbstractController
         if (!empty($data['background_image'])) {
             $game->setBackgroundImage($data['background_image']);
         }else{
-            $game->setBackgroundImage("./assets/other/default.jpg");
+            $game->setBackgroundImage("/assets/other/default.jpg");
         }
         $game->setGameId($id);
         if (isset($data['released'])) {

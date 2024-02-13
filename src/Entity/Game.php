@@ -46,7 +46,7 @@ class Game
     #[ORM\ManyToMany(targetEntity: Developer::class, mappedBy: 'gameDeveloper')]
     private Collection $developers;
 
-    #[ORM\Column]
+    #[ORM\Column(nullable: true)]
     private ?int $metacritics = null;
 
     #[ORM\Column(length: 255)]

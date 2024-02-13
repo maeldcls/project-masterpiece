@@ -115,7 +115,7 @@ class GameController extends AbstractController
                 if(isset($data['background_image'])){
                     $game->setBackgroundImage($data['background_image']);
                 }else{
-                    $game->setBackgroundImage("assets/other/default.jpg");
+                    $game->setBackgroundImage("/assets/other/default.jpg");
                 }
                 if(isset($data['description_raw'])){
                     $game->setSummary($data['description_raw']);
@@ -129,8 +129,6 @@ class GameController extends AbstractController
                 $game->setGameId($id);
                 if(isset($data['metacritic'])){
                     $game->setMetacritics($data['metacritic']);
-                }else{
-                    $game->setMetacritics(0);
                 }
                 //$dateActuelle = new DateTimeImmutable();
                 $entityManager->persist($game);
