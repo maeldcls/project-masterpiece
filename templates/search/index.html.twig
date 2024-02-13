@@ -27,9 +27,19 @@
 								<h2>{{game.title}}</h2>
 							</a>
 							{% if game.metacritics %}
-								<div class="w-8 h-8 border-2 border-green-500 flex justify-center items-center font-bold text-xl text-green-500 p-1">
-									<p class="text-green-500">{{game.metacritics}}</p>
-								</div>
+								{% if game.metacritics > 66 %}
+									<div class="w-8 h-8 border-2 border-green-500 flex justify-center items-center font-bold text-xl text-green-500 p-1">
+										<p class="text-green-500">{{game.metacritics}}</p>
+									</div>
+								{% elseif game.metacritics > 33 %}
+									<div class="w-8 h-8 border-2 border-yellow-500 flex justify-center items-center font-bold text-xl text-yellow-500 p-1">
+										<p class="text-yellow-500">{{game.metacritics}}</p>
+									</div>
+								{% else %}
+									<div class="w-8 h-8 border-2 border-red-500 flex justify-center items-center font-bold text-xl text-red-500 p-1">
+										<p class="text-red-500">{{game.metacritics}}</p>
+									</div>
+								{% endif %}
 							{% endif %}
 						</div>
 						<div>

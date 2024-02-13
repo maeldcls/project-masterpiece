@@ -15,11 +15,11 @@
     </head>
 
     <body>
-    <div>
-		</div>
-    <div class="text-white bg-gray-900 m-0 flex flex-col w-52">
+
+    <aside class="text-white bg-gray-900 m-0 flex flex-col w-52">
         <a href="{{ path('app_game') }}" class="font-bold p-2"><h4>Accueil</h4></a>
-            {% if app.user %}
+        
+        {% if app.user %}
             <a href="{{ path('app_logout') }} " class="font-bold p-2"><h4>Log Out</h4></a>
             <a href="{{ path('app_game_user_index') }}"><h4>MyGameList</h4></a>
         {% else %}
@@ -46,7 +46,7 @@
         <a href=""><h4>Racing</h4></a>
         <a href=""><h4>Sports</h4></a>
         <a href=""><h4>Puzzle</h4></a>
-    </div>
+    </aside>
     {% block body %}{% endblock %}
     {% block javascripts %}
             

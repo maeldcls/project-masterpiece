@@ -13,6 +13,8 @@ use App\Repository\GameRepository;
 use DateTimeImmutable;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 
 class GameController extends AbstractController
 {
@@ -20,35 +22,57 @@ class GameController extends AbstractController
     #[Route('/', name: 'app_game')]
     public function index(Request $request, ApiDataService $apiDataService, EntityManagerInterface $entityManager, GameRepository $gameRepository): Response
     {
-        // dd($gameRepository->find(7)->getGameUsers()->getValues());
+        
         $form = $this->createForm(SearchType::class);
         $form->handleRequest($request);
 
+        $session = $request->getSession();
         if ($form->isSubmitted() && $form->isValid()) {
             $searchWord = $form->get('searchText')->getData();
             $searchWordUpdated = strtr($searchWord, ' ', '-');
             
+            //nouvelle instance du form pour vider sa value 
+            $form = $this->createForm(SearchType::class);
             return $this->redirectToRoute('app_search',['searchWord' => $searchWordUpdated]);
+        }
+   
+        $formOrder = $this->createFormBuilder()
+        ->add('ordering', ChoiceType::class, [
+            'choices'  => [
+                '-popularity' => '-popularity',
+                '-relevance' => '-relevance',
+                // Ajoutez plus d'options si nécessaire
+            ],
+        ])
+        ->getForm();
+
+        $formOrder->handleRequest($request);
+        $ordering = '';
+        if ($formOrder->isSubmitted() && $formOrder->isValid()) {
+            // Obtenez la valeur du champ 'ordering'
+            $ordering = $formOrder->get('ordering')->getData();
+
+            // Stockez la valeur dans la session
+        }
+
+        
+        if(!$ordering){
+            $ordering = "-relevance";
         }
         
         $apiKey = "85c1e762dda2428786a58b352a42ade2";
         $limit = 50;
-        $user = $this->getUser();
-        $apiUrl = "https://api.rawg.io/api/games?key=$apiKey&ordering=-relevance&page_size=$limit";
+        $apiUrl = "https://api.rawg.io/api/games?key=$apiKey&ordering=$ordering&page_size=$limit";
+        $games=null;
         $games = $apiDataService->fetchDataFromApi($apiUrl);
+        $ordering = '';
    
-       
-        
-        // foreach ($games as $game) {
-        //     $game['userHasAdded'] = $gameUserService->hasUserAddedGame($user, $game);
-        // }
-
-
-
+        dump($apiUrl);
         return $this->render('game/index.html.twig', [
             'controller_name' => 'GameController',
             'games' => $games,
             'formSearch'=>$form->createView(),
+            'formOrder'=>$formOrder->createView()
    
         ]);
     }

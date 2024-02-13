@@ -5,16 +5,25 @@
 
 {% block body %}
 	<div class="w-full">
+
 		{{ form_start(formSearch)}}
-			{{ form_widget(formSearch.searchText)}}
-			{{ form_end(formSearch)}} 
-		<div class="header"></div>
+		{{ form_widget(formSearch.searchText)}}
+		{{ form_end(formSearch)}}
+
+		<div class="header">
+
+			{{ form_start(formOrder) }}
+			{{ form_widget(formOrder.ordering) }}
+			<button type="submit">Submit</button>
+			{{ form_end(formOrder) }}
+
+		</div>
 		<div class="flex flex-wrap justify-center">
 			{% for game in games %}
 				<div class="bg-gray-800 text-white m-2 flex flex-col w-96 rounded-lg">
 
 					<div class="screenshots" data-game-screenshots="{{ game.screenshots|json_encode }}">
-						<img class="h-200 object-cover rounded-lg screenshot-image" src="{{ game.screenshots[0] }}" alt="Screenshot">
+						<img class="h-200 object-cover rounded-t-lg screenshot-image" src="{{ game.screenshots[0] }}" alt="Screenshot">
 					</div>
 
 					<div class="cardContent">
@@ -23,9 +32,19 @@
 								<h2>{{game.title}}</h2>
 							</a>
 							{% if game.metacritics %}
-								<div class="w-8 h-8 border-2 border-green-500 flex justify-center items-center font-bold text-xl text-green-500 p-1">
-									<p class="text-green-500">{{game.metacritics}}</p>
-								</div>
+								{% if game.metacritics > 66 %}
+									<div class="w-8 h-8 border-2 border-green-500 flex justify-center items-center font-bold text-xl text-green-500 p-1">
+										<p class="text-green-500">{{game.metacritics}}</p>
+									</div>
+								{% elseif game.metacritics > 33 %}
+									<div class="w-8 h-8 border-2 border-yellow-500 flex justify-center items-center font-bold text-xl text-yellow-500 p-1">
+										<p class="text-yellow-500">{{game.metacritics}}</p>
+									</div>
+								{% else %}
+									<div class="w-8 h-8 border-2 border-red-500 flex justify-center items-center font-bold text-xl text-red-500 p-1">
+										<p class="text-red-500">{{game.metacritics}}</p>
+									</div>
+								{% endif %}
 							{% endif %}
 						</div>
 						<div>
@@ -43,10 +62,10 @@
 							{% endfor %}
 						</div>
 					</div>
-	
-					{# verifier si l'utilisateur à ajouter le jeu ou non #}	
-					{% if app.user is empty %}	
-					<p> LOGIN </p>
+
+					{# verifier si l'utilisateur à ajouter le jeu ou non #}
+					{% if app.user is empty %}
+						<a href="{{ path('app_login') }}">LOG IN TO ADD</a>
 					{% elseif game.gameUsers is not empty %}
 						{% for gameUser in game.gameUsers %}
 							<a href="{{ path('app_remove', {'gameUserId': gameUser.id}) }}">REMOVE</a>
@@ -54,16 +73,12 @@
 					{% else %}
 						<a href="{{ path('app_add_game', {'id': game.gameId}) }}">ADD</a>
 					{% endif %}
-
-					{{ dump(game.gameUsers) }}
-					{# verifier si il y a un tableau game user ou non, si il y en a un c'est que l'utilisateur à ajouter le jeu #}
-                    {# <a href="{{ path('app_add_game', {'id': game.gameId}) }}">ADD</a> #}
 				</div>
-
 			{% endfor %}
-
-
 		</div>
 	</div>
 
+{% endblock %}
+{% block javascripts %}
+	<script src="{{ asset ('js/gameDetails.js') }}"></script>
 {% endblock %}

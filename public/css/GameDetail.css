@@ -32,21 +32,19 @@
 #modal {
     top: 0;
     left: 0;
-    z-index: 1000; /* Assurez-vous que ce nombre est plus élevé que le z-index de tout autre élément sur votre page */
-    width: 100vw; /* Utilisez vw (viewport width) pour couvrir toute la largeur de la fenêtre du navigateur */
-    height: 100vh; /* Utilisez vh (viewport height) pour couvrir toute la hauteur de la fenêtre du navigateur */
-    background-color: rgba(0, 0, 0, 0.7); /* Utilisez rgba pour ajouter de la transparence à votre couleur de fond */
-    align-self: center; /* Centre le contenu verticalement */
-    justify-content: center; /* Centre le contenu horizontalement */
+    z-index: 1000;
+    width: 100vw; 
+    height: 100vh; 
+    background-color: rgba(0, 0, 0, 0.7); 
+    align-self: center; 
+    justify-content: center; 
     
 }
-#modal-img{
+#modal-content{
     width: 1400px;
     justify-content: center;
     align-self: center;
     margin: auto;
 }
 
-.content{
-    background: url();
-}
+

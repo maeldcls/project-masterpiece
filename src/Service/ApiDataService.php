@@ -28,15 +28,11 @@ class ApiDataService
 
     public function __construct(
         HttpClientInterface $client,
-        EntityManagerInterface $entityManager,
-        UserRepository $userRepository,
         GameRepository $gameRepository,
         GameUserRepository $gameUserRepository,
         Security $security
     ) {
         $this->client = $client;
-        $this->entityManager = $entityManager;
-        $this->userRepository = $userRepository;
         $this->gameRepository = $gameRepository;
         $this->gameUserRepository = $gameUserRepository;
         $this->security = $security;
@@ -44,11 +40,6 @@ class ApiDataService
 
     public function fetchDataFromApi($url)
     {
-        // Logique pour effectuer la requête API et récupérer les données
-        // $response = $this->client->request('GET', $url);
-        // $data = $response->toArray();
-
-
         // Initialisation de cURL
         $ch = curl_init($url);
 
@@ -85,10 +76,6 @@ class ApiDataService
                 if (isset($data['metacritic'])) {
                     $game->setMetacritics($data['metacritic']);
                 }
-                // pour accéder aux différents screenshots 
-                // $game->setBackgroundImage($data['short_screenshots'][0]['image']);
-
-
 
                 foreach ($data['short_screenshots'] as $screenshot) {
                     $screenshots[] = $screenshot['image'];
@@ -167,15 +154,6 @@ class ApiDataService
 
                     }
                 }
-
-
-
-                // $findGame = $gameManager->findBy(['gameId' => $game->getGameId()]);
-
-                // $gameUserManager = $this->entityManager->getRepository(GameUser::class);
-                // $findGameUser = $gameUserManager->findBy(['game' => $game,'user'=>$user]);
-
-                // dump($findGameUser);
                 array_push($games, $game);
             }
         }
