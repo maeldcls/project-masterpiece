@@ -35,34 +35,34 @@ class GameController extends AbstractController
             $form = $this->createForm(SearchType::class);
             return $this->redirectToRoute('app_search',['searchWord' => $searchWordUpdated]);
         }
-   
+        
         $formOrder = $this->createFormBuilder()
         ->add('ordering', ChoiceType::class, [
             'choices'  => [
-                '-popularity' => '-popularity',
-                '-relevance' => '-relevance',
+                '-metacritic' => '-metacritic',
+                '-rating' => '-rating',
+                '-released' => '-released',
+                '-name' => '-name',
                 // Ajoutez plus d'options si nécessaire
             ],
         ])
         ->getForm();
 
         $formOrder->handleRequest($request);
-        $ordering = '';
+
         if ($formOrder->isSubmitted() && $formOrder->isValid()) {
             // Obtenez la valeur du champ 'ordering'
             $ordering = $formOrder->get('ordering')->getData();
-
+            return $this->redirectToRoute('app_game', ['ordering' => $ordering]);
             // Stockez la valeur dans la session
         }
 
         
-        if(!$ordering){
-            $ordering = "-relevance";
-        }
-        
+        $ordering = $request->query->get('ordering', '');
+
         $apiKey = "85c1e762dda2428786a58b352a42ade2";
         $limit = 50;
-        $apiUrl = "https://api.rawg.io/api/games?key=$apiKey&ordering=$ordering&page_size=$limit";
+        $apiUrl = "https://api.rawg.io/api/games?ordering=$ordering&key=$apiKey";
         $games=null;
         $games = $apiDataService->fetchDataFromApi($apiUrl);
         $ordering = '';
@@ -112,12 +112,26 @@ class GameController extends AbstractController
 
                 
                 $game->setTitle($data['name']);
-                $game->setBackgroundImage($data['background_image']);
-                $game->setSummary($data['description_raw']);
+                if(isset($data['background_image'])){
+                    $game->setBackgroundImage($data['background_image']);
+                }else{
+                    $game->setBackgroundImage("assets/other/default.jpg");
+                }
+                if(isset($data['description_raw'])){
+                    $game->setSummary($data['description_raw']);
+                }
                 $game->setReleaseDate(new \DateTimeImmutable($data['released']));
-                $game->setWebsite($data['website']);
+                
+                if(isset($data['website'])){
+                    $game->setWebsite($data['website']);
+                }
+                
                 $game->setGameId($id);
-                $game->setMetacritics($data['metacritic']);
+                if(isset($data['metacritic'])){
+                    $game->setMetacritics($data['metacritic']);
+                }else{
+                    $game->setMetacritics(0);
+                }
                 //$dateActuelle = new DateTimeImmutable();
                 $entityManager->persist($game);
                 $entityManager->flush();

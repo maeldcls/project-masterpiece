@@ -42,10 +42,18 @@ class GameDetailsController extends AbstractController
         dump($data);
         $game = new Game();
         $game->setTitle($data['name']);
-        $game->setBackgroundImage($data['background_image']);
+        if (!empty($data['background_image'])) {
+            $game->setBackgroundImage($data['background_image']);
+        }else{
+            $game->setBackgroundImage("./assets/other/default.jpg");
+        }
         $game->setGameId($id);
-        $game->setReleaseDate(new DateTimeImmutable($data['released']));
-        $game->setSummary($data['description_raw']);
+        if (isset($data['released'])) {
+            $game->setReleaseDate(new DateTimeImmutable($data['released']));
+        }
+        if (isset($data['description_raw'])) {
+            $game->setSummary($data['description_raw']);
+        }
         if (isset($data['publishers'])) {
             foreach ($data['publishers'] as $publisher) {
                 $publi = new Publisher();
@@ -116,11 +124,15 @@ class GameDetailsController extends AbstractController
         curl_close($ch);
         $data = json_decode($response, true);
 
-        foreach ($data['results'] as $screenshot) {
-            $screenshots[] = $screenshot['image'];
+        if(isset($data['results'])){
+            foreach ($data['results'] as $screenshot) {
+                $screenshots[] = $screenshot['image'];
+            }
+            if(!empty($screenshots)){
+                $game->setScreenshots($screenshots);
+            }
         }
-        dump($game);
-        $game->setScreenshots($screenshots);
+        
         return $this->render('game_details/index.html.twig', [
             'controller_name' => 'GameDetailsController',
             'game' => $game,

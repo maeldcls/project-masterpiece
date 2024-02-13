@@ -69,7 +69,7 @@ class ApiDataService
 
         foreach ($results as $data) {
             $game = new Game();
-            if (isset($data['background_image']) && !empty($data['background_image'])) {
+            if (isset($data['name']) && !empty($data['name'])) {
                 // Publishers
                 $game->setTitle($data['name']);
                 //$game->setSummary($data['description']);
@@ -77,13 +77,28 @@ class ApiDataService
                     $game->setMetacritics($data['metacritic']);
                 }
 
-                foreach ($data['short_screenshots'] as $screenshot) {
-                    $screenshots[] = $screenshot['image'];
+                if(isset($data['short_screenshots'])){
+                    foreach ($data['short_screenshots'] as $screenshot) {
+                        $screenshots[] = $screenshot['image'];
+                    }
+                    
+                }   
+                if(!empty($screenshots)){
+                    $game->setScreenshots($screenshots);
+                }else{
+                    $screenshots[0] ="assets/other/default.jpg";
+                    $game->setScreenshots($screenshots);
                 }
 
-                $game->setBackgroundImage($data['background_image']);
-                // $jsonScreenshots = json_encode($screenshots);
-                $game->setScreenshots($screenshots);
+                if (isset($data['background_image'])) {
+                    $game->setBackgroundImage($data['background_image']);
+                }else if(isset($screenshots[0])){
+                    $game->setBackgroundImage($screenshots[0]);
+                }else{
+                    $game->setBackgroundImage("assets/other/default.jpg");
+                }
+                
+                
                 unset($screenshots);
 
                 if (isset($data['publishers'])) {
@@ -157,7 +172,7 @@ class ApiDataService
                 array_push($games, $game);
             }
         }
-
+        dump($games);
         return $games;
     }
 }

@@ -15,13 +15,14 @@ class TestController extends AbstractController
         $gameSlug = "the-witcher-3-wild-hunt"; // Remplacez par le slug du jeu que vous souhaitez rechercher
 
         $limit = 24; // Nombre de jeux à récupérer
-        $keyword = "skyrim";
+        $keyword = "final-fantasy";
         $id= 11 ;
 
         // https://api.rawg.io/api/games?key=$apiKey&platforms=$id&ordering=-metacritic 
         // requete fonctionnel pour trouver des jeux sortis sur une plateforme donné ci dessus, pour cela il faut d'abord avoir l'id de la plateforme
 
-        $apiUrl = "https://api.rawg.io/api/games?search=$keyword&key=$apiKey&ordering=metacritics";
+        $ordering = "-released"; // Trier par popularité
+        $apiUrl = "https://api.rawg.io/api/games?ordering=$ordering&search=$keyword&key=$apiKey&page=10";
         //$apiUrl = "https://api.rawg.io/api/games?key=$apiKey&ordering=-popularity&page_size=$limit";
 
 
@@ -47,6 +48,7 @@ class TestController extends AbstractController
         $data = json_decode($response, true);
         // Vérifiez si des résultats ont été renvoyés
          dd($data);
+         dd($data["next"]);
         // $results = $data['results'];
         // var_dump($results);
         // foreach ($results as $data) {

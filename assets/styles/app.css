@@ -9,8 +9,19 @@ html,body{
 form input[type="text"] {
     color:black;
 }
+form >*{
+    color:black;
+}
+select option {
+    color: black;
+}
 
-
+button{
+    color:white;
+}
+form{
+    color:black;
+}
 a{
     text-decoration: none;
     color:white;

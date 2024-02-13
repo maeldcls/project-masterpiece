@@ -22,9 +22,11 @@
 			{% for game in games %}
 				<div class="bg-gray-800 text-white m-2 flex flex-col w-96 rounded-lg">
 
-					<div class="screenshots" data-game-screenshots="{{ game.screenshots|json_encode }}">
-						<img class="h-200 object-cover rounded-t-lg screenshot-image" src="{{ game.screenshots[0] }}" alt="Screenshot">
-					</div>
+					{% if game.screenshots %}
+						<div class="screenshots" data-game-screenshots="{{ game.screenshots|json_encode }}">
+							<img class="h-200 object-cover rounded-t-lg screenshot-image" src="{{ game.screenshots[0] }}" alt="Screenshot">
+						</div>
+					{% endif %}
 
 					<div class="cardContent">
 						<div class="titleContainer">
