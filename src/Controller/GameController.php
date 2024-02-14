@@ -59,10 +59,11 @@ class GameController extends AbstractController
 
         
         $ordering = $request->query->get('ordering', '');
-
+        
+        $page = 1;
         $apiKey = "85c1e762dda2428786a58b352a42ade2";
-        $limit = 50;
-        $apiUrl = "https://api.rawg.io/api/games?ordering=$ordering&key=$apiKey";
+
+        $apiUrl = "https://api.rawg.io/api/games?ordering=$ordering&key=$apiKey&page=$page";
         $games=null;
         $games = $apiDataService->fetchDataFromApi($apiUrl);
         $ordering = '';

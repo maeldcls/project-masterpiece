@@ -14,20 +14,38 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class PlatformController extends AbstractController
 {
-    #[Route('/platform/{platform}', name: 'app_platform')]
-    public function index($platform,ApiDataService $apiDataService): Response
+    #[Route('/platform', name: 'app_platform')]
+    public function index(ApiDataService $apiDataService): Response
     {
        
-        // Remplacez "YOUR_API_KEY" par votre clé API RAWG.io
+        // $apiUrl = "https://api.rawg.io/api/games?key=$apiKey&platform=$platform&ordering=-metacritic&page_size=$limit";
+        // $apiData = $apiDataService->fetchDataFromApi($apiUrl);
         $apiKey = "85c1e762dda2428786a58b352a42ade2";
-        $limit = 25; // Nombre de jeux à récupérer
+        $apiUrl = "https://api.rawg.io/api/platforms?&key=$apiKey";
+        $ch = curl_init($apiUrl);
+        $response = curl_exec($ch);
+         // Configuration des options cURL
+         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
 
-        $apiUrl = "https://api.rawg.io/api/games?key=$apiKey&platform=$platform&ordering=-metacritic&page_size=$limit";
-        $apiData = $apiDataService->fetchDataFromApi($apiUrl);
+         // Ignorer la vérification SSL (À utiliser avec précaution !)
+         curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
 
-        return $this->render('platform/index.html.twig', [
+         // Exécution de la requête
+         $response = curl_exec($ch);
+ 
+         // Vérification des erreurs cURL
+         if (curl_errno($ch)) {
+             die('Erreur cURL : ' . curl_error($ch));
+         }
+ 
+         // Fermeture de la session cURL
+         curl_close($ch);
+        $data = json_decode($response, true);
+        dd($data);
+
+        return $this->render('platform/platform_selector.html.twig', [
             'controller_name' => 'PlatformController',
-            'games' => $apiData
+
         ]);
     }
 }

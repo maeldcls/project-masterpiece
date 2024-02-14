@@ -22,7 +22,7 @@ class TestController extends AbstractController
         // requete fonctionnel pour trouver des jeux sortis sur une plateforme donné ci dessus, pour cela il faut d'abord avoir l'id de la plateforme
 
         $ordering = "-released"; // Trier par popularité
-        $apiUrl = "https://api.rawg.io/api/games?ordering=$ordering&search=$keyword&key=$apiKey&page=10";
+        $apiUrl = "https://api.rawg.io/api/platforms?&key=$apiKey";
         //$apiUrl = "https://api.rawg.io/api/games?key=$apiKey&ordering=-popularity&page_size=$limit";
 
 
@@ -47,8 +47,8 @@ class TestController extends AbstractController
          curl_close($ch);
         $data = json_decode($response, true);
         // Vérifiez si des résultats ont été renvoyés
-         dd($data);
-         dd($data["next"]);
+         dump($data);
+
         // $results = $data['results'];
         // var_dump($results);
         // foreach ($results as $data) {
