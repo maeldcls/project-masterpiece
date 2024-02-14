@@ -172,7 +172,6 @@ class ApiDataService
                 array_push($games, $game);
             }
         }
-        dump($games);
         return $games;
     }
 }

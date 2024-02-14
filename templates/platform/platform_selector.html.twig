@@ -6,5 +6,17 @@
 
 {% endblock %}
 {% block body %}
+    <div class="w-full flex flex-wrap justify-center">
+        {% for platform in platforms %}
+            <a class="flex  m-2" href="">
+                <div clas="w-72 h-72">
+                    <img class="w-72" src="{{ platform.image}}" alt="{{ platform.image}}">
+                    <p>{{ platform.name }}</p>
+                </div>
+            </a>
+        {% endfor %}
+    </div>
+{% endblock %}
+{% block javascripts %}
 
 {% endblock %}

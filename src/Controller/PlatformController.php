@@ -41,11 +41,27 @@ class PlatformController extends AbstractController
          // Fermeture de la session cURL
          curl_close($ch);
         $data = json_decode($response, true);
-        dd($data);
+        $platforms = [];
+        foreach($data['results'] as $platformdata){
+            $platform = new Platform();
+            $platform->setImage($platformdata['image_background']);
+            $platform->setName($platformdata['name']);
+            $platform->setapiId($platformdata['id']);
+            array_push($platforms, $platform);
+        }
 
         return $this->render('platform/platform_selector.html.twig', [
             'controller_name' => 'PlatformController',
+            'platforms' => $platforms,
+        ]);
+    }
 
+    #[Route('/platform/{', name: 'app_platform')]
+    public function promptPlatform(ApiDataService $apiDataService): Response
+    {
+        return $this->render('platform/platform_selector.html.twig', [
+            'controller_name' => 'PlatformController',
+            'platforms' => $platforms,
         ]);
     }
 }

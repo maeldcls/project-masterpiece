@@ -79,8 +79,10 @@
 			{% endfor %}
 		</div>
 	</div>
-
+	<a href="{{ path('app_game_paginated', {'page': page + 1}) }}">Charger plus</a>
 {% endblock %}
 {% block javascripts %}
-	<script src="{{ asset ('js/gameDetails.js') }}"></script>
+	<script src="{{ asset('js/game.js')}}"></script>
+
+	{#<script src="{{ asset ('js/gameDetails.js') }}"></script>#}
 {% endblock %}

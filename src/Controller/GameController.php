@@ -19,8 +19,10 @@ use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 class GameController extends AbstractController
 {
     
-    #[Route('/', name: 'app_game')]
-    public function index(Request $request, ApiDataService $apiDataService, EntityManagerInterface $entityManager, GameRepository $gameRepository): Response
+    #[Route('/', name: 'app_game', defaults: ['page' => 1])]
+    #[Route('/{page}', name: 'app_game_paginated', requirements: ['page' => '\d+'])]
+    public function index(Request $request, ApiDataService $apiDataService, 
+    EntityManagerInterface $entityManager, GameRepository $gameRepository, int $page): Response
     {
         
         $form = $this->createForm(SearchType::class);
@@ -59,24 +61,25 @@ class GameController extends AbstractController
 
         
         $ordering = $request->query->get('ordering', '');
-        
-        $page = 1;
-        $apiKey = "85c1e762dda2428786a58b352a42ade2";
 
-        $apiUrl = "https://api.rawg.io/api/games?ordering=$ordering&key=$apiKey&page=$page";
+        
+        
+        $apiKey = "85c1e762dda2428786a58b352a42ade2";
+        //$apiUrl = "https://api.rawg.io/api/games?ordering=$ordering&key=$apiKey&page=$page";
+        $apiUrl = "https://api.rawg.io/api/games?&key=$apiKey&page=$page";
         $games=null;
         $games = $apiDataService->fetchDataFromApi($apiUrl);
         $ordering = '';
-   
         dump($apiUrl);
         return $this->render('game/index.html.twig', [
             'controller_name' => 'GameController',
             'games' => $games,
             'formSearch'=>$form->createView(),
-            'formOrder'=>$formOrder->createView()
-   
+            'formOrder'=>$formOrder->createView(),
+            'page'=>$page,
         ]);
     }
+
 
     #[Route('/new/{id}', name: 'app_add_game')]
     public function addGame(Request $request, EntityManagerInterface $entityManager, int $id): Response
@@ -113,6 +116,7 @@ class GameController extends AbstractController
 
                 
                 $game->setTitle($data['name']);
+                
                 if(isset($data['background_image'])){
                     $game->setBackgroundImage($data['background_image']);
                 }else{
