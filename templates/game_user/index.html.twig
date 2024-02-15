@@ -7,12 +7,34 @@
 	<div class="flex flex-col p-2 w-full">
 		<div class="flex justify-between">
             <div class="w-42"><p>image</p></div>
-			<div class="w-42"><p>title</p></div>
-            <div class="w-42"><p>favoris</p></div>
-            <div class="w-42"><p>playtime</p></div>
-            <div class="w-42"><p>rate</p></div>
-            <div class="w-42"><p>status</p></div>
-            <div class="w-42"><p>comments</p></div>
+			<div class="w-42">
+            <p>title</p>
+            <a href="{{ path('app_game_user_index_order', {'orderBy': 'title','direction': 'DESC'}) }}">+</a>
+            <a href="{{ path('app_game_user_index_order', {'orderBy': 'title','direction': 'ASC'}) }}">-</a>
+            </div>
+            <div class="w-42">
+            <p>favoris</p>
+            <a href="{{ path('app_game_user_index_order', {'orderBy': 'isFav','direction': 'DESC'}) }}">+</a>
+            <a href="{{ path('app_game_user_index_order', {'orderBy': 'isFav','direction': 'ASC'}) }}">-</a>
+            </div>
+            <div class="w-42">
+            <p>playtime</p>
+            <a href="{{ path('app_game_user_index_order', {'orderBy': 'playtime','direction': 'DESC'}) }}">+</a>
+            <a href="{{ path('app_game_user_index_order', {'orderBy': 'playtime','direction': 'ASC'}) }}">-</a>
+            </div>
+            <div class="w-42">
+            <p>rate</p>
+            <a href="{{ path('app_game_user_index_order', {'orderBy': 'rate','direction': 'DESC'}) }}">+</a>
+            <a href="{{ path('app_game_user_index_order', {'orderBy': 'rate','direction': 'ASC'}) }}">-</a>
+            </div>
+            <div class="w-42">
+            <p>status</p>
+            <a href="{{ path('app_game_user_index_order', {'orderBy': 'status','direction': 'DESC'}) }}">+</a>
+            <a href="{{ path('app_game_user_index_order', {'orderBy': 'status','direction': 'ASC'}) }}">-</a>
+            </div>
+            <div class="w-42">
+            <p>comments</p>
+            </div>
 
 		</div>
 		{% for game in gameUser %}

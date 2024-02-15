@@ -11,9 +11,15 @@
 				: Found
 				{{count}}
 				games</h4>
-
+<a href="{{ path('app_search_paginated' ,{'searchWord': searchedWord,'page': page + 1}) }}">
+Charger plus
+</a>
+	{% if page > 1%}
+		<a href="{{ path('app_search_paginated',{'searchWord': searchedWord,'page': page - 1}) }}">Charger moins</a>
+	{% endif %}
 		</div>
 		{% include 'partials/card_container.html.twig' %}
+		
 </div>
 				
 {% endblock %}

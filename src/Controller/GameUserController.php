@@ -16,11 +16,20 @@ use Symfony\Component\Routing\Annotation\Route;
 #[Route('/game/user')]
 class GameUserController extends AbstractController
 {
-    #[Route('/', name: 'app_game_user_index', methods: ['GET'])]
-    public function index(GameUserRepository $gameUserRepository): Response
+    #[Route('/', name: 'app_game_user_index', defaults: ['orderBy' => 'title' ,'direction'=> 'ASC'] ,methods: ['GET'])]
+    #[Route('/{orderBy}/{direction}', name: 'app_game_user_index_order', methods: ['GET'])]
+    public function index(GameUserRepository $gameUserRepository, string $orderBy, string $direction): Response
     {
-        /** @var \App\Entity\User $user */
-        $result = $gameUserRepository->showMyGames($this->getUser()->getId());
+      if($orderBy == 'title'){
+        $order = 'g.title';
+      } else {
+        $order = 'gu.'.$orderBy;
+      }
+        
+        //$direction = 'ASC';
+        $idUser = $this->getUser()->getId();
+
+        $result = $gameUserRepository->showMyGames($idUser,$order,$direction);
 
 
         $form = $this->createForm(GameUserType::class);

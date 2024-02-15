@@ -17,9 +17,11 @@ class MyGameListController extends AbstractController
     #[Route('/my/game/list', name: 'app_my_game_list')]
     public function index(GameUserRepository $gameUserRepository, EntityManagerInterface $entityManager): Response
     {
-      
-        /** @var \App\Entity\User $user */
-        $result = $gameUserRepository->showMyGames($this->getUser()->getId());
+     
+        $orderBy = 'gu.rate';
+        $direction = 'ASC';
+        $idUser = $this->getUser()->getId();
+        $result = $gameUserRepository->showMyGames($idUser,'rate');
 
         dump($result);
         $form = $this->createForm(GameUserType::class);

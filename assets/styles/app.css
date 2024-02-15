@@ -130,3 +130,16 @@ body{
     align-self: center;
     margin: auto;
 }
+
+.nextButton{
+    position: fixed;
+    top: 50%;
+    transform: translateY(-50%);
+    right: 20px;
+}
+.previousButton{
+    position: fixed;
+    top: 50%;
+    transform: translateY(-50%);
+    left:13rem;
+}
