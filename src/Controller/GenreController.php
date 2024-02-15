@@ -32,7 +32,7 @@ class GenreController extends AbstractController
 
         $genre = strtolower($genre);
 
-        $apiKey = "85c1e762dda2428786a58b352a42ade2";
+        $apiKey = $_ENV['API_KEY'];
         $limit = 24; // Nombre de jeux à récupérer
         $ordering = "-metacritic"; 
         $apiUrl = "https://api.rawg.io/api/games?ordering=$ordering&key=$apiKey&genres=$genre&page_size=$limit";

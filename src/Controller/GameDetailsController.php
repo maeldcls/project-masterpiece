@@ -19,7 +19,7 @@ class GameDetailsController extends AbstractController
     #[Route('/game/details/{id}', name: 'app_game_details')]
     public function index($id): Response
     {
-        $apiKey = "85c1e762dda2428786a58b352a42ade2";
+        $apiKey = $_ENV['API_KEY'];
         $apiUrl = "https://api.rawg.io/api/games/$id?key=$apiKey";
 
         $ch = curl_init($apiUrl);
@@ -103,7 +103,7 @@ class GameDetailsController extends AbstractController
             $game->setWebsite($data['website']);
         }
 
-        $apiKey = "85c1e762dda2428786a58b352a42ade2";
+        $apiKey = $_ENV['API_KEY'];
         $apiUrl = "https://api.rawg.io/api/games/$id/screenshots?key=$apiKey";
 
         $ch = curl_init($apiUrl);

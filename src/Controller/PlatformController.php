@@ -19,7 +19,7 @@ class PlatformController extends AbstractController
     {
        
   
-        $apiKey = "85c1e762dda2428786a58b352a42ade2";
+        $apiKey = $_ENV['API_KEY'];
         $apiUrl = "https://api.rawg.io/api/platforms?key=$apiKey";
         $ch = curl_init($apiUrl);
         $response = curl_exec($ch);
@@ -60,7 +60,7 @@ class PlatformController extends AbstractController
     #[Route('/platform/{id}', name: 'app_platform_search')]
     public function promptPlatform(ApiDataService $apiDataService,int $id): Response
     {
-        $apiKey = "85c1e762dda2428786a58b352a42ade2";
+        $apiKey = $_ENV['API_KEY'];
         $apiUrl = "https://api.rawg.io/api/games?platforms=$id&key=$apiKey";
 
         $games=null;
