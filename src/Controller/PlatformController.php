@@ -18,10 +18,9 @@ class PlatformController extends AbstractController
     public function index(ApiDataService $apiDataService): Response
     {
        
-        // $apiUrl = "https://api.rawg.io/api/games?key=$apiKey&platform=$platform&ordering=-metacritic&page_size=$limit";
-        // $apiData = $apiDataService->fetchDataFromApi($apiUrl);
+  
         $apiKey = "85c1e762dda2428786a58b352a42ade2";
-        $apiUrl = "https://api.rawg.io/api/platforms?&key=$apiKey";
+        $apiUrl = "https://api.rawg.io/api/platforms?key=$apiKey";
         $ch = curl_init($apiUrl);
         $response = curl_exec($ch);
          // Configuration des options cURL
@@ -50,18 +49,26 @@ class PlatformController extends AbstractController
             array_push($platforms, $platform);
         }
 
+
+
         return $this->render('platform/platform_selector.html.twig', [
             'controller_name' => 'PlatformController',
             'platforms' => $platforms,
         ]);
     }
 
-    #[Route('/platform/{', name: 'app_platform')]
-    public function promptPlatform(ApiDataService $apiDataService): Response
+    #[Route('/platform/{id}', name: 'app_platform_search')]
+    public function promptPlatform(ApiDataService $apiDataService,int $id): Response
     {
-        return $this->render('platform/platform_selector.html.twig', [
+        $apiKey = "85c1e762dda2428786a58b352a42ade2";
+        $apiUrl = "https://api.rawg.io/api/games?platforms=$id&key=$apiKey";
+
+        $games=null;
+        $games = $apiDataService->fetchDataFromApi($apiUrl);
+
+        return $this->render('platform/index.html.twig', [
             'controller_name' => 'PlatformController',
-            'platforms' => $platforms,
+            'games' => $games,
         ]);
     }
 }

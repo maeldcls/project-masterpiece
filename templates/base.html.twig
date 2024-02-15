@@ -33,7 +33,9 @@
         <a href=""><h4>Last 30 days</h4></a>
         <a href=""><h4>This week</h4></a>
         <a href=""><h4>Next Month</h4></a>
+
         <a href="{{ path('app_genre_selector') }}"><h3 class="font-bold p-2">Genres</h3></a>
+
         <a href="{{ path('app_genre', {'genre': 'action'}) }}"><h4>Action</h4></a>
         <a href="{{ path('app_genre', {'genre': 'strategy'}) }}"><h4>Strategy</h4></a>
         <a href="{{ path('app_genre', {'genre': 'shooter'}) }}"><h4>Shooter</h4></a>
@@ -41,11 +43,13 @@
         <a href="{{ path('app_genre', {'genre': 'puzzle'}) }}"><h4>Puzzle</h4></a>
         <a href="{{ path('app_genre', {'genre': 'racing'}) }}"><h4>Racing</h4></a>
         <a href="{{ path('app_genre', {'genre': 'sports'}) }}"><h4>Sports</h4></a>
+
         <a href="{{ path('app_platform') }}"><h3 class="font-bold p-2">Platforms</h3></a>
-        <a href=""><h4>Puzzle</h4></a>
-        <a href=""><h4>Racing</h4></a>
-        <a href=""><h4>Sports</h4></a>
-        <a href=""><h4>Puzzle</h4></a>
+
+        <a href="{{ path('app_platform_search', {'id': '4'}) }}"><h4>PC</h4></a>
+        <a href="{{ path('app_platform_search', {'id': '187'}) }}"><h4>PS5</h4></a>
+        <a href="{{ path('app_platform_search', {'id': '1'}) }}"><h4>Xbox One</h4></a>
+        <a href="{{ path('app_platform_search', {'id': '7'}) }}"><h4>Nintendo Switch</h4></a>
     </aside>
     {% block body %}{% endblock %}
     {% block javascripts %}

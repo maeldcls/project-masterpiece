@@ -59,24 +59,29 @@ class GameController extends AbstractController
             // Stockez la valeur dans la session
         }
 
-        
         $ordering = $request->query->get('ordering', '');
-
-        
         
         $apiKey = "85c1e762dda2428786a58b352a42ade2";
-        //$apiUrl = "https://api.rawg.io/api/games?ordering=$ordering&key=$apiKey&page=$page";
-        $apiUrl = "https://api.rawg.io/api/games?&key=$apiKey&page=$page";
+        $apiUrl = "https://api.rawg.io/api/games?ordering=$ordering&key=$apiKey&page=$page";
         $games=null;
         $games = $apiDataService->fetchDataFromApi($apiUrl);
         $ordering = '';
-        dump($apiUrl);
+
+        if(empty($games)){
+            $page --;
+            $apiUrl = "https://api.rawg.io/api/games?ordering=$ordering&key=$apiKey&page=$page";
+            $games = $apiDataService->fetchDataFromApi($apiUrl);
+        }
+
+
+
         return $this->render('game/index.html.twig', [
             'controller_name' => 'GameController',
             'games' => $games,
             'formSearch'=>$form->createView(),
             'formOrder'=>$formOrder->createView(),
             'page'=>$page,
+
         ]);
     }
 

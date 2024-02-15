@@ -18,66 +18,7 @@
 			{{ form_end(formOrder) }}
 
 		</div>
-		<div class="flex flex-wrap justify-center">
-			{% for game in games %}
-				<div class="bg-gray-800 text-white m-2 flex flex-col w-96 rounded-lg">
-
-					{% if game.screenshots %}
-						<div class="screenshots" data-game-screenshots="{{ game.screenshots|json_encode }}">
-							<img class="h-200 object-cover rounded-t-lg screenshot-image" src="{{ game.screenshots[0] }}" alt="Screenshot">
-						</div>
-					{% endif %}
-
-					<div class="cardContent">
-						<div class="titleContainer">
-							<a href="{{ path('app_game_details', {'id': game.gameId}) }}">
-								<h2>{{game.title}}</h2>
-							</a>
-							{% if game.metacritics %}
-								{% if game.metacritics > 66 %}
-									<div class="w-8 h-8 border-2 border-green-500 flex justify-center items-center font-bold text-xl text-green-500 p-1">
-										<p class="text-green-500">{{game.metacritics}}</p>
-									</div>
-								{% elseif game.metacritics > 33 %}
-									<div class="w-8 h-8 border-2 border-yellow-500 flex justify-center items-center font-bold text-xl text-yellow-500 p-1">
-										<p class="text-yellow-500">{{game.metacritics}}</p>
-									</div>
-								{% else %}
-									<div class="w-8 h-8 border-2 border-red-500 flex justify-center items-center font-bold text-xl text-red-500 p-1">
-										<p class="text-red-500">{{game.metacritics}}</p>
-									</div>
-								{% endif %}
-							{% endif %}
-						</div>
-						<div>
-							<p>Plateforms :</p>
-							{% for parentPlatform in game.parentPlatform %}
-								<div class="platform">
-									<img src="{{ asset('assets/image/' ~ parentPlatform ~ '.svg') }}" alt="{{ parentPlatform }}"/>
-								</div>
-							{% endfor %}
-						</div>
-						<div>
-							<p>Genres :</p>
-							{% for genre in game.genres %}
-								<a class="genreLink" href="{{ path('app_genre', {'genre': genre.name}) }}">{{genre.name}}</a>
-							{% endfor %}
-						</div>
-					</div>
-
-					{# verifier si l'utilisateur à ajouter le jeu ou non #}
-					{% if app.user is empty %}
-						<a href="{{ path('app_login') }}">LOG IN TO ADD</a>
-					{% elseif game.gameUsers is not empty %}
-						{% for gameUser in game.gameUsers %}
-							<a href="{{ path('app_remove', {'gameUserId': gameUser.id}) }}">REMOVE</a>
-						{% endfor %}
-					{% else %}
-						<a href="{{ path('app_add_game', {'id': game.gameId}) }}">ADD</a>
-					{% endif %}
-				</div>
-			{% endfor %}
-		</div>
+		{% include 'partials/card_container.html.twig' %}
 	</div>
 	<a href="{{ path('app_game_paginated', {'page': page + 1}) }}">Charger plus</a>
 {% endblock %}
