@@ -5,7 +5,7 @@
 {% block stylesheets %}{% endblock %}
 {% block body %}
 	<div class="flex flex-col p-2 w-full">
-		<div class="flex justify-between">
+		<div class="grid grid-cols-8 w-full">
 			<div class="w-42">
 				<p>image</p>
 			</div>
@@ -37,19 +37,20 @@
 			<div class="w-42">
 				<p>comments</p>
 			</div>
-
+			<div>
+				<p>edit/delete</p>
+			</div>
 		</div>
 		{% for game in gameUser %}
-			<div class="flex justify-between ">
-				<div>
+			<div class="grid grid-cols-8 w-full">
+				<div class="flex justify-center">
 					<img class="h-24" src="{{ game.game.backgroundImage }}" alt="{{ game.game.title }}">
 				</div>
 				<div class="">
 					<a href="{{ path('app_game_details', {'id': game.game.gameId}) }}">{{ game.game.title }}</a>
 				</div>
 				{% if game.isFav == true %}
-					<div class="">
-						<p>favoris</p>
+					<div class="flex justify-center items-center">
 						<a href="{{ path('app_fav', {'gameUserId': game.id}) }}">
 							<svg
 								fill="yellow" width="20px" height="20px" xmlns="http://www.w3.org/2000/svg" viewbox="0 0 576 512">
@@ -58,53 +59,58 @@
 						</a>
 					</div>
 				{% else %}
-					<div class="w-1/7">
-						<p>favoris</p>
+					<div class="flex justify-center items-center">
+
 						<a href="{{ path('app_fav', {'gameUserId': game.id}) }}">
 							<svg fill="white" width="20px" height="20px" xmlns="http://www.w3.org/2000/svg" viewbox="0 0 576 512"><!--!Font Awesome Free 6.5.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.--><path d="M316.9 18C311.6 7 300.4 0 288.1 0s-23.4 7-28.8 18L195 150.3 51.4 171.5c-12 1.8-22 10.2-25.7 21.7s-.7 24.2 7.9 32.7L137.8 329 113.2 474.7c-2 12 3 24.2 12.9 31.3s23 8 33.8 2.3l128.3-68.5 128.3 68.5c10.8 5.7 23.9 4.9 33.8-2.3s14.9-19.3 12.9-31.3L438.5 329 542.7 225.9c8.6-8.5 11.7-21.2 7.9-32.7s-13.7-19.9-25.7-21.7L381.2 150.3 316.9 18z"/></svg>
 						</a>
 					</div>
 				{% endif %}
 				{% if not game.playtime is empty %}
-					<div class="">
+					<div class="flex justify-center items-center">
 						<p>{{ game.playtime }}hours</p>
 					</div>
 				{% else %}
-					<div class="">
-						<p>0</p>
+					<div class="flex justify-center items-center">
+						<p>0 hour</p>
 					</div>
 				{% endif %}
 				{% if not game.rate is empty %}
-					<div class="">
+					<div class="flex justify-center items-center">
 						<p>{{ game.rate }}/20</p>
-					</divclass="">
+					</div>
 				{% else %}
-					<div class="">
+					<div class="flex justify-center items-center">
 						<p>-</p>
 					</div>
 				{% endif %}
 				{% if not game.status is empty %}
-					<div class="">
+					<div class="flex justify-center items-center">
 						<p>{{ game.status }}</p>
 					</div>
 				{% else %}
-					<div class="">
+					<div class="flex justify-center items-center">
 						<p>-</p>
 					</div>
 				{% endif %}
 				{% if not game.comments is empty %}
-					<div class="">
+					<div class="flex justify-center items-center">
 						<p>{{ game.comments }}</p>
 					</div>
 				{% else %}
-					<div class="">
+					<div class="flex justify-center items-center">
 						<p>-</p>
 					</div>
 				{% endif %}
-				<a href="{{ path('app_remove', {'gameUserId': game.id}) }}">remove
-				</a>
-				<a href="{{ path('app_game_user_edit', {'id': game.id}) }}">edit
-				</a>
+				<div class="flex justify-center  items-center">
+					<a class="m-10" href="{{ path('app_remove', {'gameUserId': game.id}) }}">
+						<svg height="20px" size="2rem" fill="white" xmlns="http://www.w3.org/2000/svg" viewbox="0 0 448 512"><!--!Font Awesome Free 6.5.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.--><path d="M135.2 17.7L128 32H32C14.3 32 0 46.3 0 64S14.3 96 32 96H416c17.7 0 32-14.3 32-32s-14.3-32-32-32H320l-7.2-14.3C307.4 6.8 296.3 0 284.2 0H163.8c-12.1 0-23.2 6.8-28.6 17.7zM416 128H32L53.2 467c1.6 25.3 22.6 45 47.9 45H346.9c25.3 0 46.3-19.7 47.9-45L416 128z"/></svg>
+					</a>
+					<a fill="white" href="{{ path('app_game_user_edit', {'id': game.id}) }}">
+						<svg height="20px" fill="white" xmlns="http://www.w3.org/2000/svg" viewbox="0 0 512 512"><!--!Font Awesome Free 6.5.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.--><path d="M441 58.9L453.1 71c9.4 9.4 9.4 24.6 0 33.9L424 134.1 377.9 88 407 58.9c9.4-9.4 24.6-9.4 33.9 0zM209.8 256.2L344 121.9 390.1 168 255.8 302.2c-2.9 2.9-6.5 5-10.4 6.1l-58.5 16.7 16.7-58.5c1.1-3.9 3.2-7.5 6.1-10.4zM373.1 25L175.8 222.2c-8.7 8.7-15 19.4-18.3 31.1l-28.6 100c-2.4 8.4-.1 17.4 6.1 23.6s15.2 8.5 23.6 6.1l100-28.6c11.8-3.4 22.5-9.7 31.1-18.3L487 138.9c28.1-28.1 28.1-73.7 0-101.8L474.9 25C446.8-3.1 401.2-3.1 373.1 25zM88 64C39.4 64 0 103.4 0 152V424c0 48.6 39.4 88 88 88H360c48.6 0 88-39.4 88-88V312c0-13.3-10.7-24-24-24s-24 10.7-24 24V424c0 22.1-17.9 40-40 40H88c-22.1 0-40-17.9-40-40V152c0-22.1 17.9-40 40-40H200c13.3 0 24-10.7 24-24s-10.7-24-24-24H88z"/></svg>
+					</a>
+				</div>
+
 			</div>
 
 
