@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Game;
 use App\Entity\GameUser;
+use App\Form\GameUserEditType;
 use App\Form\GameUserType;
 use App\Repository\GameRepository;
 use App\Repository\GameUserRepository;
@@ -69,33 +70,7 @@ class GameUserController extends AbstractController
         ]);
     }
 
-    #[Route('/{id}/edit', name: 'app_game_user_edit', methods: ['GET', 'POST'])]
-    public function edit(Request $request, GameUser $gameUser,GameRepository $gameRepository, GameUserRepository $gameUserRepository,EntityManagerInterface $entityManager,int $id): Response
-    {
-        $form = $this->createForm(GameUserType::class, $gameUser);
-        $form->handleRequest($request);
-        if (!$gameUser) {
-            throw $this->createNotFoundException('GameUser not found');
-        }
-        $gameUser = $gameUserRepository->find($id);
-        $game = new Game();
-        $game = $gameRepository->find($gameUser->getGame()->getId());
-        
-
-        if ($form->isSubmitted() &&$form->isValid()) {
-            $gameUser->setComments($form->get('comments')->getData());
-            $entityManager->persist($gameUser);
-            $entityManager->flush();
-            dump($gameUser);
-            return $this->redirectToRoute('app_game_user_index', [], Response::HTTP_SEE_OTHER);
-        }
-
-        return $this->render('game_user/edit.html.twig', [
-            'game_user' => $gameUser,
-            'form' => $form,
-            'game' => $game,
-        ]);
-    }
+    
 
     #[Route('/{id}', name: 'app_game_user_delete', methods: ['POST'])]
     public function delete(Request $request, GameUser $gameUser, EntityManagerInterface $entityManager): Response
@@ -108,21 +83,7 @@ class GameUserController extends AbstractController
         return $this->redirectToRoute('app_game_user_index', [], Response::HTTP_SEE_OTHER);
     }
 
-    #[Route('/fav/{gameUserId}', name: 'app_fav')]
-    public function changeFav(EntityManagerInterface $entityManager, int $gameUserId)
-    {
-        $repository = $entityManager->getRepository(GameUser::class);
-        $gameUser = $repository->find($gameUserId);
+    
 
-        if ($gameUser) {
-            $gameUser->toggleIsFav();
-            $entityManager->flush();
-
-            return $this->redirectToRoute('app_game_user_index');
-        } else {
-            // si entiy GameUser pas trouvé
-            return $this->redirectToRoute('app_game_user_index');
-        }
-    }
-
+   
 }

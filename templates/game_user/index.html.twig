@@ -44,11 +44,11 @@
 				<div>
 					<img class="h-24" src="{{ game.game.backgroundImage }}" alt="{{ game.game.title }}">
 				</div>
-				<div class="w-42">
+				<div class="">
 					<a href="{{ path('app_game_details', {'id': game.game.gameId}) }}">{{ game.game.title }}</a>
 				</div>
 				{% if game.isFav == true %}
-					<div class="w-1/7">
+					<div class="">
 						<p>favoris</p>
 						<a href="{{ path('app_fav', {'gameUserId': game.id}) }}">
 							<svg
@@ -66,39 +66,38 @@
 					</div>
 				{% endif %}
 				{% if not game.playtime is empty %}
-					<div class="w-1/7">
-						<p>{{ game.playtime }}
-							hours</p>
+					<div class="">
+						<p>{{ game.playtime }}hours</p>
 					</div>
 				{% else %}
-					<div class="w-1/7">
+					<div class="">
 						<p>0</p>
 					</div>
 				{% endif %}
 				{% if not game.rate is empty %}
-					<div class="w-1/7">
+					<div class="">
 						<p>{{ game.rate }}/20</p>
-					</divclass="w-1/7">
+					</divclass="">
 				{% else %}
-					<div class="w-1/7">
+					<div class="">
 						<p>-</p>
 					</div>
 				{% endif %}
 				{% if not game.status is empty %}
-					<div class="w-1/7">
+					<div class="">
 						<p>{{ game.status }}</p>
 					</div>
 				{% else %}
-					<div class="w-1/7">
+					<div class="">
 						<p>-</p>
 					</div>
 				{% endif %}
 				{% if not game.comments is empty %}
-					<div class="w-1/7">
+					<div class="">
 						<p>{{ game.comments }}</p>
 					</div>
 				{% else %}
-					<div class="w-1/7">
+					<div class="">
 						<p>-</p>
 					</div>
 				{% endif %}

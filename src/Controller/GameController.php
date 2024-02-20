@@ -61,7 +61,7 @@ class GameController extends AbstractController
 
         $ordering = $request->query->get('ordering', '');
         
-        $apiKey = $_ENV['API_KEY'];
+        $apiKey = $this->getParameter('my_api_key');
         $apiUrl = "https://api.rawg.io/api/games?ordering=$ordering&key=$apiKey&page=$page";
         $games=null;
         $games = $apiDataService->fetchDataFromApi($apiUrl);
@@ -98,7 +98,7 @@ class GameController extends AbstractController
             $gameUser = new GameUser();
             $game = new Game();
             if(!$foundGame){
-                $apiKey = $_ENV['API_KEY'];
+                $apiKey = $this->getParameter('my_api_key');
                 $apiUrl = "https://api.rawg.io/api/games/$id?key=$apiKey";
         
                 $ch = curl_init($apiUrl);

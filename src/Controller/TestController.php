@@ -11,7 +11,7 @@ class TestController extends AbstractController
     #[Route('/test', name: 'app_test')]
     public function index(): Response
     {
-        $apiKey = "85c1e762dda2428786a58b352a42ade2";
+        $apiKey = $this->getParameter('my_api_key');
         $gameSlug = "the-witcher-3-wild-hunt"; // Remplacez par le slug du jeu que vous souhaitez rechercher
 
         $limit = 24; // Nombre de jeux à récupérer
