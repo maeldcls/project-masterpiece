@@ -6,9 +6,7 @@
 {% block body %}
 	<div class="w-full">
 
-		{{ form_start(formSearch)}}
-		{{ form_widget(formSearch.searchText)}}
-		{{ form_end(formSearch)}}
+		{% include 'partials/searchBar.html.twig' %}
 
 		<div class="header">
 
