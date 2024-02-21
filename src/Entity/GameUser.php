@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use App\Repository\GameUserRepository;
+use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: GameUserRepository::class)]
@@ -28,9 +29,6 @@ class GameUser
     private ?\DateTimeImmutable $addedAt = null;
 
     #[ORM\Column(nullable: true)]
-    private ?\DateTimeImmutable $updatedAt = null;
-
-    #[ORM\Column(nullable: true)]
     private ?int $playtime = null;
 
     #[ORM\Column(length: 255)]
@@ -41,6 +39,14 @@ class GameUser
 
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $comments = null;
+
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $platform = null;
+
+    #[ORM\Column(nullable: true)]
+    private ?\DateTimeImmutable $datePlayed = null;
+
+
 
     public function getId(): ?int
     {
@@ -95,17 +101,6 @@ class GameUser
         return $this;
     }
 
-    public function getUpdatedAt(): ?\DateTimeImmutable
-    {
-        return $this->updatedAt;
-    }
-
-    public function setUpdatedAt(?\DateTimeImmutable $updatedAt): static
-    {
-        $this->updatedAt = $updatedAt;
-
-        return $this;
-    }
 
     public function getPlaytime(): ?int
     {
@@ -159,4 +154,31 @@ class GameUser
     {
         $this->isFav = !$this->isFav;
     }
+
+
+    public function getPlatform(): ?string
+    {
+        return $this->platform;
+    }
+
+    public function setPlatform(?string $platform): static
+    {
+        $this->platform = $platform;
+
+        return $this;
+    }
+
+    public function getDatePlayed(): ?\DateTimeImmutable
+    {
+        return $this->datePlayed;
+    }
+
+    public function setDatePlayed(?\DateTimeImmutable $datePlayed): static
+    {
+        $this->datePlayed = $datePlayed;
+
+        return $this;
+    }
+
+ 
 }

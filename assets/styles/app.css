@@ -34,27 +34,8 @@ body{
 }
 
 
-.gameCard{
-    background-color: #303346;
-    color:white;
-    margin:5px;
-    display: flex;
-    flex-direction: column;
-    width: 400px;
-}
-.gameCard>div{
-    width:100%;
-    overflow: hidden;
-}
-.titleContainer{
-    display: flex;
-    vertical-align: top;
-    justify-content: space-between;
-    padding:5px;
-}
-.titleContainer>h2{
-    margin-top:0;
-}
+
+
 .cardContent{
     display: flex;
     flex-direction: column;
@@ -68,14 +49,7 @@ body{
 }
 
 
-.genreLink{
-    padding:2px;
-   align-self:center;
-}
-.genreLink:hover{
-    color:grey;
-  
-}
+
 .navBar a h4:hover{
     font-weight: bold;
     color:gray;
@@ -142,4 +116,20 @@ body{
     top: 50%;
     transform: translateY(-50%);
     left:13rem;
+}
+.dp08 {
+
+	box-shadow:
+		/* offset-x | offset-y | blur-radius | spread-radius | color */
+		0px 8px 10px 1px hsla(0,0%,0%,0.14), 
+		0px 3px 14px 2px hsla(0,0%,0%,0.12), 
+		0px 5px 5px -3px hsla(0,0%,0%,0.2);
+}
+.dp08:hover {
+
+	box-shadow:
+		/* offset-x | offset-y | blur-radius | spread-radius | color */
+		0px 8px 10px 1px hsla(0, 0%, 100%, 0.14), 
+		0px 3px 14px 2px hsla(0, 0%, 100%, 0.12), 
+		0px 5px 5px -3px hsla(0, 0%, 100%, 0.2);
 }

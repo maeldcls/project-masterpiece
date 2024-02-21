@@ -163,7 +163,7 @@ class GameController extends AbstractController
                 $gameUser->setAddedAt(new DateTimeImmutable());
                 $gameUser->setIsFav(false);
                 $gameUser->setStatus("Finished");
-     
+
                 $entityManager->persist($gameUser);
                 $entityManager->flush();
             }
