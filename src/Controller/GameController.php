@@ -28,7 +28,7 @@ class GameController extends AbstractController
         $form = $this->createForm(SearchType::class);
         $form->handleRequest($request);
 
-        $session = $request->getSession();
+
         if ($form->isSubmitted() && $form->isValid()) {
             $searchWord = $form->get('searchText')->getData();
             $searchWordUpdated = strtr($searchWord, ' ', '-');
@@ -38,15 +38,19 @@ class GameController extends AbstractController
             return $this->redirectToRoute('app_search',['searchWord' => $searchWordUpdated]);
         }
         
+        
         $formOrder = $this->createFormBuilder()
         ->add('ordering', ChoiceType::class, [
             'choices'  => [
-                '-metacritic' => '-metacritic',
-                '-rating' => '-rating',
-                '-released' => '-released',
-                '-name' => '-name',
-                // Ajoutez plus d'options si nécessaire
+                'Revelance' => '-relevance',
+                'Highest Metacritics' => '-metacritic',
+                'Best rating' => '-rating',
+                'Recent released' => '-released',
+                'Name A-Z' => '-name',
+                'Name Z-A' => 'name',
+                
             ],
+            'data' => $request->query->get('ordering', ''),
         ])
         ->getForm();
 
@@ -158,7 +162,7 @@ class GameController extends AbstractController
                 $gameUser->setUser($this->getUser());
                 $gameUser->setAddedAt(new DateTimeImmutable());
                 $gameUser->setIsFav(false);
-                $gameUser->setStatus("played");
+                $gameUser->setStatus("Finished");
      
                 $entityManager->persist($gameUser);
                 $entityManager->flush();
