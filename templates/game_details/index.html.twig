@@ -26,7 +26,7 @@
 				
 				<p id="summaryFull" class="hidden">{{ game.summary}}</p>
 
-				<p id="readMore" class="cursor-pointer">Read More</p>
+				<button id="readMore" class="w-10 cursor-pointer bg-sky-500">Read More</button>
 				<p id="hide" class="cursor-pointer hidden">Hide</p>
 			{% endif %}
 
@@ -62,8 +62,8 @@
 	</div>
 	<style>
 		.content {
-			background: url({{ game.backgroundImage }})center no-repeat;
-			background-size:cover;
+			background: url({{ game.backgroundImage }})top no-repeat;
+			background-size:contain;
 			width:100%;
 		}
 	</style>

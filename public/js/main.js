@@ -1,3 +1,5 @@
+
+
 document.addEventListener('DOMContentLoaded', function () {
     let screenshotsContainers = document.querySelectorAll('.screenshots');
     
@@ -33,4 +35,13 @@ document.addEventListener('DOMContentLoaded', function () {
 
     });
 
+    
+
+});
+selectOrder.addEventListener('change', function () {
+    let value = selectOrder.value;
+    console.log(value);
+    // let url = new URL(window.location.href);
+    // url.searchParams.set('order', value);
+    // window.location.href = url.toString();
 });
