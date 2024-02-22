@@ -135,7 +135,7 @@ body{
 }
 
 .zombie {
-    animation: marche 30s linear infinite;
+    animation: marche 20s linear infinite;
 }
 
 @keyframes marche {
@@ -143,6 +143,15 @@ body{
         transform: translateX(0);
     }
     100% {
-        transform: translateX(calc(100vw));
+        transform: translateX(calc(100vw - 13rem));
     }
+}
+
+
+a:hover .added {
+    fill:black;
+}
+
+.black{
+    color:black;
 }

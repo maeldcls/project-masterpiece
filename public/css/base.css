@@ -1,0 +1,11 @@
+a .svg-aside {
+    display: none;
+}
+
+/* Affichez le SVG lorsque vous survolez le lien */
+a:hover .svg-aside {
+    display: block;
+}
+a:hover{
+    font-weight: bold;
+}
