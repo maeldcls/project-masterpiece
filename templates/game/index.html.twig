@@ -8,18 +8,18 @@
 
 		{% include 'partials/searchBar.html.twig' %}
 
-		<div class="flex header">
-			<h1 class="text-4xl ">Main page</h1>
-			{{ form_start(formOrder, {'attr': {'id':'ordering-form-id'}})  }}
-			{{ form_widget(formOrder.ordering) }}
-
+		<div class="flex lg:flex-row flex-col  justify-between mx-16 items-center header mb-4">
+			<h1 class="text-4xl lg:mb-0 mb-5">Main page</h1>
+			{{ form_start(formOrder, {'attr': {'id':'ordering-form-id','class':'bg-transparent'}}) }}
+			{{ form_label(formOrder.ordering, 'Order By :') }}
+			{{ form_widget(formOrder.ordering,{'arre' :{'class':'bg-transparent rounded'}}) }}
 			{{ form_end(formOrder) }}
 			
 
 		</div>
 		<div class="flex w-full">
 		{% if page > 1%}
-				<a class="previousButton"href="{{ path('app_game_paginated', {'page': page - 1,'ordering': app.request.query.get('ordering')}) }}">
+				<a class="previousButton" href="{{ path('app_game_paginated', {'page': page - 1,'ordering': app.request.query.get('ordering')}) }}">
 				<svg fill="white" width="2.5rem" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--!Font Awesome Free 6.5.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.--><path d="M9.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l192 192c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L77.3 256 246.6 86.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-192 192z"/></svg>
 				</a>
 			{% endif %}

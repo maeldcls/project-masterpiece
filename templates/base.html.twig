@@ -23,14 +23,14 @@
 	<body>
 
 		<aside class="w-52">
-			<div class="text-white bg-gray-900 flex flex-col w-full p-2 h-screen">
+			<div class="text-white bg-slate-900 flex flex-col w-full p-2 h-screen">
 				<a class="flex justify-between  items-center" href="{{ path('app_game') }}" class="font-bold ml-2 p-2">
 					<h4 class="text-2xl">Accueil</h4>
                     {% include 'partials/icon_selector.html.twig' %}
 				</a>
 
 				{% if app.user %}
-					<a class="flex justify-between  items-center" href="{{ path('app_logout') }} " class="font-bold ml-2 p-2">
+					<a class="flex justify-between  items-center" href="{{ path('app_logout') }}" class="font-bold ml-2 p-2">
 						<h4 class="text-2xl">Log Out</h4>
                         {% include 'partials/icon_selector.html.twig' %}
 					</a>

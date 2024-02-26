@@ -15,7 +15,7 @@ class SearchType extends AbstractType
         $builder
             ->add('searchText')
             ->add('submit', SubmitType::class,[
-                
+                'label' => 'Search',
             ])
             
         ;

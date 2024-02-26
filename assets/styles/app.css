@@ -6,12 +6,7 @@ html,body{
     padding:0;
     overflow-x: hidden;
 }
-form input[type="text"] {
-    color:black;
-}
-form >*{
-    color:black;
-}
+
 select option {
     color: black;
 }
@@ -19,9 +14,7 @@ select option {
 button{
     color:white;
 }
-form{
-    color:black;
-}
+
 a{
     text-decoration: none;
     color:white;
@@ -33,7 +26,9 @@ body{
     min-width:100%;
 }
 
-
+.searchBar{
+    background-color:#15141A;
+}
 
 
 .cardContent{
@@ -104,19 +99,6 @@ body{
     align-self: center;
     margin: auto;
 }
-
-.nextButton{
-    position: fixed;
-    top: 50%;
-    transform: translateY(-50%);
-    right: 20px;
-}
-.previousButton{
-    position: fixed;
-    top: 50%;
-    transform: translateY(-50%);
-    left:13rem;
-}
 .dp08 {
 
 	box-shadow:
@@ -135,16 +117,20 @@ body{
 }
 
 .zombie {
-    animation: marche 20s linear infinite;
+    animation: marche 14s linear infinite;
 }
 
 @keyframes marche {
     0% {
-        transform: translateX(0);
+        transform: translateX(-20px);
     }
     100% {
-        transform: translateX(calc(100vw - 13rem));
+        transform: translateX(calc(33vw));
     }
+}
+
+.add{
+
 }
 
 
@@ -155,3 +141,51 @@ a:hover .added {
 .black{
     color:black;
 }
+
+select {
+    background-color: #000000; 
+    color: #ffffff; 
+    border: solid 1px #ffffff;
+  }
+  
+  select option {
+    background-color: #000000; 
+    color:#ffffff;
+  }
+ 
+
+.nextButton{
+    position: fixed;
+    top: 50%;
+    transform: translateY(-50%);
+    right: 1rem;
+}
+.previousButton{
+    position: fixed;
+    top: 50%;
+    transform: translateY(-50%);
+    
+}
+
+@media (min-width: 1024px) {
+    aside {
+      display: block; 
+    }
+    .previousButton{
+        left:12rem;
+    }
+    
+  }
+  
+  /* Pour écrans moyens et plus petits */
+  @media (max-width: 1023px) {
+    aside {
+      display: none; 
+    }
+    .previousButton{
+        left:1rem;
+    }
+    .logContainer{
+        display:none;
+    }
+  }

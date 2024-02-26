@@ -38,35 +38,33 @@
 				</div>
 				<div class="flex justify-between p-2">
 					<div class="flex">
-						<p>Genre
-							{% if game.genres|length > 1 %}s
-							{% endif %}
-							:
+						<p>
+							Genre{% if game.genres|length > 1 %}s {% endif %} :
 						</p>
 						{% for genre in game.genres %}
 							<a class="ml-1 text-indigo-100 hover:text-indigo-500" href="{{ path('app_genre', {'genre': genre.name}) }}">{{genre.name}}</a>
 						{% endfor %}
 						{# verifier si l'utilisateur à ajouter le jeu ou non #}
 					</div>
-					<div>
+					
 						{% if app.user is empty %}
 							<a href="{{ path('app_login') }}">LOG IN TO ADD</a>
 						{% elseif game.gameUsers is not empty %}
 							{% for gameUser in game.gameUsers %}
-								<a class="flex justify-center items-center border-1 border-lime-300 rounded hover:font-normal p-1 m-2 text-sm text-white bg-lime-700 hover:bg-white hover:text-black hover:border-black added" href="{{ path('app_remove', {'gameUserId': gameUser.id}) }}" >
-    <svg width="12" height="9" viewbox="0 0 12 9" xmlns="http://www.w3.org/2000/svg" style="vertical-align: middle;">
-        <path d="M3.97 9L0 4.846l1.323-1.384L3.971 6.23 9.927 0l1.323 1.385z" fill="#FFF" fill-rule="evenodd"></path>
-    </svg><p class="white added-text">ADDED</p>
-</a>
+								<a class="flex justify-center items-center border-1 border-lime-300 rounded hover:font-normal p-1 m-2 text-sm text-white bg-lime-700 hover:bg-white hover:text-black hover:border-black added" href="{{ path('app_remove', {'gameUserId': gameUser.id}) }}">
+									<svg width="12" height="9" viewbox="0 0 12 9" xmlns="http://www.w3.org/2000/svg" style="vertical-align: middle;">
+										<path d="M3.97 9L0 4.846l1.323-1.384L3.971 6.23 9.927 0l1.323 1.385z" fill="#FFF" fill-rule="evenodd"></path>
+									</svg>
+									<p class="white added-text">ADDED</p>
+								</a>
 
 							{% endfor %}
 						{% else %}
-							<a class="flex justify-center items-center border-1  border-black rounded hover:font-normal w-4 p-1 m-2 text-sm hover:border-white text-white bg-transparent" href="{{ path('app_add_game', {'id': game.gameId}) }}">
-								<svg width="10px" fill="white" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--!Font Awesome Free 6.5.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.--><path d="M256 80c0-17.7-14.3-32-32-32s-32 14.3-32 32V224H48c-17.7 0-32 14.3-32 32s14.3 32 32 32H192V432c0 17.7 14.3 32 32 32s32-14.3 32-32V288H400c17.7 0 32-14.3 32-32s-14.3-32-32-32H256V80z"/></svg>
-									<p>ADD</p>
+							<a class="flex justify-center items-center border-1 border-slate-100 rounded hover:font-normal p-1 m-2 text-sm text-white bg-transparent  hover:text-black hover:border-black" href="{{ path('app_add_game', {'id': game.gameId}) }}">
+								<p class="white added-text">ADD</p>
 							</a>
 						{% endif %}
-					</div>
+					
 				</div>
 			</div>
 
