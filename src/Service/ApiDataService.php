@@ -18,21 +18,16 @@ use Symfony\Contracts\HttpClient\HttpClientInterface;
 
 class ApiDataService
 {
-    private $client;
-    private $entityManager;
-    private $userRepository;
+  
     private $gameRepository;
     private $gameUserRepository;
     private $security;
 
-
     public function __construct(
-        HttpClientInterface $client,
         GameRepository $gameRepository,
         GameUserRepository $gameUserRepository,
         Security $security
     ) {
-        $this->client = $client;
         $this->gameRepository = $gameRepository;
         $this->gameUserRepository = $gameUserRepository;
         $this->security = $security;
@@ -42,24 +37,18 @@ class ApiDataService
     {
         // Initialisation de cURL
         $ch = curl_init($url);
-
         // Configuration des options cURL
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-
         // Ignorer la vérification SSL (À utiliser avec précaution !)
         curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
-
         // Exécution de la requête
         $response = curl_exec($ch);
-
         // Vérification des erreurs cURL
         if (curl_errno($ch)) {
             die('Erreur cURL : ' . curl_error($ch));
         }
-
         // Fermeture de la session cURL
         curl_close($ch);
-
         // Traitement de la réponse
         $data = json_decode($response, true);
 

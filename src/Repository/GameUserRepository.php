@@ -65,10 +65,6 @@ class GameUserRepository extends ServiceEntityRepository
 
     public function hasUserAddedGame(User $user, Game $game): bool
     {
-        // Implémentez la logique pour vérifier si l'utilisateur a ajouté le jeu
-        // Vous pouvez utiliser des requêtes DQL ou les méthodes du Repository pour effectuer la vérification
-
-        // Exemple avec une requête DQL :
         $query = $this->createQueryBuilder('gu')
             ->select('COUNT(gu.id)')
             ->where('gu.user = :user')

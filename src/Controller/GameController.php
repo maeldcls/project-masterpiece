@@ -156,7 +156,10 @@ class GameController extends AbstractController
             }
 
             $gameUserManager =$entityManager->getRepository(GameUser::class);
-            $foundGameUser = $gameUserManager->findby(['game' => $gameId, 'user' => $this->getUser()->getId()]);
+            
+            /** @var \App\Entity\User $user */
+            $user = $this->getUser();
+            $foundGameUser = $gameUserManager->findby(['game' => $gameId, 'user' => $user->getId()]);
             
             if(!$foundGameUser){
                 $gameUser->setUser($this->getUser());
