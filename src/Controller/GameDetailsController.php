@@ -39,7 +39,6 @@ class GameDetailsController extends AbstractController
         // Fermeture de la session cURL
         curl_close($ch);
         $data = json_decode($response, true);
-        dump($data);
         $game = new Game();
         $game->setTitle($data['name']);
         if (!empty($data['background_image'])) {

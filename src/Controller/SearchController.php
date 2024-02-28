@@ -22,16 +22,15 @@ class SearchController extends AbstractController
 
         $searchWordUpdated = strtr($searchWord, '-', ' ');
         $apiKey = $this->getParameter('my_api_key');
-        $apiUrl = "https://api.rawg.io/api/games?key=$apiKey&search=$searchWord&ordering=-metacritic&page=$page";
+        $apiUrl = "https://api.rawg.io/api/games?key=$apiKey&search=$searchWord&page=$page";
         $apiData = $apiDataService->fetchDataFromApi($apiUrl);
 
-        $count = count($apiData);
+
         return $this->render('search/index.html.twig', [
             'controller_name' => 'SearchController',
             'games' => $apiData,
             'searchedGame'=>$searchWordUpdated,
             'searchedWord'=>$searchWord,
-            'count'=>$count,
             'page'=>$page,
         ]);
     }

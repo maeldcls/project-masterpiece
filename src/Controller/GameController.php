@@ -57,10 +57,10 @@ class GameController extends AbstractController
         $formOrder->handleRequest($request);
 
         if ($formOrder->isSubmitted() && $formOrder->isValid()) {
-            // Obtenez la valeur du champ 'ordering'
+            // récupère la valeur du champ 'ordering'
             $ordering = $formOrder->get('ordering')->getData();
             return $this->redirectToRoute('app_game', ['ordering' => $ordering]);
-            // Stockez la valeur dans la session
+            
         }
 
         $ordering = $request->query->get('ordering', '');

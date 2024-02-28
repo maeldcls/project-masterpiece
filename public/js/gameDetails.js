@@ -33,14 +33,12 @@ window.onclick = function (event) {
     }
 };
 
- // this function is called when a small image is clicked
  function showModal(src) {
     modal.classList.remove('hidden');
     modal.classList.add('fixed');
     modalImg.src = src;
 }
 
-// this function is called when the close button is clicked
 function closeModal() {
     modal.classList.add('hidden');
 }
