@@ -24,10 +24,9 @@ class GameController extends AbstractController
     public function index(Request $request, ApiDataService $apiDataService, 
     EntityManagerInterface $entityManager, GameRepository $gameRepository, int $page): Response
     {
-        
+        //initialisation du formulaire de recherche
         $form = $this->createForm(SearchType::class);
         $form->handleRequest($request);
-
 
         if ($form->isSubmitted() && $form->isValid()) {
             $searchWord = $form->get('searchText')->getData();

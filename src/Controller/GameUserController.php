@@ -6,6 +6,7 @@ use App\Entity\Game;
 use App\Entity\GameUser;
 use App\Form\GameUserEditType;
 use App\Form\GameUserType;
+use App\Form\SearchType;
 use App\Repository\GameRepository;
 use App\Repository\GameUserRepository;
 use Doctrine\ORM\EntityManagerInterface;
@@ -17,10 +18,22 @@ use Symfony\Component\Routing\Annotation\Route;
 #[Route('/game/user')]
 class GameUserController extends AbstractController
 {
-    #[Route('/', name: 'app_game_user_index', defaults: ['orderBy' => 'title' ,'direction'=> 'ASC'] ,methods: ['GET'])]
-    #[Route('/{orderBy}/{direction}', name: 'app_game_user_index_order', methods: ['GET'])]
-    public function index(GameUserRepository $gameUserRepository, string $orderBy, string $direction): Response
+    #[Route('/', name: 'app_game_user_index', defaults: ['orderBy' => 'title' ,'direction'=> 'ASC'] ,methods: ['GET', 'POST'])]
+    #[Route('/{orderBy}/{direction}', name: 'app_game_user_index_order', methods: ['GET', 'POST'])]
+    public function index(Request $request, GameUserRepository $gameUserRepository, string $orderBy, string $direction): Response
     {
+        $formSearch = $this->createForm(SearchType::class);
+        $formSearch->handleRequest($request);
+
+        if ($formSearch->isSubmitted() && $formSearch->isValid()) {
+            $searchWord = $formSearch->get('searchText')->getData();
+            $searchWordUpdated = strtr($searchWord, ' ', '-');
+            
+            //nouvelle instance du form pour vider sa value 
+            $formSearch = $this->createForm(SearchType::class);
+            return $this->redirectToRoute('app_search',['searchWord' => $searchWordUpdated]);
+        }
+
       if($orderBy == 'title'){
         $order = 'g.title';
       } else {
@@ -37,6 +50,7 @@ class GameUserController extends AbstractController
             'controller_name' => 'GameUserController',
             'gameUser' => $result,
             'form' => $form->createView(),
+            'formSearch' => $formSearch->createView(),
         ]);
     }
 

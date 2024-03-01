@@ -8,17 +8,32 @@ use App\Entity\Genre;
 use App\Entity\Platform;
 use App\Entity\Publisher;
 use App\Entity\Tag;
+use App\Form\SearchType;
 use DateTime;
 use DateTimeImmutable;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 class GameDetailsController extends AbstractController
 {
-    #[Route('/game/details/{id}', name: 'app_game_details')]
-    public function index($id): Response
+    #[Route('/game/details/{id}', name: 'app_game_details',methods: ['GET','POST'])]
+    public function index(Request $request,$id): Response
     {
+        //initialisation du formulaire de recherche
+        $formSearch = $this->createForm(SearchType::class);
+        $formSearch->handleRequest($request);
+
+        if ($formSearch->isSubmitted() && $formSearch->isValid()) {
+            $searchWord = $formSearch->get('searchText')->getData();
+            $searchWordUpdated = strtr($searchWord, ' ', '-');
+            
+            //nouvelle instance du form pour vider sa value 
+            $formSearch = $this->createForm(SearchType::class);
+            return $this->redirectToRoute('app_search',['searchWord' => $searchWordUpdated]);
+        }
+
         $apiKey = $this->getParameter('my_api_key');
         $apiUrl = "https://api.rawg.io/api/games/$id?key=$apiKey";
 
@@ -135,7 +150,8 @@ class GameDetailsController extends AbstractController
         return $this->render('game_details/index.html.twig', [
             'controller_name' => 'GameDetailsController',
             'game' => $game,
-            'data' => $data
+            'data' => $data,
+            'formSearch' =>$formSearch->createView(),
         ]);
     }
 }

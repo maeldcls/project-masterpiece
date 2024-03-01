@@ -1,25 +1,42 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Search
+{% block title %}Searched :{{ searchedGame }}
 {% endblock %}
 
 {% block body %}
 	<div class="w-full">
-		<div class="header">
-			<h4>Results for the search
-				"{{searchedGame}}"
-			</h4>
-
-			
-<a href="{{ path('app_search_paginated' ,{'searchWord': searchedWord,'page': page + 1}) }}">
-Charger plus
-</a>
-	{% if page > 1%}
-		<a href="{{ path('app_search_paginated',{'searchWord': searchedWord,'page': page - 1}) }}">Charger moins</a>
-	{% endif %}
+		{% include 'partials/searchBar.html.twig' %}
+		<div class="flex lg:flex-row flex-col  justify-between mx-16 items-center header mb-4">
+		{% if game is defined %}
+			<h1 class="text-4xl lg:mb-0 mb-5">Results for the search : "{{searchedGame}}", page {{ page }}</h1>
+		{% else %}
+			<h1 class="text-4xl lg:mb-0 mb-5">No Result for the search : "{{searchedGame}}"</h1>
+		{% endif %}
+			{{ form_start(formOrder, {'attr': {'id':'ordering-form-id','class':'bg-transparent'}}) }}
+			{{ form_label(formOrder.ordering, 'Order By :') }}
+			{{ form_widget(formOrder.ordering,{'attr' :{'class':'bg-transparent rounded'}}) }}
+			{{ form_end(formOrder) }}
 		</div>
-		{% include 'partials/card_container.html.twig' %}
-		
-</div>
-				
+		<div class="flex w-full">
+			{% if page > 1%}
+				<a class="previousButton" href="{{ path('app_search_paginated', {'searchWord': searchWord, 'page': page - 1,'ordering': app.request.query.get('ordering')}) }}">
+					<svg fill="white" width="2.5rem" xmlns="http://www.w3.org/2000/svg" viewbox="0 0 320 512"><!--!Font Awesome Free 6.5.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.--><path d="M9.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l192 192c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L77.3 256 246.6 86.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-192 192z"/></svg>
+				</a>
+			{% endif %}
+			{% include 'partials/card_container.html.twig' %}
+			<a class="nextButton" href="{{ path('app_search_paginated', {'searchWord': searchWord, 'page': page + 1, 'ordering': app.request.query.get('ordering')}) }}">
+				<svg
+					fill="white" width="2.5rem" xmlns="http://www.w3.org/2000/svg" viewbox="0 0 320 512">
+					<!--!Font Awesome Free 6.5.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.-->
+					<path d="M310.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-192 192c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L242.7 256 73.4 86.6c-12.5-12.5-12.5-32.8
+					0-45.3s32.8-12.5 45.3 0l192 192z"/></svg>
+			</a>
+
+		</div>
+	</div>
+
+{% endblock %}
+{% block javascripts %}
+	<script src="{{ asset('js/game.js')}}"></script>
+	<script src="{{ asset('js/order.js')}}"></script>
 {% endblock %}

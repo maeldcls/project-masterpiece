@@ -1,0 +1,5 @@
+{% block submit_widget %}
+    <button class=" w-full h-full bg-gray-800 text-white rounded-r-full pr-3"type="{{ type|default('submit') }}" {{ block('button_attributes') }}>
+        <img class="w-6 h-6"src="{{ asset('/assets/other/search.svg') }}" alt="Submit">
+    </button>
+{% endblock %}

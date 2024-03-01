@@ -5,11 +5,10 @@
 
 {% block body %}
 	<div class="w-full">
-
 		{% include 'partials/searchBar.html.twig' %}
 
 		<div class="flex lg:flex-row flex-col  justify-between mx-16 items-center header mb-4">
-			<h1 class="text-4xl lg:mb-0 mb-5">Main page</h1>
+			<h1 class="text-4xl lg:mb-0 mb-5">Main page{% if page > 1 %}, page {{ page }}{% endif %}</h1>
 			{{ form_start(formOrder, {'attr': {'id':'ordering-form-id','class':'bg-transparent'}}) }}
 			{{ form_label(formOrder.ordering, 'Order By :') }}
 			{{ form_widget(formOrder.ordering,{'arre' :{'class':'bg-transparent rounded'}}) }}
@@ -17,6 +16,9 @@
 
 
 		</div>
+
+
+		
 		<div class="flex w-full">
 			{% if page > 1%}
 				<a class="previousButton" href="{{ path('app_game_paginated', {'page': page - 1,'ordering': app.request.query.get('ordering')}) }}">
@@ -31,12 +33,10 @@
 					<path d="M310.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-192 192c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L242.7 256 73.4 86.6c-12.5-12.5-12.5-32.8
 					0-45.3s32.8-12.5 45.3 0l192 192z"/></svg>
 			</a>
-			<div></div>
-
-
+		</div>
 		{% endblock %}
 		{% block javascripts %}
 			<script src="{{ asset('js/game.js')}}"></script>
-
+			<script src="{{ asset('js/order.js')}}"></script>
 
 		{% endblock %}

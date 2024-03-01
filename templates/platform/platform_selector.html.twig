@@ -6,6 +6,8 @@
 {% endblock %}
 {% block body %}
     <div class="w-full flex flex-wrap justify-center">
+        {% include 'partials/searchBar.html.twig' %}
+        
         {% for platform in platforms %}
 
             <a class="flex  m-2" href="{{ path('app_platform_search', {'id': platform.apiId }) }}">

@@ -75,7 +75,7 @@ class ApiDataService
                     if(!empty($screenshots)){
                         $game->setScreenshots($screenshots);
                     }else{
-                        $screenshots[0] ="assets/other/default.jpg";
+                        $screenshots[0] ="/assets/other/default.jpg";
                         $game->setScreenshots($screenshots);
                     }
     
@@ -84,7 +84,7 @@ class ApiDataService
                     }else if(isset($screenshots[0])){
                         $game->setBackgroundImage($screenshots[0]);
                     }else{
-                        $game->setBackgroundImage("assets/other/default.jpg");
+                        $game->setBackgroundImage("/assets/other/default.jpg");
                     }
                     
                     
