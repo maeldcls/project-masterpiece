@@ -1,0 +1,65 @@
+[
+  {
+    "quote": "What is better ? To be born good or to overcome your evil nature through great effort ?",
+    "game": "The Elder Scrolls V: Skyrim",
+    "author": "Paarthurnax",
+    "image":"/assets/quotes/skyrim.jpg"
+  },{
+    "quote": "Stand in the ashes of a trillion dead souls, and asks the ghosts if honor matters. The silence is your answer.",
+    "game": "Mass Effect 3",
+    "author": "Javik",
+    "image":"/assets/quotes/mass-effect-3.webp"
+  },{
+    "quote": "No gods or kings. Only man.",
+    "game": "Bioshock",
+    "author": "Andrew Ryan",
+    "image":"/assets/quotes/bioshock.webp"
+  },{
+    "quote": "...",
+    "game": "The legend of Zelda",
+    "author": "Link",
+    "image":"/assets/quotes/zelda.jpg"
+  },{
+    "quote": "You are here, and it’s beautiful, and escaping isn’t always something bad.",
+    "game": "Firewatch",
+    "author": "Delilah",
+    "image":"/assets/quotes/firewatch.webp"
+  },{
+    "quote": "We both said a lot of things that you're going to regret. But I think we can put our differences behind us. For science. You monster.",
+    "game": "Portal 2",
+    "author": "GLaDOS",
+    "image":"/assets/quotes/portal.webp"
+  },{
+    "quote": "I used to be an adventurer like you, until I took an arrow to the knee.",
+    "game": "The Elder Scrolls V: Skyrim",
+    "author": "Town Guard",
+    "image":"/assets/quotes/skyrim2.webp"
+  },{
+    "quote": "I'm rackin' my brain trying to think of a name for that diamond pony I bought. I was gonna call it 'piss-for-brains' in honor of you, but that just feels immature. Maybe... 'Butt Stallion'?",
+    "game": "Borderlands 2",
+    "author": "Handsome Jack",
+    "image":"/assets/quotes/borderlands2.webp"
+  },{
+    "quote": "No matter how dark the night, morning always comes, and our journey begins anew.",
+    "game": "Final Fantasy 10",
+    "author": "Lulu",
+    "image":"/assets/quotes/ff-x.webp"
+  },{
+    "quote": "Tell me Bats. What are you really scared of? Failing to save this cesspool of a city? Not finding the Commissioner in time? Me, in a thong?",
+    "game": "Batman: Arkham Asylum",
+    "author": "The Joker",
+    "image":"/assets/quotes/batman.webp"
+  },{
+    "quote": "Praise the sun!",
+    "game": "Dark Souls",
+    "author": "Solaire of Astora",
+    "image":"/assets/quotes/dark-souls.webp"
+  },{
+    "quote": "YOU DIED",
+    "game": "Dark Souls",
+    "author": "The game",
+    "image":"/assets/quotes/dark-souls2.webp"
+  }
+  
+ 
+]

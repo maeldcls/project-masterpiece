@@ -4,7 +4,6 @@ let addedElements = document.querySelectorAll('.added');
 
 
 selectOrder.addEventListener('change', function () {
-    let value = selectOrder.value;
     formOrdering.submit();
 });
 

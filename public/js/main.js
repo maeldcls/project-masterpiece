@@ -3,8 +3,6 @@
 document.addEventListener('DOMContentLoaded', function () {
     let screenshotsContainers = document.querySelectorAll('.screenshots');
     
-
-   
     screenshotsContainers.forEach(function (screenshotsContainer) {
         let currentIndex = 0;
         let intervalId;
@@ -33,15 +31,5 @@ document.addEventListener('DOMContentLoaded', function () {
             screenshotImage.src = screenshots[0];
         });
 
-    });
-
-    
-
-});
-selectOrder.addEventListener('change', function () {
-    let value = selectOrder.value;
-    console.log(value);
-    // let url = new URL(window.location.href);
-    // url.searchParams.set('order', value);
-    // window.location.href = url.toString();
+    }); 
 });

@@ -26,8 +26,9 @@ class GameUserController extends AbstractController
       } else {
         $order = 'gu.'.$orderBy;
       }
-        
-        $idUser = $this->getUser()->getId();
+        /** @var \App\Entity\User $user */
+        $user = $this->getUser();
+        $idUser = $user->getId();
         $result = $gameUserRepository->showMyGames($idUser,$order,$direction);
 
         $form = $this->createForm(GameUserType::class);

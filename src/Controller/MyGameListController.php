@@ -34,8 +34,9 @@ class MyGameListController extends AbstractController
     }
 
     #[Route('/remove/{gameUserId}', name: 'app_remove')]
-    public function deleteGameUserAction(EntityManagerInterface $entityManager, int $gameUserId)
+    public function deleteGameUserAction(Request $request,EntityManagerInterface $entityManager, int $gameUserId)
     {
+        $url = $request->headers->get('referer');
         $repository = $entityManager->getRepository(GameUser::class);
         $gameUser = $repository->find($gameUserId);
 
@@ -43,10 +44,10 @@ class MyGameListController extends AbstractController
             $entityManager->remove($gameUser);
             $entityManager->flush();
 
-            return $this->redirectToRoute('app_game_user_index');
+            return $this->redirect($url);
         } else {
             // si entiy GameUser pas trouvé
-            return $this->redirectToRoute('app_game_user_index');
+            return $this->redirect($url);
         }
     }
     #[Route('/fav/{gameUserId}', name: 'app_fav')]
