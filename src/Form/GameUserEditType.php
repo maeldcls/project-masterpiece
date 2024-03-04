@@ -21,7 +21,7 @@ class GameUserEditType extends AbstractType
             // ->add('playtime')
             // ->add('status')
             // ->add('rate')
-            ->add('comments')
+            //->add('comments')
         ;
     }
 

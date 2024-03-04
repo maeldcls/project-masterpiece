@@ -22,12 +22,17 @@ class GameUserType extends AbstractType
         $builder
             ->add('comments',TextareaType::class,[
                 'required' => false,
+                'attr' => [
+                    'class' => 'text-black',
+                ],
             ])
             ->add('rate', IntegerType::class,[
                 'attr' => [
                     'min' => 0,
                     'max' => 20,
+                    'class' => 'text-black',
                 ],
+                
                 'required' => false,
             ])
             ->add('status', ChoiceType::class, [
@@ -37,13 +42,22 @@ class GameUserType extends AbstractType
                     'Finished' => 'Finished',
                     'Dropped' => 'Dropped',
                 ],
+
                 'required' => false,
             ])
             ->add('playtime', IntegerType::class,[
                 'required' => false,
+                'attr' => [
+
+                    'class' => 'text-black',
+                ],
             ])
             ->add('datePlayed', DateType::class,[
                 'required' => false,
+                'attr' => [
+
+                    'class' => 'text-black',
+                ],
             ])
         ;
     }
