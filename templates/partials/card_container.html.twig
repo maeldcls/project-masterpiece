@@ -48,7 +48,9 @@
 					</div>
 					
 						{% if app.user is empty %}
-							<a href="{{ path('app_login') }}">LOG IN TO ADD</a>
+							<a class="flex justify-center items-center border-1 border-slate-100 rounded hover:font-normal p-1 m-2 text-sm text-white bg-transparent  hover:text-black hover:border-black" href="{{ path('app_login', {'id': game.gameId}) }}">
+								<p class="white added-text">ADD</p>
+							</a>
 						{% elseif game.gameUsers is not empty %}
 							{% for gameUser in game.gameUsers %}
 								<a class="flex justify-center items-center border-1 border-lime-300 rounded hover:font-normal p-1 m-2 text-sm text-white bg-lime-700 hover:bg-white hover:text-black hover:border-black added" href="{{ path('app_remove', {'gameUserId': gameUser.id}) }}">

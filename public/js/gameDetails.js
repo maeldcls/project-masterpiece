@@ -1,5 +1,6 @@
-var modalImg = document.querySelector("#modal-img");
-var modal = document.querySelector("#modal");
+let modalImg = document.querySelector("#modal-img");
+let modal = document.querySelector("#modal");
+
 document.addEventListener('DOMContentLoaded', function() {
     let readMore = document.querySelector("#readMore");
     let hide = document.querySelector("#hide");

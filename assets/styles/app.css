@@ -189,3 +189,7 @@ select {
         display:none;
     }
   }
+
+#formRegister[type="text"]{
+    color:black;
+}

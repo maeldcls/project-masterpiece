@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\User;
 use App\Form\RegistrationFormType;
+use App\Form\SearchType;
 use App\Security\EmailVerifier;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bridge\Twig\Mime\TemplatedEmail;
@@ -29,6 +30,20 @@ class RegistrationController extends AbstractController
     #[Route('/register', name: 'app_register')]
     public function register(Request $request, UserPasswordHasherInterface $userPasswordHasher, EntityManagerInterface $entityManager,SerializerInterface $serializer): Response
     {
+
+        $formSearch = $this->createForm(SearchType::class);
+        $formSearch->handleRequest($request);
+
+        if ($formSearch->isSubmitted() && $formSearch->isValid()) {
+            $searchWord = $formSearch->get('searchText')->getData();
+            $searchWordUpdated = strtr($searchWord, ' ', '-');
+            
+            //nouvelle instance du form pour vider sa value 
+            $form = $this->createForm(SearchType::class);
+            return $this->redirectToRoute('app_search',['searchWord' => $searchWordUpdated]);
+        }
+
+
         $user = new User();
         $form = $this->createForm(RegistrationFormType::class, $user);
         $form->handleRequest($request);
@@ -66,7 +81,8 @@ class RegistrationController extends AbstractController
         return $this->render('registration/register.html.twig', [
             'registrationForm' => $form->createView(),
             'game' => $game,
-            'random' => $random
+            'random' => $random,
+            'formSearch' => $formSearch
         ]);
     }
 

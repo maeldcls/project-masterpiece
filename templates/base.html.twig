@@ -25,7 +25,7 @@
 		<aside class="w-52">
 			<div class="text-white bg-slate-900 flex flex-col w-full p-2 h-screen">
 				<a class="flex justify-between  items-center" href="{{ path('app_game') }}" class="font-bold ml-2 p-2">
-					<h4 class="text-2xl">Accueil</h4>
+					<h4 class="text-2xl">Home Page</h4>
                     {% include 'partials/icon_selector.html.twig' %}
 				</a>
 
@@ -39,29 +39,12 @@
                         {% include 'partials/icon_selector.html.twig' %}
 					</a>
 				{% else %}
-					<a class="flex justify-between  items-center" href="{{ path('app_login') }}" class="font-boldml-2 p-2">
+					<a class="flex justify-between  items-center" href="{{ path('app_login') }}" class="font-bold ml-2 p-2">
 						<h4 class="text-2xl">Log In</h4>
                         {% include 'partials/icon_selector.html.twig' %}
 					</a>
 				{% endif %}
 
-				<h3 class="font-bold p-2">TOP</h3>
-				<a href="">
-					<h4>Best of the Year</h4>
-				</a>
-				<a href="">
-					<h4>Popular in 2022</h4>
-				</a>
-				<h3 class="font-bold p-2">New releases</h3>
-				<a href="">
-					<h4>Last 30 days</h4>
-				</a>
-				<a href="">
-					<h4>This week</h4>
-				</a>
-				<a href="">
-					<h4>Next Month</h4>
-				</a>
 
 				<a class="flex justify-between  items-center" href="{{ path('app_genre_selector') }}">
 					<h3 class="text-2xl p-2">Genres</h3>
@@ -120,9 +103,11 @@
 				</a>
 			</div>
 		</aside>
+		{# {% include 'partials/nav_mobile.html.twig' %} #}
 		{% block body %}{% endblock %}
 		{% block javascripts %}{% endblock %}
 		{{ encore_entry_script_tags('app') }}
+		<script src="{{ asset('js/navResponsive.js')}}"></script>
 
 		{% block importmap %}
 			{{ importmap('app') }}

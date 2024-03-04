@@ -2,7 +2,9 @@
 
 namespace App\Controller;
 
+use App\Form\SearchType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
@@ -19,13 +21,26 @@ class SecurityController extends AbstractController
     }
 
     #[Route(path: '/login', name: 'app_login')]
-    public function login(AuthenticationUtils $authenticationUtils,SerializerInterface $serializer): Response
+    public function login(Request $request,AuthenticationUtils $authenticationUtils,SerializerInterface $serializer): Response
     {
         // if ($this->getUser()) {
         //     return $this->redirectToRoute('target_path');
         // }
 
         // get the login error if there is one
+
+        $form = $this->createForm(SearchType::class);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $searchWord = $form->get('searchText')->getData();
+            $searchWordUpdated = strtr($searchWord, ' ', '-');
+            
+            //nouvelle instance du form pour vider sa value 
+            $form = $this->createForm(SearchType::class);
+            return $this->redirectToRoute('app_search',['searchWord' => $searchWordUpdated]);
+        }
+
         $error = $authenticationUtils->getLastAuthenticationError();
         // last username entered by the user
         $lastUsername = $authenticationUtils->getLastUsername();
@@ -40,7 +55,8 @@ class SecurityController extends AbstractController
             'last_username' => $lastUsername, 
             'error' => $error,
             'game' => $game,
-            'random' => $random
+            'random' => $random,
+            'formSearch'=> $form
         ]);
     }
 
