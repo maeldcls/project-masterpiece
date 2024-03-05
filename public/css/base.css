@@ -1,3 +1,8 @@
+@font-face {
+    font-family: 'kanit';
+    src: url('../assets/font/Kanit-Light.ttf') format('truetype');
+   
+  }
 a .svg-aside {
     display: none;
 }
@@ -27,3 +32,8 @@ a:hover{
 .hidden{
     display:none;
 }
+
+h1{
+    font-family: 'kanit';
+}
+ 

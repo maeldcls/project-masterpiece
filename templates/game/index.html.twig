@@ -8,7 +8,7 @@
 		{% include 'partials/searchBar.html.twig' %}
 
 		<div class="flex lg:flex-row flex-col  justify-between mx-16 items-center header mb-4">
-			<h1 class="text-4xl lg:mb-0 mb-5">Main page{% if page > 1 %}, page {{ page }}{% endif %}</h1>
+			<h1 class="text-4xl lg:mb-0 mb-5 font-kanit">Main page{% if page > 1 %}, page {{ page }}{% endif %}</h1>
 			{{ form_start(formOrder, {'attr': {'id':'ordering-form-id','class':'bg-transparent'}}) }}
 			{{ form_label(formOrder.ordering, 'Order By :') }}
 			{{ form_widget(formOrder.ordering,{'arre' :{'class':'bg-transparent rounded'}}) }}
