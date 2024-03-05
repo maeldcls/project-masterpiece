@@ -23,14 +23,14 @@ class GameUserType extends AbstractType
             ->add('comments',TextareaType::class,[
                 'required' => false,
                 'attr' => [
-                    'class' => 'text-black',
+                    'class' => 'text-black flex flex-col w-full',
                 ],
             ])
             ->add('rate', IntegerType::class,[
                 'attr' => [
                     'min' => 0,
                     'max' => 20,
-                    'class' => 'text-black',
+                    'class' => 'mb-4 text-black flex flex-col w-full',
                 ],
                 
                 'required' => false,
@@ -42,21 +42,24 @@ class GameUserType extends AbstractType
                     'Finished' => 'Finished',
                     'Dropped' => 'Dropped',
                 ],
-
+                'attr' => [
+                    
+                    'class' => 'mb-4 flex flex-col w-full statusInput',
+                ],
                 'required' => false,
             ])
             ->add('playtime', IntegerType::class,[
                 'required' => false,
                 'attr' => [
 
-                    'class' => 'text-black',
+                    'class' => ' mb-4 text-black flex flex-col w-full',
                 ],
             ])
             ->add('datePlayed', DateType::class,[
                 'required' => false,
                 'attr' => [
 
-                    'class' => 'text-black',
+                    'class' => 'mb-4 text-black flex-col w-full',
                 ],
             ])
         ;

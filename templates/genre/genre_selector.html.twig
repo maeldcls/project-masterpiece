@@ -2,35 +2,145 @@
 
 {% block title %}Project Masterpiece
 {% endblock %}
-{% block stylesheets %}
-
-{% endblock %}
+{% block stylesheets %}{% endblock %}
 {% block body %}
 	<div class="w-full">
-        {% include 'partials/searchBar.html.twig' %}
+		{% include 'partials/searchBar.html.twig' %}
 		<div class="header"></div>
 		<div class="flex flex-wrap justify-center">
-			<div class="bg-gray-800 text-white m-2 flex flex-col w-96 h-96 rounded-lg">
-                <a href="{{ path('app_genre', {'genre': 'action'}) }}"><p>Action</p></a>
-                <a href="{{ path('app_genre', {'genre': 'adventure'}) }}"><p>Adventure</p></a>
-                <a href="{{ path('app_genre', {'genre': 'arcade'}) }}"><p>Arcade</p></a>
-                <a href="{{ path('app_genre', {'genre': 'board-games'}) }}"><p>Board Games</p></a>
-                <a href="{{ path('app_genre', {'genre': 'card'}) }}"><p>Card</p></a>
-                <a href="{{ path('app_genre', {'genre': 'casual'}) }}"><p>Casual</p></a>
-                <a href="{{ path('app_genre', {'genre': 'educational'}) }}"><p>Educational</p></a>
-                <a href="{{ path('app_genre', {'genre': 'family'}) }}"><p>Family</p></a>
-                <a href="{{ path('app_genre', {'genre': 'fighting'}) }}"><p>Fighting</p></a>
-                <a href="{{ path('app_genre', {'genre': 'Indie'}) }}"><p>Indie</p></a>
-                <a href="{{ path('app_genre', {'genre': 'massively-multiplayer'}) }}"><p>Massively Multiplayer</p></a>
-                <a href="{{ path('app_genre', {'genre': 'platformer'}) }}"><p>Platformer</p></a>
-                <a href="{{ path('app_genre', {'genre': 'puzzle'}) }}"><p>Puzzle</p></a>
-                <a href="{{ path('app_genre', {'genre': 'racing'}) }}"><p>Racing</p></a>
-                <a href="{{ path('app_genre', {'genre': 'role-playing-games-rpg'}) }}"><p>RPG</p></a>
-                <a href="{{ path('app_genre', {'genre': 'shooter'}) }}"><p>Shooter</p></a>
-                <a href="{{ path('app_genre', {'genre': 'simulation'}) }}"><p>Simulation</p></a>
-                <a href="{{ path('app_genre', {'genre': 'sports'}) }}"><p>Sports</p></a>
-                <a href="{{ path('app_genre', {'genre': 'strategy'}) }}"><p>Strategy</p></a>
-            </div>
+			<a class="m-2" href="{{ path('app_genre', {'genre': 'action'}) }}">
+				<div class="w-72 h-72 bg-cover bg-center hover:scale-105 rounded" style="background-image: url('/assets/genre/action.webp');">
+					<div class="bg-slate-900 font-bold bg-opacity-80 hover:bg-opacity-60 h-full w-full flex justify-center items-center">
+						<p class="text-4xl">Action</p>
+					</div>
+				</div>
+			</a>
+			<a class="m-2" href="{{ path('app_genre', {'genre': 'adventure'}) }}">
+				<div class="w-72 h-72 bg-cover hover:scale-105 rounded bg-right" style="background-image: url('/assets/genre/adventure.jpg');">
+					<div class="bg-slate-900 font-bold bg-opacity-80 hover:bg-opacity-60 h-full w-full flex justify-center items-center">
+						<p class="text-4xl">Adventure</p>
+					</div>
+				</div>
+			</a>
+			<a class="m-2" href="{{ path('app_genre', {'genre': 'arcade'}) }}">
+				<div class="w-72 h-72 bg-cover hover:scale-105 rounded bg-right" style="background-image: url('/assets/genre/arcade.avif');">
+					<div class="bg-slate-900 font-bold bg-opacity-80 hover:bg-opacity-60 h-full w-full flex justify-center items-center">
+						<p class="text-4xl">Arcade</p>
+					</div>
+				</div>
+			</a>
+			<a class="m-2" href="{{ path('app_genre', {'genre': 'board-games'}) }}">
+				<div class="w-72 h-72 bg-cover hover:scale-105 rounded bg-center" style="background-image: url('/assets/genre/board.jpg');">
+					<div class="bg-slate-900 font-bold bg-opacity-80 hover:bg-opacity-60 h-full w-full flex justify-center items-center">
+						<p class="text-4xl">Board Games</p>
+					</div>
+				</div>
+			</a>
+			<a class="m-2" href="{{ path('app_genre', {'genre': 'card'}) }}">
+				<div class="w-72 h-72 bg-cover hover:scale-105 rounded bg-center" style="background-image: url('/assets/genre/card.avif');">
+					<div class="bg-slate-900 font-bold bg-opacity-80 hover:bg-opacity-60 h-full w-full flex justify-center items-center">
+						<p class="text-4xl">Card</p>
+					</div>
+				</div>
+			</a>
+			<a class="m-2" href="{{ path('app_genre', {'genre': 'casual'}) }}">
+				<div class="w-72 h-72 bg-cover hover:scale-105 rounded bg-center" style="background-image: url('/assets/genre/casual.jpg');">
+					<div class="bg-slate-900 font-bold bg-opacity-80 hover:bg-opacity-60 h-full w-full flex justify-center items-center">
+						<p class="text-4xl">Casual</p>
+					</div>
+				</div>
+			</a>
+			<a class="m-2" href="{{ path('app_genre', {'genre': 'educational'}) }}">
+				<div class="w-72 h-72 bg-cover hover:scale-105 rounded bg-center" style="background-image: url('/assets/genre/educational.jpeg');">
+					<div class="bg-slate-900 font-bold bg-opacity-80 hover:bg-opacity-60 h-full w-full flex justify-center items-center">
+						<p class="text-4xl">Educational</p>
+					</div>
+				</div>
+			</a>
+			<a class="m-2" href="{{ path('app_genre', {'genre': 'family'}) }}">
+				<div class="w-72 h-72 bg-cover hover:scale-105 rounded bg-center" style="background-image: url('/assets/genre/family.jpg');">
+					<div class="bg-slate-900 font-bold bg-opacity-80 hover:bg-opacity-60 h-full w-full flex justify-center items-center">
+						<p class="text-4xl">Family</p>
+					</div>
+				</div>
+			</a>
+			<a class="m-2" href="{{ path('app_genre', {'genre': 'fighting'}) }}">
+				<div class="w-72 h-72 bg-cover hover:scale-105 rounded bg-center" style="background-image: url('/assets/genre/fighter.jpg');">
+					<div class="bg-slate-900 font-bold bg-opacity-80 hover:bg-opacity-60 h-full w-full flex justify-center items-center">
+						<p class="text-4xl">Fighting</p>
+					</div>
+				</div>
+			</a>
+			<a class="m-2" href="{{ path('app_genre', {'genre': 'Indie'}) }}">
+				<div class="w-72 h-72 bg-cover hover:scale-105 rounded bg-center" style="background-image: url('/assets/genre/indie.jpg');">
+					<div class="bg-slate-900 font-bold bg-opacity-80 hover:bg-opacity-60 h-full w-full flex justify-center items-center">
+						<p class="text-4xl">Indie</p>
+					</div>
+				</div>
+			</a>
+			<a class="m-2" href="{{ path('app_genre', {'genre': 'massively-multiplayer'}) }}">
+				<div class="w-72 h-72 bg-cover hover:scale-105 rounded bg-center" style="background-image: url('/assets/genre/mmo.webp');">
+					<div class="bg-slate-900 font-bold bg-opacity-80 hover:bg-opacity-60 h-full w-full flex text-center items-center">
+						<p class="text-4xl">Massively Multiplayer</p>
+					</div>
+				</div>
+			</a>
+			<a class="m-2" href="{{ path('app_genre', {'genre': 'platformer'}) }}">
+				<div class="w-72 h-72 bg-cover hover:scale-105 rounded bg-center" style="background-image: url('/assets/genre/platformer.jpg');">
+					<div class="bg-slate-900 font-bold bg-opacity-80 hover:bg-opacity-60 h-full w-full flex justify-center items-center">
+						<p class="text-4xl">Platformer</p>
+					</div>
+				</div>
+			</a>
+			<a class="m-2" href="{{ path('app_genre', {'genre': 'puzzle'}) }}">
+				<div class="w-72 h-72 bg-cover hover:scale-105 rounded bg-center" style="background-image: url('/assets/genre/puzzle.jpg');">
+					<div class="bg-slate-900 font-bold bg-opacity-80 hover:bg-opacity-60 h-full w-full flex justify-center items-center">
+						<p class="text-4xl">Puzzle</p>
+					</div>
+				</div>
+			</a>
+			<a class="m-2" href="{{ path('app_genre', {'genre': 'racing'}) }}">
+				<div class="w-72 h-72 bg-cover hover:scale-105 rounded bg-center" style="background-image: url('/assets/genre/racing.jpg');">
+					<div class="bg-slate-900 font-bold bg-opacity-80 hover:bg-opacity-60 h-full w-full flex justify-center items-center">
+						<p class="text-4xl">Racing</p>
+					</div>
+				</div>
+			</a>
+			<a class="m-2" href="{{ path('app_genre', {'genre': 'role-playing-games-rpg'}) }}">
+				<div class="w-72 h-72 bg-cover hover:scale-105 rounded bg-center" style="background-image: url('/assets/genre/rpg.jpg');">
+					<div class="bg-slate-900 font-bold bg-opacity-80 hover:bg-opacity-60 h-full w-full flex justify-center items-center">
+						<p class="text-4xl">RPG</p>
+					</div>
+				</div>
+			</a>
+			<a class="m-2" href="{{ path('app_genre', {'genre': 'shooter'}) }}">
+				<div class="w-72 h-72 bg-cover hover:scale-105 rounded bg-center" style="background-image: url('/assets/genre/shooter.webp');">
+					<div class="bg-slate-900 font-bold bg-opacity-80 hover:bg-opacity-60 h-full w-full flex justify-center items-center">
+						<p class="text-4xl">Shooter</p>
+					</div>
+				</div>
+			</a>
+			<a class="m-2" href="{{ path('app_genre', {'genre': 'simulation'}) }}">
+				<div class="w-72 h-72 bg-cover hover:scale-105 rounded bg-center" style="background-image: url('/assets/genre/simulation.jpg');">
+					<div class="bg-slate-900 font-bold bg-opacity-80 hover:bg-opacity-60 h-full w-full flex justify-center items-center">
+						<p class="text-4xl">Simulation</p>
+					</div>
+				</div>
+			</a>
+			<a class="m-2" href="{{ path('app_genre', {'genre': 'sports'}) }}">
+				<div class="w-72 h-72 bg-cover hover:scale-105 rounded bg-center" style="background-image: url('/assets/genre/sport.webp');">
+					<div class="bg-slate-900 font-bold bg-opacity-80 hover:bg-opacity-60 h-full w-full flex justify-center items-center">
+						<p class="text-4xl">Sports</p>
+					</div>
+				</div>
+			</a>
+			<a class="m-2" href="{{ path('app_genre', {'genre': 'strategy'}) }}">
+				<div class="w-72 h-72 bg-cover hover:scale-105 rounded bg-center" style="background-image: url('/assets/genre/strategy.png');">
+					<div class="bg-slate-900 font-bold bg-opacity-80 hover:bg-opacity-60 h-full w-full flex justify-center items-center">
+						<p class="text-4xl">Strategy</p>
+					</div>
+				</div>
+			</a>
 
 
 		</div>

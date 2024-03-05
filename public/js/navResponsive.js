@@ -23,17 +23,6 @@ button.addEventListener("click", (event) => {
 //     }
 // };
 
-function toggleMenuVisibility() {
-    const screenWidth = window.innerWidth;
-  
-    if (screenWidth <= 768) {
-      // Show the menu if the screen width is small
-
-    } else {
-      // Hide the menu if the screen width is larger
-  
-    }
-  }
 
   window.addEventListener('resize', () => {
     if(window.innerWidth>1023){

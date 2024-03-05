@@ -5,18 +5,20 @@
 {% block stylesheets %}
 {% endblock %}
 {% block body %}
-    <div class="w-full flex flex-wrap justify-center">
+    <div class="w-full ">
         {% include 'partials/searchBar.html.twig' %}
-        
+        <div class="flex flex-wrap justify-center">
         {% for platform in platforms %}
 
             <a class="flex  m-2" href="{{ path('app_platform_search', {'id': platform.apiId }) }}">
-                <div clas="w-72 h-72">
-                    <img class="w-72" src="{{ platform.image}}" alt="{{ platform.image}}">
-                    <p>{{ platform.name }}</p>
+                <div class="w-72 h-72 bg-cover bg-center hover:scale-105 rounded" style="background-image: url('{{ platform.image }}');">
+                    <div class="bg-slate-900 font-bold bg-opacity-80 hover:bg-opacity-60 h-full w-full flex justify-center items-center">
+                        <p class="text-4xl">{{ platform.name }}</p>
+                    </div>
                 </div>
             </a>
         {% endfor %}
+        </div>
     </div>
 {% endblock %}
 {% block javascripts %}

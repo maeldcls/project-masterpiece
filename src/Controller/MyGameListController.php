@@ -6,6 +6,7 @@ use App\Entity\Game;
 use App\Entity\GameUser;
 use App\Form\GameUserEditType;
 use App\Form\GameUserType;
+use App\Form\SearchType;
 use App\Repository\GameRepository;
 use App\Repository\GameUserRepository;
 use Doctrine\ORM\EntityManagerInterface;
@@ -70,6 +71,19 @@ class MyGameListController extends AbstractController
     #[Route('/{id}/edit', name: 'app_game_user_edit', methods: ['GET', 'POST'])]
     public function edit(Request $request, GameUser $gameUser,GameRepository $gameRepository, GameUserRepository $gameUserRepository,EntityManagerInterface $entityManager,int $id): Response
     {
+
+        $formSearch = $this->createForm(SearchType::class);
+        $formSearch->handleRequest($request);
+
+        if ($formSearch->isSubmitted() && $formSearch->isValid()) {
+            $searchWord = $formSearch->get('searchText')->getData();
+            $searchWordUpdated = strtr($searchWord, ' ', '-');
+            
+            //nouvelle instance du form pour vider sa value 
+            $formSearch = $this->createForm(SearchType::class);
+            return $this->redirectToRoute('app_search',['searchWord' => $searchWordUpdated]);
+        }
+
         $form = $this->createForm(GameUserType::class, $gameUser);
         $form->handleRequest($request);
         if (!$gameUser) {
@@ -92,6 +106,7 @@ class MyGameListController extends AbstractController
             'game_user' => $gameUser,
             'form' => $form,
             'game' => $game,
+            'formSearch' =>$formSearch
         ]);
     }
     

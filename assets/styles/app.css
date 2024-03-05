@@ -168,7 +168,7 @@ select {
 }
 
 @media (min-width: 1024px) {
-    aside {
+    nav {
       display: block; 
     }
     .previousButton{
@@ -179,7 +179,7 @@ select {
   
   /* Pour écrans moyens et plus petits */
   @media (max-width: 1023px) {
-    aside {
+    nav {
       display: none; 
     }
     .previousButton{
@@ -191,5 +191,13 @@ select {
   }
 
 #formRegister[type="text"]{
+    color:black;
+}
+
+.statusInput{
+    background-color:transparent;
+}
+.statusInput option{
+    background-color:transparent !important;
     color:black;
 }

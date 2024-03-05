@@ -7,21 +7,27 @@
 {% endblock %}
 
 {% block body %}
-<div class="w-full content flex flex-col justify-center items-center">
-    <h1>Edit the infos of my Game</h1>
+<div class="w-full content h-screen">
+    {% include 'partials/searchBar.html.twig' %}
+    <div class="w-full flex flex-col justify-center items-center mx-auto">
+        
+        <div class="border-2 border-white rounded p-10 h-full mt-10">
+        <h1>Edit the infos of my Game</h1>
 
-    <p>{{ game.title }}</p>
-    
-     {{ include('game_user/_form.html.twig', {'button_label': 'Update'}) }}
-    {{ include('game_user/_delete_form.html.twig') }}
-    <a href="{{ path('app_game_user_index') }}">back to list</a>
-    
+        <p>{{ game.title }}</p>
+        
+        {{ include('game_user/_form.html.twig', {'button_label': 'Update'}) }}
+        {{ include('game_user/_delete_form.html.twig') }}
+        <a href="{{ path('app_game_user_index') }}">back to list</a>
+        </div>
+    </div>
 </div>
     <style>
         .content {
     position: relative;
     background-image: url({{ game.backgroundImage }});
     background-size: cover;
+    background-position:center;
 }
 
 .content::before {
