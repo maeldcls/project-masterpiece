@@ -34,24 +34,13 @@ body{
 }
 
 
-.cardContent{
-    display: flex;
-    flex-direction: column;
-}
-.cardContent>div{
-    display: flex;  
-}
+
 
 *{
     color:white;
 }
 
 
-
-.navBar a h4:hover{
-    font-weight: bold;
-    color:gray;
-}
 
 .platform>img{
     height: 13px;

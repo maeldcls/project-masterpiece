@@ -76,6 +76,8 @@ class PlatformController extends AbstractController
     #[Route('/platform/{id}/{page}', name: 'app_platform_search_paginated', requirements: ['page' => '\d+'])]
     public function promptPlatform(Request $request, ApiDataService $apiDataService,int $id,int $page): Response
     {
+        $platformName = $request->query->get('name');
+
         $apiKey = $this->getParameter('my_api_key');
         $apiUrl = "https://api.rawg.io/api/games?platforms=$id&key=$apiKey";
 
@@ -117,7 +119,7 @@ class PlatformController extends AbstractController
             // récupère la valeur du champ 'ordering'
             $ordering = $formOrder->get('ordering')->getData();
             $page = 1;
-            return $this->redirectToRoute('app_platform_search_paginated', ['ordering' => $ordering,'page'=>$page,'id'=>$id]);
+            return $this->redirectToRoute('app_platform_search_paginated', ['ordering' => $ordering,'page'=>$page,'id'=>$id, 'name'=>$platformName]);
             
         }
 
@@ -129,7 +131,7 @@ class PlatformController extends AbstractController
         $games=null;
         $games = $apiDataService->fetchDataFromApi($apiUrl);
         $ordering = '';
-
+        
         if(empty($games)){
             $page --;
             $apiUrl = "https://api.rawg.io/api/games?platforms=$id&key=$apiKey&ordering=$ordering&page=$page";
@@ -142,7 +144,8 @@ class PlatformController extends AbstractController
             'formSearch'=>$form->createView(),
             'formOrder'=>$formOrder->createView(),
             'page'=>$page,
-            'idPlatform'=>$id
+            'idPlatform'=>$id,
+            'platformName' => $platformName
         ]);
     }
 }

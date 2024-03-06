@@ -10,7 +10,7 @@
         <div class="flex flex-wrap justify-center">
         {% for platform in platforms %}
 
-            <a class="flex  m-2" href="{{ path('app_platform_search', {'id': platform.apiId }) }}">
+            <a class="flex  m-2" href="{{ path('app_platform_search', {'id': platform.apiId, 'name': platform.name }) }}">
                 <div class="w-72 h-72 bg-cover bg-center ease-in duration-300 hover:scale-105 rounded" style="background-image: url('{{ platform.image }}');">
                     <div class="bg-slate-900 font-bold bg-opacity-80 hover:bg-opacity-60 h-full w-full flex justify-center text-center items-center ">
                         <p class="text-4xl font-kanit">{{ platform.name }}</p>

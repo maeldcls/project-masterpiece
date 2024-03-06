@@ -21,8 +21,7 @@ class GameController extends AbstractController
     
     #[Route('/', name: 'app_game', defaults: ['page' => 1])]
     #[Route('/{page}', name: 'app_game_paginated', requirements: ['page' => '\d+'])]
-    public function index(Request $request, ApiDataService $apiDataService, 
-    EntityManagerInterface $entityManager, GameRepository $gameRepository, int $page): Response
+    public function index(Request $request, ApiDataService $apiDataService, int $page): Response
     {
         //initialisation du formulaire de recherche
         $form = $this->createForm(SearchType::class);
@@ -75,8 +74,6 @@ class GameController extends AbstractController
             $apiUrl = "https://api.rawg.io/api/games?ordering=$ordering&key=$apiKey&page=$page";
             $games = $apiDataService->fetchDataFromApi($apiUrl);
         }
-
-
 
         return $this->render('game/index.html.twig', [
             'controller_name' => 'GameController',

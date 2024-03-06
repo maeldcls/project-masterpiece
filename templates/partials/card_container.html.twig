@@ -1,4 +1,4 @@
-<div class="flex flex-wrap justify-center">
+<div class="flex flex-wrap justify-center mx-5">
 	{% for game in games %}
 		<div class="bg-gray-800 text-white m-2 flex flex-col w-96 rounded-lg dp08">
 
@@ -8,7 +8,7 @@
 				</div>
 			{% endif %}
 
-			<div class="cardContent">
+			<div class="flex flex-col">
 				<div class="flex justify-between p-2 font-bold text-xl text-indigo-100 hover:text-indigo-500">
 					<a href="{{ path('app_game_details', {'id': game.gameId}) }}">
 						<h2>{{game.title}}</h2>
@@ -29,24 +29,38 @@
 						{% endif %}
 					{% endif %}
 				</div>
-				<div class="ml-2 ">
+				<div class="flex flex-colml-2 ">
 					{% for parentPlatform in game.parentPlatform %}
-						<div class=" ml-1 p-1 bg-white  rounded-full h-6 w-6 flex justify-center items-center">
-							<img src="{{ asset('assets/image/' ~ parentPlatform ~ '.svg') }}" alt="{{ parentPlatform }}"/>
-						</div>
+						{% if parentPlatform in ['commodore-amiga', 'atari', '3do', 'neo-geo'] %}
+							<div class=" ml-1 p-1 bg-white  rounded-full h-6 w-6 flex justify-center items-center">
+								<img src="{{ asset('assets/image/' ~ parentPlatform ~ '.png') }}" alt="{{ parentPlatform }}"/>
+							</div>
+						{% else %}
+							<div class=" ml-1 p-1 bg-white  rounded-full h-6 w-6 flex justify-center items-center">
+								<img src="{{ asset('assets/image/' ~ parentPlatform ~ '.svg') }}" alt="{{ parentPlatform }}"/>
+							</div>
+						{% endif %}
 					{% endfor %}
 				</div>
-				<div class="flex justify-between p-2">
-					<div class="flex">
+				<div class="flex justify-between p-2 mb-5 h-12">
+					<div class="flex flex-col w-full">
 						<p>
-							Genre{% if game.genres|length > 1 %}s {% endif %} :
+							Genre{% if game.genres|length > 1 %}s{% endif %} : 
 						</p>
-						{% for genre in game.genres %}
-							<a class="ml-1 text-indigo-100 hover:text-indigo-500" href="{{ path('app_genre', {'genre': genre.name}) }}">{{genre.name}}</a>
-						{% endfor %}
-						{# verifier si l'utilisateur à ajouter le jeu ou non #}
+						<div class=" flex">
+							{% for genre in game.genres %}
+								{% if genre.name == "RPG" %}
+									<a class="ml-1 text-indigo-100 hover:text-indigo-500" href="{{ path('app_genre', {'genre': 'role-playing-games-rpg' }) }}">{{genre.name}}</a>
+								{% elseif genre.name == "Massively Multiplayer" %}
+									<a class="ml-1 text-indigo-100 hover:text-indigo-500" href="{{ path('app_genre', {'genre': 'massively-multiplayer' }) }}">MMO</a>
+								{% else %}
+									<a class="ml-1 text-indigo-100 hover:text-indigo-500" href="{{ path('app_genre', {'genre': genre.name}) }}">{{genre.name}}</a>
+								{% endif %}
+
+							{% endfor %}
+						</div>
 					</div>
-					
+					<div>
 						{% if app.user is empty %}
 							<a class="flex justify-center items-center border-1 border-slate-100 rounded hover:font-normal p-1 m-2 text-sm text-white bg-transparent  hover:text-black hover:border-black" href="{{ path('app_login', {'id': game.gameId}) }}">
 								<p class="white added-text">ADD</p>
@@ -66,7 +80,7 @@
 								<p class="white added-text">ADD</p>
 							</a>
 						{% endif %}
-					
+					</div>
 				</div>
 			</div>
 

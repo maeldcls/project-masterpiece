@@ -3,107 +3,105 @@
 	<head>
 		<meta charset="UTF-8">
 		<title>
-			{% block title %}Welcome!
+			{% block title %}My Game List
 			{% endblock %}
 		</title>
-		<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text></svg>">
-
-
-		{% block stylesheets %}
-			
+		<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text></svg>"> {% block stylesheets %}{% endblock %}
+		{% block extra_stylesheets %}
+			<link rel="stylesheet" href="{{ asset('css/base.css') }}">
 		{% endblock %}
-        {% block extra_stylesheets %}
-            <link rel="stylesheet" href="{{ asset('css/base.css') }}">
-        {% endblock %}
 		{{ encore_entry_link_tags('app') }}
 
 
 	</head>
 
 	<body>
-
-		<nav class="w-52">
-			<div class="text-white bg-slate-900 flex w-52 flex-col p-2 fixed top-0 left-0 h-full">
-				<a class="flex justify-between  items-center" href="{{ path('app_game') }}" class="font-bold ml-2 p-2">
-					<h4 class="text-2xl font-kanit">Home Page</h4>
-                    {% include 'partials/icon_selector.html.twig' %}
-				</a>
-
-				{% if app.user %}
-					<a class="flex justify-between  items-center" href="{{ path('app_logout') }}" class="font-bold ml-2 p-2">
-						<h4 class="text-2xl">Log Out</h4>
-                        {% include 'partials/icon_selector.html.twig' %}
+		<nav class=" w-48">
+			<div class="text-white bg-slate-900 flex w-48 flex-col p-2 fixed top-0 left-0 h-full">
+				<div class="flex flex-col mb-10">
+					<a class="flex justify-between  items-center mt-4" href="{{ path('app_game') }}" class="font-bold ml-2 p-2">
+						<h4 class="text-2xl font-kanit hover:text-indigo-300">Home Page</h4>
+						{% include 'partials/icon_selector.html.twig' %}
 					</a>
-					<a class="flex justify-between  items-center" href="{{ path('app_game_user_index') }}">
-						<h4 class="text-2xl">MyGameList</h4>
-                        {% include 'partials/icon_selector.html.twig' %}
+
+					{% if app.user %}
+						<a class="flex justify-between  items-center " href="{{ path('app_logout') }}" class="font-bold ml-2 p-2">
+							<h4 class="text-2xl hover:text-indigo-300">Log Out</h4>
+							{% include 'partials/icon_selector.html.twig' %}
+						</a>
+						<a class="flex justify-between  items-center " href="{{ path('app_game_user_index') }}">
+							<h4 class="text-2xl hover:text-indigo-300">MyGameList</h4>
+							{% include 'partials/icon_selector.html.twig' %}
+						</a>
+					{% else %}
+						<a class="flex justify-between  items-center" href="{{ path('app_login') }}" class="font-bold ml-2 p-2">
+							<h4 class="text-2xl hover:text-indigo-300">Log In</h4>
+							{% include 'partials/icon_selector.html.twig' %}
+						</a>
+					{% endif %}
+				</div>
+				<div class="flex flex-col mb-10">
+					<a class="flex justify-between  items-center " href="{{ path('app_genre_selector') }}">
+						<h3 class="text-2xl hover:text-indigo-300">Genres</h3>
+						{% include 'partials/icon_selector.html.twig' %}
 					</a>
-				{% else %}
-					<a class="flex justify-between  items-center" href="{{ path('app_login') }}" class="font-bold ml-2 p-2">
-						<h4 class="text-2xl">Log In</h4>
-                        {% include 'partials/icon_selector.html.twig' %}
+
+					<a class="flex justify-between  items-center ml-2" href="{{ path('app_genre', {'genre': 'action'}) }}">
+						<h4 class="hover:text-indigo-300">Action</h4>
+						{% include 'partials/icon_selector.html.twig' %}
 					</a>
-				{% endif %}
+					<a class="flex justify-between  items-center ml-2" href="{{ path('app_genre', {'genre': 'strategy'}) }}">
+						<h4 class="hover:text-indigo-300">Strategy</h4>
+						{% include 'partials/icon_selector.html.twig' %}
+					</a>
+					<a class="flex justify-between  items-center ml-2" href="{{ path('app_genre', {'genre': 'shooter'}) }}">
+						<h4 class="hover:text-indigo-300">Shooter</h4>
+						{% include 'partials/icon_selector.html.twig' %}
+					</a>
+					<a class="flex justify-between  items-center ml-2" href="{{ path('app_genre', {'genre': 'adventure'}) }}">
+						<h4 class="hover:text-indigo-300">Adventure</h4>
+						{% include 'partials/icon_selector.html.twig' %}
+					</a>
+					<a class="flex justify-between  items-center ml-2" href="{{ path('app_genre', {'genre': 'puzzle'}) }}">
+						<h4 class="hover:text-indigo-300">Puzzle</h4>
+						{% include 'partials/icon_selector.html.twig' %}
+					</a>
+					<a class="flex justify-between  items-center ml-2" href="{{ path('app_genre', {'genre': 'racing'}) }}">
+						<h4 class="hover:text-indigo-300">Racing</h4>
+						{% include 'partials/icon_selector.html.twig' %}
+					</a>
+					<a class="flex justify-between  items-center ml-2" href="{{ path('app_genre', {'genre': 'sports'}) }}">
+						<h4 class="hover:text-indigo-300">Sports</h4>
+						{% include 'partials/icon_selector.html.twig' %}
+					</a>
+				</div>
+				<div class="flex flex-col mb-10">
+					<a class="flex justify-between  items-center" href="{{ path('app_platform') }}">
+						<h3 class="text-2xl hover:text-indigo-300">Platforms</h3>
+						{% include 'partials/icon_selector.html.twig' %}
+					</a>
 
-
-				<a class="flex justify-between  items-center" href="{{ path('app_genre_selector') }}">
-					<h3 class="text-2xl p-2">Genres</h3>
-                    {% include 'partials/icon_selector.html.twig' %}
-				</a>
-
-				<a class="flex justify-between  items-center" href="{{ path('app_genre', {'genre': 'action'}) }}">
-					<h4>Action</h4>
-					{% include 'partials/icon_selector.html.twig' %}
-				</a>
-				<a class="flex justify-between  items-center" href="{{ path('app_genre', {'genre': 'strategy'}) }}">
-					<h4>Strategy</h4>
-                    {% include 'partials/icon_selector.html.twig' %}
-				</a>
-				<a class="flex justify-between  items-center" href="{{ path('app_genre', {'genre': 'shooter'}) }}">
-					<h4>Shooter</h4>
-                    {% include 'partials/icon_selector.html.twig' %}
-				</a>
-				<a class="flex justify-between  items-center" href="{{ path('app_genre', {'genre': 'adventure'}) }}">
-					<h4>Adventure</h4>
-                    {% include 'partials/icon_selector.html.twig' %}
-				</a>
-				<a class="flex justify-between  items-center" href="{{ path('app_genre', {'genre': 'puzzle'}) }}">
-					<h4>Puzzle</h4>
-                    {% include 'partials/icon_selector.html.twig' %}
-				</a>
-				<a class="flex justify-between  items-center" href="{{ path('app_genre', {'genre': 'racing'}) }}">
-					<h4>Racing</h4>
-                    {% include 'partials/icon_selector.html.twig' %}
-				</a>
-				<a class="flex justify-between  items-center" href="{{ path('app_genre', {'genre': 'sports'}) }}">
-					<h4>Sports</h4>
-                    {% include 'partials/icon_selector.html.twig' %}
-				</a>
-
-				<a class="flex justify-between  items-center" href="{{ path('app_platform') }}">
-					<h3 class="text-2xl p-2">Platforms</h3>
-                    {% include 'partials/icon_selector.html.twig' %}
-				</a>
-
-				<a class="flex justify-between  items-center" href="{{ path('app_platform_search', {'id': '4'}) }}">
-					<h4>PC</h4>
-                    {% include 'partials/icon_selector.html.twig' %}
-				</a>
-				<a class="flex justify-between  items-center" href="{{ path('app_platform_search', {'id': '187'}) }}">
-					<h4>PS5</h4>
-                    {% include 'partials/icon_selector.html.twig' %}
-				</a>
-				<a class="flex justify-between  items-center" href="{{ path('app_platform_search', {'id': '1'}) }}">
-					<h4>Xbox One</h4>
-                    {% include 'partials/icon_selector.html.twig' %}
-				</a>
-				<a class="flex justify-between  items-center" href="{{ path('app_platform_search', {'id': '7'}) }}">
-					<h4>Nintendo Switch</h4>
-                    {% include 'partials/icon_selector.html.twig' %}
-				</a>
+					<a class="flex justify-between  items-center ml-2" href="{{ path('app_platform_search', {'id': '4', 'name': 'PC'}) }}">
+						<h4 class="hover:text-indigo-300">PC</h4>
+						{% include 'partials/icon_selector.html.twig' %}
+					</a>
+					<a class="flex justify-between  items-center ml-2" href="{{ path('app_platform_search', {'id': '187', 'name': 'PS5'}) }}">
+						<h4 class="hover:text-indigo-300">PS5</h4>
+						{% include 'partials/icon_selector.html.twig' %}
+					</a>
+					<a class="flex justify-between  items-center ml-2" href="{{ path('app_platform_search', {'id': '1', 'name': 'Xbox One'}) }}">
+						<h4 class="hover:text-indigo-300">Xbox One</h4>
+						{% include 'partials/icon_selector.html.twig' %}
+					</a>
+					<a class="flex justify-between  items-center ml-2" href="{{ path('app_platform_search', {'id': '7', 'name': 'Nintendo Switch'}) }}">
+						<h4 class="hover:text-indigo-300">Nintendo Switch</h4>
+						{% include 'partials/icon_selector.html.twig' %}
+					</a>
+				</div>
 			</div>
 		</nav>
 		{% include 'partials/nav_mobile.html.twig' %}
+		<div id=""></div>
 		{% block body %}{% endblock %}
 		{% block javascripts %}{% endblock %}
 		{{ encore_entry_script_tags('app') }}
@@ -112,7 +110,7 @@
 		{% block importmap %}
 			{{ importmap('app') }}
 		{% endblock %}
-		
+
 
 	</body>
 
