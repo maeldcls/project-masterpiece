@@ -1,6 +1,7 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}{{game.title}}
+{% block title %}
+	{{game.title}}
 {% endblock %}
 
 {% block stylesheets %}
@@ -10,67 +11,142 @@
 	<div class="content">
 
 		{% include 'partials/searchBar.html.twig' %}
-		
-		<div class="w-full flex flex-col screenContainer">
-			<h2 class="text-4xl font-bold p-4 title">{{ game.title }}</h2>
+
+		<div class="w-full flex flex-col screenContainer items-center ">
+			<div>
+				<h2 class="text-4xl font-bold p-4 title">{{ game.title }}</h2>
+			</div>
+			<div>
+				{% if app.user is empty %}
+							<a class="flex justify-center items-center border-2 border-slate-100 rounded hover:font-normal p-1 m-2 text-sm text-white bg-transparent  hover:text-black hover:border-black" href="{{ path('app_login', {'id': game.gameId}) }}">
+								<p class="added-text">ADD</p>
+							</a>
+						{% elseif game.gameUsers is not empty %}
+							{% for gameUser in game.gameUsers %}
+								<a class="flex justify-center items-center border-1 border-lime-300 rounded hover:font-normal p-1 m-2 text-sm text-white bg-lime-700 hover:bg-white hover:text-black hover:border-black added" href="{{ path('app_remove', {'gameUserId': gameUser.id}) }}">
+									<svg width="12" height="9" viewbox="0 0 12 9" xmlns="http://www.w3.org/2000/svg" style="vertical-align: middle;">
+										<path d="M3.97 9L0 4.846l1.323-1.384L3.971 6.23 9.927 0l1.323 1.385z" fill="#FFF" fill-rule="evenodd"></path>
+									</svg>
+									<p class="added-text">ADDED</p>
+								</a>
+
+							{% endfor %}
+						{% else %}
+							<a class="flex justify-center items-center border-2 border-slate-100 rounded hover:font-normal p-1 m-2 text-sm text-white bg-transparent  hover:text-indigo-500 hover:border-indigo-500 " href="{{ path('app_add_game', {'id': game.gameId}) }}">
+								<p class="added-text">ADD</p>
+							</a>
+						{% endif %}
+			</div>
 			{% if game.screenshots %}
-            <div class=" w-full flex flex-wrap">
-			    {% for screenshot in game.screenshots %}
-                    <div class="p-2">
-                        <img class="screen" src="{{ screenshot }}" alt="screen" onclick="showModal('{{ screenshot }}')"/>
-                    </div>
-			    {% endfor %}
-            </div>
+				<div class=" w-full  flex flex-wrap justify-center mb-5">
+					{% for screenshot in game.screenshots %}
+						<div class="p-2">
+							<img class="screen" src="{{ screenshot }}" alt="screen" onclick="showModal('{{ screenshot }}')"/>
+						</div>
+					{% endfor %}
+				</div>
 			{% endif %}
 			{% if game.summary %}
-				<p id="summaryPreview">{{ game.summary|slice(0, 200) }}{{ game.summary|length > 100 ? '...' : '' }}</p>
-				
-				<p id="summaryFull" class="hidden">{{ game.summary}}</p>
+				<div class="flex flex-col w-full lg:w-2/3 items-center justify-center">
+					<p class="text-center" id="summaryPreview">{{ game.summary|slice(0, 200) }}{{ game.summary|length > 100 ? '...' : '' }}</p>
 
-				<button id="readMore" class="w-10 cursor-pointer">Read More</button>
-				<p id="hide" class="cursor-pointer hidden">Hide</p>
-			{% endif %}
+					<p id="summaryFull" class="hidden text-center">{{ game.summary}}</p>
 
-			{% if game.website %}
-				<a href="{{ game.website }}">{{ game.website }}</a>
+					<button id="readMore" class=" cursor-pointer border-2 border-white rounded-sm text-xl p-2 mt-4">Read More</button>
+					<p id="hide" class="cursor-pointer border-2 border-white rounded-sm text-xl p-2 mt-4 hidden">Hide</p>
+				</div>
 			{% endif %}
+			<div class="w-full lg:w-2/3 flex flex-col lg:flex-row">
+				<div class="lg:w-1/2 w-full lg:mr-4">
+					{% if game.platforms %}
+						<h2 class="font-bold pb-2 mt-4 text-2xl">Platforms :<h2>
+						<p>
+							{% for platform in game.platforms %}
+								{{platform.name}}
+							{% endfor %}
+						</p>
+					{% endif %}
 
-			{% if game.releaseDate %}
-				<p>Release Date :{{ game.releaseDate|date('d/m/Y') }}
-			{% endif %}
+					{% if game.genres %}
+						<h2 class="font-bold pb-2 mt-4 text-2xl">Genres :</h2>
+						{% for genre in game.genres %}
+							<a class="hover:text-indigo-300" href="{{ path('app_genre', {'genre': genre.name }) }}">{{ genre.name }}</a>
+						{% endfor %}
+					{% endif %}
 
-			{% if game.genres %}
-				<p>Genres :</p>
-				{% for genre in game.genres %}
-					<a href="{{ path('app_genre', {'genre': genre.name }) }}">{{ genre.name }}</a>
-				{% endfor %}
-			{% endif %}
-			{% if game.tags %}
-				<p>Tags :</p>
-				<p>
-				{% for tag in game.tags %}
-					{{ tag.name }}
-				{% endfor %}, 
-				</p>
-			{% endif %}
+					{% if game.tags %}
+						<h2 class="font-bold pb-2 mt-4 text-2xl">Tags :</h2>
+						<p>
+							{% for tag in game.tags %}
+								{{ tag.name }}
+							{% endfor %}
+						</p>
+					{% endif %}
+				</div>
+
+				<div class="lg:w-1/2 w-full lg:ml-4 flex flex-col items-start lg:items-end">
+					<h2 class="font-bold pb-2 mt-4 text-2xl">Metacritic Score :</h2>
+					{% if game.metacritics %}
+						{% if game.metacritics > 66 %}
+							<div class="w-8 h-8 border-2 border-green-500 flex justify-center items-center font-bold text-xl text-green-500 p-1">
+								<p class="text-green-500">{{game.metacritics}}</p>
+							</div>
+						{% elseif game.metacritics > 33 %}
+							<div class="w-8 h-8 border-2 border-yellow-500 flex justify-center items-center font-bold text-xl text-yellow-500 p-1">
+								<p class="text-yellow-500">{{game.metacritics}}</p>
+							</div>
+						{% else %}
+							<div class="w-8 h-8 border-2 border-red-500 flex justify-center items-center font-bold text-xl text-red-500 p-1">
+								<p class="text-red-500">{{game.metacritics}}</p>
+							</div>
+						{% endif %}
+					{% endif %}
+					<h2 class="font-bold pb-2 mt-4 text-2xl">Release Date</h2>
+					{% if game.releaseDate %}
+						<p>{{ game.releaseDate|date('d/m/Y') }}
+					{% endif %}
+					
+					{% if game.website %}
+						<h2 class="font-bold pb-2 mt-4 text-2xl">Website</h2>
+						<a class="hover:text-indigo-300"href="{{ game.website }}">{{ game.website }}</a>
+					{% endif %}
+
+					{% if game.publishers %}
+						<h2 class="font-bold pb-2 mt-4 text-2xl">Publisher(s) :</h2>
+						<p>
+						{% for publisher in game.publishers %}
+								{{publisher.name}} 
+						{% endfor %}
+						</p>
+					{% endif %}
+					{% if game.developers %}
+						<h2 class="font-bold pb-2 mt-4 text-2xl">Developers(s) :</h2>
+						<p>
+						{% for developer in game.developers %}
+								{{developer.name}} 
+						{% endfor %}
+						</p>
+					{% endif %}
+				</div>
+			</div>
+		
 		</div>
 
-		<div id="modal" class="hidden">
+		<div id="modal1" class="hidden">
 			<img id="modal-img" class="object-cover"/>
 		</div>
-
-		<a href="{{ path('app_add_game', {'id': game.gameId}) }}">ADD</a>
 	</div>
 	<style>
 		.content {
 			background: url({{ game.backgroundImage }})top no-repeat;
-			background-size:contain;
-			width:100%;
+			background-size: contain;
+			width: 100%;
+			background-position: center 128px;
 		}
 	</style>
 
-
 {% endblock %}
 {% block javascripts %}
-	<script src="{{ asset ('js/gameDetails.js') }}"></script>
+	<script src="{{ asset('js/effectHoverAdd.js')}}"></script>
+	<script src="{{ asset('js/gameDetails.js') }}"></script>
 {% endblock %}

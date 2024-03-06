@@ -9,6 +9,8 @@ use App\Entity\Platform;
 use App\Entity\Publisher;
 use App\Entity\Tag;
 use App\Form\SearchType;
+use App\Repository\GameRepository;
+use App\Repository\GameUserRepository;
 use DateTime;
 use DateTimeImmutable;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -19,7 +21,7 @@ use Symfony\Component\Routing\Annotation\Route;
 class GameDetailsController extends AbstractController
 {
     #[Route('/game/details/{id}', name: 'app_game_details',methods: ['GET','POST'])]
-    public function index(Request $request,$id): Response
+    public function index(Request $request,$id, GameRepository $gameRepository, GameUserRepository $gameUserRepository): Response
     {
         //initialisation du formulaire de recherche
         $formSearch = $this->createForm(SearchType::class);
@@ -74,6 +76,9 @@ class GameDetailsController extends AbstractController
                 $publi->setName($publisher['name']);
                 $game->addPublisher($publi);
             }
+        }
+        if (isset($data['metacritic'])) {
+            $game->setMetacritics($data['metacritic']);
         }
 
         // Developers
@@ -147,6 +152,19 @@ class GameDetailsController extends AbstractController
             }
         }
         
+        /** @var \App\Entity\User $user */
+        $user = $this->getUser();
+        if (!empty($user)) {
+            $gameInDatabase = $gameRepository->findOneBy(['gameId' => $game->getGameId()]);
+
+            if (!empty($gameInDatabase)) {
+                $gameUserOfGameInDatabase = $gameUserRepository->findOneBy(['game' => $gameInDatabase, 'user' => $user]);
+                if (!empty($gameUserOfGameInDatabase)) {
+                    $game->addGameUser($gameUserOfGameInDatabase);
+                }
+            }
+        }
+
         return $this->render('game_details/index.html.twig', [
             'controller_name' => 'GameDetailsController',
             'game' => $game,

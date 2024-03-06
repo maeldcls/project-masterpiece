@@ -62,8 +62,8 @@
 					</div>
 					<div>
 						{% if app.user is empty %}
-							<a class="flex justify-center items-center border-1 border-slate-100 rounded hover:font-normal p-1 m-2 text-sm text-white bg-transparent  hover:text-black hover:border-black" href="{{ path('app_login', {'id': game.gameId}) }}">
-								<p class="white added-text">ADD</p>
+							<a class="flex justify-center items-center border-2 border-slate-100 rounded hover:font-normal p-1 m-2 text-sm text-white bg-transparent  hover:text-black hover:border-black" href="{{ path('app_login', {'id': game.gameId}) }}">
+								<p class="added-text">ADD</p>
 							</a>
 						{% elseif game.gameUsers is not empty %}
 							{% for gameUser in game.gameUsers %}
@@ -71,13 +71,13 @@
 									<svg width="12" height="9" viewbox="0 0 12 9" xmlns="http://www.w3.org/2000/svg" style="vertical-align: middle;">
 										<path d="M3.97 9L0 4.846l1.323-1.384L3.971 6.23 9.927 0l1.323 1.385z" fill="#FFF" fill-rule="evenodd"></path>
 									</svg>
-									<p class="white added-text">ADDED</p>
+									<p class="added-text">ADDED</p>
 								</a>
 
 							{% endfor %}
 						{% else %}
-							<a class="flex justify-center items-center border-1 border-slate-100 rounded hover:font-normal p-1 m-2 text-sm text-white bg-transparent  hover:text-black hover:border-black" href="{{ path('app_add_game', {'id': game.gameId}) }}">
-								<p class="white added-text">ADD</p>
+							<a class="flex justify-center items-center border-2 border-slate-100 rounded hover:font-normal p-1 m-2 text-sm text-white bg-transparent  hover:text-indigo-500 hover:border-indigo-500 " href="{{ path('app_add_game', {'id': game.gameId}) }}">
+								<p class="added-text">ADD</p>
 							</a>
 						{% endif %}
 					</div>

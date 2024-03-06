@@ -1,5 +1,5 @@
 let modalImg = document.querySelector("#modal-img");
-let modal = document.querySelector("#modal");
+let modal1 = document.querySelector("#modal1");
 
 document.addEventListener('DOMContentLoaded', function() {
     let readMore = document.querySelector("#readMore");
@@ -28,18 +28,18 @@ document.addEventListener('DOMContentLoaded', function() {
 
 
 window.onclick = function (event) {
-    if (event.target === modal) {
-        modal.classList.remove('fixed');
-        modal.classList.add('hidden');
+    if (event.target === modal1) {
+        modal1.classList.remove('fixed');
+        modal1.classList.add('hidden');
     }
 };
 
  function showModal(src) {
-    modal.classList.remove('hidden');
-    modal.classList.add('fixed');
-    modalImg.src = src;
+    modal1.classList.remove('hidden');
+    modal1.classList.add('fixed');
+    modal1.src = src;
 }
 
 function closeModal() {
-    modal.classList.add('hidden');
+    modal1.classList.add('hidden');
 }

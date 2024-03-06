@@ -61,7 +61,7 @@ class ApiDataService
                 if (isset($data['name']) && !empty($data['name'])) {
                     // Publishers
                     $game->setTitle($data['name']);
-                    //$game->setSummary($data['description']);
+
                     if (isset($data['metacritic'])) {
                         $game->setMetacritics($data['metacritic']);
                     }

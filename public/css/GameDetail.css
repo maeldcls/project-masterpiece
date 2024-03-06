@@ -8,6 +8,7 @@
     backdrop-filter: blur(40px);
     padding-bottom:400px;
     margin-top: 300px;
+    
 }
 
 .screen{
@@ -44,5 +45,4 @@
     align-self: center;
     margin: auto;
 }
-
 
