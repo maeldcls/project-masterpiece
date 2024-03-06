@@ -41,7 +41,7 @@
 				<div class=" w-full  flex flex-wrap justify-center mb-5">
 					{% for screenshot in game.screenshots %}
 						<div class="p-2">
-							<img class="screen" src="{{ screenshot }}" alt="screen" onclick="showModal('{{ screenshot }}')"/>
+							<img class="screen cursor-zoom-in" src="{{ screenshot }}" alt="screen" onclick="showModal('{{ screenshot }}')"/>
 						</div>
 					{% endfor %}
 				</div>
@@ -132,8 +132,8 @@
 		
 		</div>
 
-		<div id="modal1" class="hidden">
-			<img id="modal-img" class="object-cover"/>
+		<div id="modal1" class="hidden cursor-zoom-out">
+			<img id="modal-img" class="object-cover cursor-default"/>
 		</div>
 	</div>
 	<style>

@@ -1,4 +1,4 @@
-let modalImg = document.querySelector("#modal-img");
+var modalImg = document.querySelector("#modal-img");
 let modal1 = document.querySelector("#modal1");
 
 document.addEventListener('DOMContentLoaded', function() {
@@ -37,7 +37,7 @@ window.onclick = function (event) {
  function showModal(src) {
     modal1.classList.remove('hidden');
     modal1.classList.add('fixed');
-    modal1.src = src;
+    modalImg.src = src;
 }
 
 function closeModal() {
