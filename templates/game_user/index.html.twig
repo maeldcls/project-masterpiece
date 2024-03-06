@@ -83,7 +83,15 @@
 				{% endif %}
 				{% if not game.status is empty %}
 					<div class="flex justify-center items-center">
-						<p>{{ game.status }}</p>
+						{% if game.status == 'Finished' %}
+							<p class="text-amber-400">{{ game.status }}</p>
+						{% elseif game.status == 'Want to play' %}
+							<p class="text-fuchsia-500">{{ game.status }}</p>
+						{% elseif game.status == 'Playing' %}
+							<p class="text-lime-500">{{ game.status }}</p>
+						{% elseif game.status == 'Dropped'%}
+							<p class="text-red-700">{{ game.status }}</p>
+						{% endif %}
 					</div>
 				{% else %}
 					<div class="flex justify-center items-center">

@@ -54,7 +54,7 @@
 								{% elseif genre.name == "Massively Multiplayer" %}
 									<a class="ml-1 text-indigo-100 hover:text-indigo-500" href="{{ path('app_genre', {'genre': 'massively-multiplayer' }) }}">MMO</a>
 								{% else %}
-									<a class="ml-1 text-indigo-100 hover:text-indigo-500" href="{{ path('app_genre', {'genre': genre.name}) }}">{{genre.name}}</a>
+									<a class=" ml-1 text-indigo-100 hover:text-indigo-500" href="{{ path('app_genre', {'genre': genre.name}) }}">{{genre.name}}</a>
 								{% endif %}
 
 							{% endfor %}
