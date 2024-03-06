@@ -51,6 +51,8 @@ class GameUserController extends AbstractController
             'gameUser' => $result,
             'form' => $form->createView(),
             'formSearch' => $formSearch->createView(),
+            'order'=>$orderBy,
+            'direction'=>$direction
         ]);
     }
 

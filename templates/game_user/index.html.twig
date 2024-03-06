@@ -10,47 +10,151 @@
 	{% include 'partials/searchBar.html.twig' %}
 	<div class="flex flex-col items-center w-full">
 		
-		<div class="grid grid-cols-9 w-11/12 border-b-2 m-2 pb-2 border-pink-500">
-			<div class="w-42">
+		<div class="grid grid-cols-4 md:grid-cols-8 lg:grid-cols-8 w-11/12 border-b-2 m-2 pb-2 border-pink-500">
+			<div>
+
+			</div>
+			<div class="flex justify-center items-center">
+				{% if order == 'title'%}
+					<p class="text-purple-400">title</p>
+				{% else %}
+					<p>title</p>
+				{% endif %}
+					<div class="flex flex-col ml-2">
+						<a href="{{ path('app_game_user_index_order', {'orderBy': 'title','direction': 'DESC'}) }}">
+							{% if order == 'title' and direction == 'DESC'%}
+								<svg width="10px" height="20px" fill="#c084fc" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--!Font Awesome Free 6.5.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.--><path d="M182.6 137.4c-12.5-12.5-32.8-12.5-45.3 0l-128 128c-9.2 9.2-11.9 22.9-6.9 34.9s16.6 19.8 29.6 19.8H288c12.9 0 24.6-7.8 29.6-19.8s2.2-25.7-6.9-34.9l-128-128z"/></svg>
+							{% else %}
+								<svg width="10px" height="20px" fill="white" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--!Font Awesome Free 6.5.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.--><path d="M182.6 137.4c-12.5-12.5-32.8-12.5-45.3 0l-128 128c-9.2 9.2-11.9 22.9-6.9 34.9s16.6 19.8 29.6 19.8H288c12.9 0 24.6-7.8 29.6-19.8s2.2-25.7-6.9-34.9l-128-128z"/></svg>
+							{% endif %}
+						</a>
+						<a href="{{ path('app_game_user_index_order', {'orderBy': 'title','direction': 'ASC'}) }}">
+							{% if order == 'title' and direction == 'ASC'%}
+								<svg width="10px" height="20px" fill="#c084fc" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--!Font Awesome Free 6.5.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.--><path d="M137.4 374.6c12.5 12.5 32.8 12.5 45.3 0l128-128c9.2-9.2 11.9-22.9 6.9-34.9s-16.6-19.8-29.6-19.8L32 192c-12.9 0-24.6 7.8-29.6 19.8s-2.2 25.7 6.9 34.9l128 128z"/></svg>
+							{% else %}
+								<svg width="10px" height="20px" fill="white" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--!Font Awesome Free 6.5.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.--><path d="M137.4 374.6c12.5 12.5 32.8 12.5 45.3 0l128-128c9.2-9.2 11.9-22.9 6.9-34.9s-16.6-19.8-29.6-19.8L32 192c-12.9 0-24.6 7.8-29.6 19.8s-2.2 25.7 6.9 34.9l128 128z"/></svg>
+							{% endif %}
+						</a>
+					</div>
 				
 			</div>
-			<div class="w-42">
-				<p>title</p>
-				<a href="{{ path('app_game_user_index_order', {'orderBy': 'title','direction': 'DESC'}) }}">+</a>
-				<a href="{{ path('app_game_user_index_order', {'orderBy': 'title','direction': 'ASC'}) }}">-</a>
-			</div>
-			
-			<div class="w-42">
-				<p>playtime</p>
-				<a href="{{ path('app_game_user_index_order', {'orderBy': 'playtime','direction': 'DESC'}) }}">+</a>
-				<a href="{{ path('app_game_user_index_order', {'orderBy': 'playtime','direction': 'ASC'}) }}">-</a>
-			</div>
-			<div class="w-42">
-				<p>rate</p>
-				<a href="{{ path('app_game_user_index_order', {'orderBy': 'rate','direction': 'DESC'}) }}">+</a>
-				<a href="{{ path('app_game_user_index_order', {'orderBy': 'rate','direction': 'ASC'}) }}">-</a>
-			</div>
-			<div class="w-42">
-				<p>status</p>
-				<a href="{{ path('app_game_user_index_order', {'orderBy': 'status','direction': 'DESC'}) }}">+</a>
-				<a href="{{ path('app_game_user_index_order', {'orderBy': 'status','direction': 'ASC'}) }}">-</a>
-			</div>
-			<div class="w-42">
-				<p>platform</p>
-				<a href="{{ path('app_game_user_index_order', {'orderBy': 'platform','direction': 'DESC'}) }}">+</a>
-				<a href="{{ path('app_game_user_index_order', {'orderBy': 'platform','direction': 'ASC'}) }}">-</a>
-			</div>
-			<div class="w-42">
-				<p>datePlayed</p>
-				<a href="{{ path('app_game_user_index_order', {'orderBy': 'datePlayed','direction': 'DESC'}) }}">+</a>
-				<a href="{{ path('app_game_user_index_order', {'orderBy': 'datePlayed','direction': 'ASC'}) }}">-</a>
-			</div>
-			<div>
-				<div class="w-42">
-					<p>favoris</p>
-					<a href="{{ path('app_game_user_index_order', {'orderBy': 'isFav','direction': 'DESC'}) }}">+</a>
-					<a href="{{ path('app_game_user_index_order', {'orderBy': 'isFav','direction': 'ASC'}) }}">-</a>
+			<div class="flex justify-center items-center">
+				{% if order == 'playtime' %}
+					<p class="text-purple-400">playtime</p>
+				{% else %}
+					<p>playtime</p>
+				{% endif %}
+				<div class="flex flex-col ml-2">
+						<a href="{{ path('app_game_user_index_order', {'orderBy': 'playtime','direction': 'DESC'}) }}">
+							{% if order == 'playtime' and direction == 'DESC'%}
+								<svg width="10px" height="20px" fill="#c084fc" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--!Font Awesome Free 6.5.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.--><path d="M182.6 137.4c-12.5-12.5-32.8-12.5-45.3 0l-128 128c-9.2 9.2-11.9 22.9-6.9 34.9s16.6 19.8 29.6 19.8H288c12.9 0 24.6-7.8 29.6-19.8s2.2-25.7-6.9-34.9l-128-128z"/></svg>
+							{% else %}
+								<svg width="10px" height="20px" fill="white" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--!Font Awesome Free 6.5.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.--><path d="M182.6 137.4c-12.5-12.5-32.8-12.5-45.3 0l-128 128c-9.2 9.2-11.9 22.9-6.9 34.9s16.6 19.8 29.6 19.8H288c12.9 0 24.6-7.8 29.6-19.8s2.2-25.7-6.9-34.9l-128-128z"/></svg>
+							{% endif %}
+						</a>
+						<a href="{{ path('app_game_user_index_order', {'orderBy': 'playtime','direction': 'ASC'}) }}">
+							{% if order == 'playtime' and direction == 'ASC'%}
+								<svg width="10px" height="20px" fill="#c084fc" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--!Font Awesome Free 6.5.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.--><path d="M137.4 374.6c12.5 12.5 32.8 12.5 45.3 0l128-128c9.2-9.2 11.9-22.9 6.9-34.9s-16.6-19.8-29.6-19.8L32 192c-12.9 0-24.6 7.8-29.6 19.8s-2.2 25.7 6.9 34.9l128 128z"/></svg>
+							{% else %}
+								<svg width="10px" height="20px" fill="white" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--!Font Awesome Free 6.5.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.--><path d="M137.4 374.6c12.5 12.5 32.8 12.5 45.3 0l128-128c9.2-9.2 11.9-22.9 6.9-34.9s-16.6-19.8-29.6-19.8L32 192c-12.9 0-24.6 7.8-29.6 19.8s-2.2 25.7 6.9 34.9l128 128z"/></svg>
+							{% endif %}
+						</a>
 				</div>
+			</div>
+			<div class="flex justify-center items-center">
+				{% if order == 'rate' %}
+				<p class="text-purple-400">rate</p>
+				{% else %}
+					<p>rate</p>
+				{% endif %}
+				<div class="flex flex-col ml-2">
+					<a href="{{ path('app_game_user_index_order', {'orderBy': 'rate','direction': 'DESC'}) }}">
+						{% if order == 'rate' and direction == 'DESC'%}
+							<svg width="10px" height="20px" fill="#c084fc" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--!Font Awesome Free 6.5.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.--><path d="M182.6 137.4c-12.5-12.5-32.8-12.5-45.3 0l-128 128c-9.2 9.2-11.9 22.9-6.9 34.9s16.6 19.8 29.6 19.8H288c12.9 0 24.6-7.8 29.6-19.8s2.2-25.7-6.9-34.9l-128-128z"/></svg>
+						{% else %}
+							<svg width="10px" height="20px" fill="white" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--!Font Awesome Free 6.5.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.--><path d="M182.6 137.4c-12.5-12.5-32.8-12.5-45.3 0l-128 128c-9.2 9.2-11.9 22.9-6.9 34.9s16.6 19.8 29.6 19.8H288c12.9 0 24.6-7.8 29.6-19.8s2.2-25.7-6.9-34.9l-128-128z"/></svg>
+						{% endif %}
+					</a>
+					<a href="{{ path('app_game_user_index_order', {'orderBy': 'rate','direction': 'ASC'}) }}">
+						{% if order == 'rate' and direction == 'ASC'%}
+							<svg width="10px" height="20px" fill="#c084fc" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--!Font Awesome Free 6.5.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.--><path d="M137.4 374.6c12.5 12.5 32.8 12.5 45.3 0l128-128c9.2-9.2 11.9-22.9 6.9-34.9s-16.6-19.8-29.6-19.8L32 192c-12.9 0-24.6 7.8-29.6 19.8s-2.2 25.7 6.9 34.9l128 128z"/></svg>
+						{% else %}
+							<svg width="10px" height="20px" fill="white" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--!Font Awesome Free 6.5.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.--><path d="M137.4 374.6c12.5 12.5 32.8 12.5 45.3 0l128-128c9.2-9.2 11.9-22.9 6.9-34.9s-16.6-19.8-29.6-19.8L32 192c-12.9 0-24.6 7.8-29.6 19.8s-2.2 25.7 6.9 34.9l128 128z"/></svg>
+						{% endif %}
+					</a>
+				</div>
+			</div>
+			<div class="flex justify-center items-center">
+				{% if order == 'status' %}
+				<p class="text-purple-400">status</p>
+				{% else %}
+					<p>status</p>
+				{% endif %}
+				<div class="flex flex-col ml-2">
+					<a href="{{ path('app_game_user_index_order', {'orderBy': 'status','direction': 'DESC'}) }}">
+						{% if order == 'status' and direction == 'DESC'%}
+							<svg width="10px" height="20px" fill="#c084fc" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--!Font Awesome Free 6.5.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.--><path d="M182.6 137.4c-12.5-12.5-32.8-12.5-45.3 0l-128 128c-9.2 9.2-11.9 22.9-6.9 34.9s16.6 19.8 29.6 19.8H288c12.9 0 24.6-7.8 29.6-19.8s2.2-25.7-6.9-34.9l-128-128z"/></svg>
+						{% else %}
+							<svg width="10px" height="20px" fill="white" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--!Font Awesome Free 6.5.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.--><path d="M182.6 137.4c-12.5-12.5-32.8-12.5-45.3 0l-128 128c-9.2 9.2-11.9 22.9-6.9 34.9s16.6 19.8 29.6 19.8H288c12.9 0 24.6-7.8 29.6-19.8s2.2-25.7-6.9-34.9l-128-128z"/></svg>
+						{% endif %}
+					</a>
+					<a href="{{ path('app_game_user_index_order', {'orderBy': 'status','direction': 'ASC'}) }}">
+						{% if order == 'status' and direction == 'ASC'%}
+							<svg width="10px" height="20px" fill="#c084fc" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--!Font Awesome Free 6.5.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.--><path d="M137.4 374.6c12.5 12.5 32.8 12.5 45.3 0l128-128c9.2-9.2 11.9-22.9 6.9-34.9s-16.6-19.8-29.6-19.8L32 192c-12.9 0-24.6 7.8-29.6 19.8s-2.2 25.7 6.9 34.9l128 128z"/></svg>
+						{% else %}
+							<svg width="10px" height="20px" fill="white" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--!Font Awesome Free 6.5.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.--><path d="M137.4 374.6c12.5 12.5 32.8 12.5 45.3 0l128-128c9.2-9.2 11.9-22.9 6.9-34.9s-16.6-19.8-29.6-19.8L32 192c-12.9 0-24.6 7.8-29.6 19.8s-2.2 25.7 6.9 34.9l128 128z"/></svg>
+						{% endif %}
+					</a>
+				</div>
+			</div>
+			<div class="flex justify-center items-center">
+				{% if order == 'platform' %}
+				<p class="text-purple-400">platform</p>
+				{% else %}
+					<p>platform</p>
+				{% endif %}
+				<div class="flex flex-col ml-2">
+					<a href="{{ path('app_game_user_index_order', {'orderBy': 'platform','direction': 'DESC'}) }}">
+						{% if order == 'platform' and direction == 'DESC'%}
+							<svg width="10px" height="20px" fill="#c084fc" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--!Font Awesome Free 6.5.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.--><path d="M182.6 137.4c-12.5-12.5-32.8-12.5-45.3 0l-128 128c-9.2 9.2-11.9 22.9-6.9 34.9s16.6 19.8 29.6 19.8H288c12.9 0 24.6-7.8 29.6-19.8s2.2-25.7-6.9-34.9l-128-128z"/></svg>
+						{% else %}
+							<svg width="10px" height="20px" fill="white" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--!Font Awesome Free 6.5.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.--><path d="M182.6 137.4c-12.5-12.5-32.8-12.5-45.3 0l-128 128c-9.2 9.2-11.9 22.9-6.9 34.9s16.6 19.8 29.6 19.8H288c12.9 0 24.6-7.8 29.6-19.8s2.2-25.7-6.9-34.9l-128-128z"/></svg>
+						{% endif %}
+					</a>
+					<a href="{{ path('app_game_user_index_order', {'orderBy': 'platform','direction': 'ASC'}) }}">
+						{% if order == 'platform' and direction == 'ASC'%}
+							<svg width="10px" height="20px" fill="#c084fc" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--!Font Awesome Free 6.5.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.--><path d="M137.4 374.6c12.5 12.5 32.8 12.5 45.3 0l128-128c9.2-9.2 11.9-22.9 6.9-34.9s-16.6-19.8-29.6-19.8L32 192c-12.9 0-24.6 7.8-29.6 19.8s-2.2 25.7 6.9 34.9l128 128z"/></svg>
+						{% else %}
+							<svg width="10px" height="20px" fill="white" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--!Font Awesome Free 6.5.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.--><path d="M137.4 374.6c12.5 12.5 32.8 12.5 45.3 0l128-128c9.2-9.2 11.9-22.9 6.9-34.9s-16.6-19.8-29.6-19.8L32 192c-12.9 0-24.6 7.8-29.6 19.8s-2.2 25.7 6.9 34.9l128 128z"/></svg>
+						{% endif %}
+					</a>
+				</div>
+			</div>
+			<div class="flex justify-center items-center">
+				{% if order == 'datePlayed' %}
+				<p class="text-purple-400">datePlayed</p>
+				{% else %}
+					<p>datePlayed</p>
+				{% endif %}
+				<div class="flex flex-col ml-2">
+					<a href="{{ path('app_game_user_index_order', {'orderBy': 'datePlayed','direction': 'DESC'}) }}">
+						{% if order == 'datePlayed' and direction == 'DESC'%}
+							<svg width="10px" height="20px" fill="#c084fc" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--!Font Awesome Free 6.5.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.--><path d="M182.6 137.4c-12.5-12.5-32.8-12.5-45.3 0l-128 128c-9.2 9.2-11.9 22.9-6.9 34.9s16.6 19.8 29.6 19.8H288c12.9 0 24.6-7.8 29.6-19.8s2.2-25.7-6.9-34.9l-128-128z"/></svg>
+						{% else %}
+							<svg width="10px" height="20px" fill="white" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--!Font Awesome Free 6.5.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.--><path d="M182.6 137.4c-12.5-12.5-32.8-12.5-45.3 0l-128 128c-9.2 9.2-11.9 22.9-6.9 34.9s16.6 19.8 29.6 19.8H288c12.9 0 24.6-7.8 29.6-19.8s2.2-25.7-6.9-34.9l-128-128z"/></svg>
+						{% endif %}
+					</a>
+					<a href="{{ path('app_game_user_index_order', {'orderBy': 'datePlayed','direction': 'ASC'}) }}">
+						{% if order == 'datePlayed' and direction == 'ASC'%}
+							<svg width="10px" height="20px" fill="#c084fc" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--!Font Awesome Free 6.5.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.--><path d="M137.4 374.6c12.5 12.5 32.8 12.5 45.3 0l128-128c9.2-9.2 11.9-22.9 6.9-34.9s-16.6-19.8-29.6-19.8L32 192c-12.9 0-24.6 7.8-29.6 19.8s-2.2 25.7 6.9 34.9l128 128z"/></svg>
+						{% else %}
+							<svg width="10px" height="20px" fill="white" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--!Font Awesome Free 6.5.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.--><path d="M137.4 374.6c12.5 12.5 32.8 12.5 45.3 0l128-128c9.2-9.2 11.9-22.9 6.9-34.9s-16.6-19.8-29.6-19.8L32 192c-12.9 0-24.6 7.8-29.6 19.8s-2.2 25.7 6.9 34.9l128 128z"/></svg>
+						{% endif %}
+					</a>
+				</div>
+			</div>
+			<div class="flex flex-col justify-center items-center">
+				<p>fav/comments</p>
 				<p>edit/delete</p>
 			</div>
 		</div>
@@ -85,7 +189,7 @@
 					<div class="flex justify-center items-center">
 						{% if game.status == 'Finished' %}
 							<p class="text-amber-400">{{ game.status }}</p>
-						{% elseif game.status == 'Want to play' %}
+						{% elseif game.status == 'Want To Play' %}
 							<p class="text-fuchsia-500">{{ game.status }}</p>
 						{% elseif game.status == 'Playing' %}
 							<p class="text-lime-500">{{ game.status }}</p>
