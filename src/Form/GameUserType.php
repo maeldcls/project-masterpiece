@@ -12,6 +12,7 @@ use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -56,6 +57,13 @@ class GameUserType extends AbstractType
                 ],
             ])
             ->add('datePlayed', DateType::class,[
+                'required' => false,
+                'attr' => [
+
+                    'class' => 'mb-4 text-black flex-col w-full',
+                ],
+            ])
+            ->add('platform', TextType::class,[
                 'required' => false,
                 'attr' => [
 

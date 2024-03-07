@@ -137,7 +137,7 @@ class ApiDataService
     
                             if (!in_array($platformSlug, $uniquePlatforms)) {
                                 $parentPlatforms[] = $platformSlug;
-                                $uniquePlatforms[] = $platformSlug; // Ajouter la plateforme au tableau des éléments uniques
+                                $uniquePlatforms[] = $platformSlug;
                             }
                         }
                         $game->setParentPlatform($parentPlatforms);

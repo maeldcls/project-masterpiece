@@ -140,7 +140,6 @@ class GameController extends AbstractController
                 if(isset($data['metacritic'])){
                     $game->setMetacritics($data['metacritic']);
                 }
-                //$dateActuelle = new DateTimeImmutable();
                 $entityManager->persist($game);
                 $entityManager->flush();
 
